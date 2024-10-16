@@ -1,0 +1,365 @@
+div.card {
+    width: 100%; /*Imposto larghezza e altezzza delle cards*/
+    height: 100%;
+}
+
+img.card-img-top{
+    height: 500px; /*Imposta grandezza standard per le foto e fa in modo che non si deformino*/
+    object-fit: cover;
+}
+
+.navbar{
+    transition: all 0.3s ease; /* Aggiunge una transizione fluida */
+
+}
+
+div#titolo{
+    max-width: 680px;
+}
+
+#titoloHome, #mapHome, #descrizione, #gallery, #prenotaOra #prenotazioniUtente{
+    background-color: #cececebc;
+}
+
+#cardsHome, #topHome, #descrizione2{
+    background-color: #929fba
+}
+
+#caroselloHome img{
+    height: 500px; /* Altezza massima desiderata */
+    object-fit: cover; /* Copre completamente la scatola mantenendo le proporzioni */
+    object-position: center center; /* Cambia la posizione dell'immagine, puoi regolare i valori per decidere quale porzione mostrare */
+}
+
+.btn-prenota {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Colore di sfondo */
+    color: #ffffff !important;           /* Colore del testo */
+    border-color: #cececebc !important;    /* Colore del bordo */
+    font-size: 90%;                   /* Dimensione del testo più grande */
+    padding: 20px 40px;                  /* Padding per aumentare le dimensioni del bottone */
+    border-radius: 10px;                  /* Arrotondare gli angoli del bottone */
+    text-decoration: none;               /* Rimuovere la sottolineatura del link */
+    display: inline-block;               /* Assicurarsi che si comporti come un bottone */
+}
+
+.btn-prenota:hover {
+    background-color: #929fba !important; /* Colore di sfondo al passaggio del mouse */
+    border-color: #929fba !important;     /* Colore del bordo al passaggio del mouse */
+    color: #ffffff !important;            /* Mantenere il colore del testo bianco */
+}
+
+.btn-custom {
+    background-color: #929fba !important; /* Colore di sfondo */
+    color: #ffffff !important;           /* Colore del testo */
+    border-color: #929fba !important;    /* Colore del bordo */
+    font-size: 90%;                   /* Dimensione del testo più grande */
+    padding: 20px 40px;                  /* Padding per aumentare le dimensioni del bottone */
+    border-radius: 10px;                  /* Arrotondare gli angoli del bottone */
+    text-align: center;                  /* Centrare il testo */
+    text-decoration: none;               /* Rimuovere la sottolineatura del link */
+    display: inline-block;               /* Assicurarsi che si comporti come un bottone */
+}
+
+.btn-custom:hover {
+    background-color: #060606bc !important; /* Colore di sfondo al passaggio del mouse */
+    border-color: #cececebc !important;     /* Colore del bordo al passaggio del mouse */
+    color: #ffffff !important;            /* Mantenere il colore del testo bianco */
+}
+
+#carouselExampleIndicators {
+    position: relative;
+    z-index: 0; /* Assicura che il carosello sia dietro la form */
+}
+
+#carouselExampleIndicators .carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Colore nero con 50% di trasparenza */
+    color: #ffffff;
+
+}
+
+#carouselExampleIndicators .carousel-caption h3 {
+    color:#ffffff;
+    font-family: "exotc350_dmbd_btdemi-bold";
+    font-size: 3rem;
+    text-transform:capitalize;
+    letter-spacing:2px;
+    font-weight:400;
+    margin-bottom:4px;
+}
+#carouselExampleIndicators .carousel-caption p{
+    font-size:2rem;
+    font-weight:400;
+    color:#ffffff;
+    font-family: "exotc350_dmbd_btdemi-bold";
+    margin-bottom:0;
+    margin-top:0;
+} 
+
+li a.active {
+    background-color: lightgray;
+}
+
+
+.card-custom {
+    border: 1px solid #cececebc !important;
+    border-radius: 5px;
+    background-color: #cececebc !important;
+    padding: 20px;
+}
+
+.card-custom-header{
+    background-color: #929fba
+}
+
+/* Stile generale del footer */
+footer {
+    background-color: #929fba;
+    color: white;
+    padding: 15px 0; /* Ridotto da 30px a 15px per diminuire l'altezza */
+    margin-top: 40px; /* Aumentato il margine superiore per maggior distanziamento */
+}
+  
+/* Stile per i link nel footer */
+footer a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+  
+footer a:hover {
+    text-decoration: underline;
+}
+  
+/* Stile per gli elementi di intestazione del footer */
+footer h6 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: left;
+}
+  
+/* Stile per gli elementi del corpo del footer */
+footer p {
+    margin-bottom: 10px;
+    margin-left: 0;
+    text-align: left;
+}
+  
+/* Stile per gli elementi di icone */
+footer i {
+    margin-right: 10px;
+}
+
+div.footer {
+    background-color: #929fba;
+    padding: 15px 0; /* Ridotto da 30px a 15px per diminuire l'altezza */
+}
+
+.bg-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Altezza desiderata per l'immagine di sfondo */
+    background: url('../img/ZenFuori.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.bg-container .carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5); /* Colore nero con 50% di trasparenza */
+    color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.bg-container .carousel-caption h3 {
+    color: #ffffff;
+    font-family: "exotc350_dmbd_btdemi-bold";
+    font-size: 3rem;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.li-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Altezza desiderata per l'immagine di sfondo */
+    background: url('../img/gardalandlogo12.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.li-container .carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5); /* Colore nero con 50% di trasparenza */
+    color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.li-container .carousel-caption h3 {
+    color: #ffffff;
+    font-family: "exotc350_dmbd_btdemi-bold";
+    font-size: 3rem;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.co-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Altezza desiderata per l'immagine di sfondo */
+    background: url('../img/contatti.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.co-container .carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5); /* Colore nero con 50% di trasparenza */
+    color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.co-container .carousel-caption h3 {
+    color: #ffffff;
+    font-family: "exotc350_dmbd_btdemi-bold";
+    font-size: 3rem;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+/* Stili personalizzati */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-group-vertical .btn {
+    min-width: 120px; /* Puoi regolare questo valore secondo le tue necessità */
+}
+
+.form-container {
+    margin-top: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container .btn {
+    margin-top: auto;
+}
+
+.summary-card {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.total-section {
+    background-color: #e9ecef;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.price-info {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.price-label {
+    font-weight: bold;
+}
+
+header {
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+}
+
+header h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.carousel-container {
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%; /* Imposta la larghezza desiderata per il carosello */
+    max-height: 500px; /* Imposta l'altezza desiderata per il carosello */
+}
+
+.carousel-item img {
+    width: auto; /* Utilizza la larghezza originale dell'immagine */
+    height: auto; /* Utilizza l'altezza originale dell'immagine */
+    max-width: 100%; /* Assicura che l'immagine non superi mai la larghezza del contenitore */
+    max-height: 100%; /* Assicura che l'immagine non superi mai l'altezza del contenitore */
+}
+
+.place-header{
+    background-image: url('../img/gardalandlogo12.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: "exotc350_dmbd_btdemi-bold";
+    font-size: 3.5rem;
+}
+
+.invalid-input {
+    color: #bd2626;
+    font-weight: bold;
+}
+
+.contact-text{
+    font-size: 1.25rem;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+      
+.contact-text :hover{
+    text-decoration: underline;
+}
+
+ul.regole{
+    background-color: #929fba
+}
+
