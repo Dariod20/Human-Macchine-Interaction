@@ -293,21 +293,22 @@
         const prezzo=document.getElementById('prezzoTotaleNumero').innerText;
 
         document.getElementById('riepilogo-soggiorno').innerHTML = `
-          <strong>Arrivo:</strong> ${arrivo}<br>
-          <strong>Partenza:</strong> ${partenza}<br>
-          <strong>Orario di arrivo:</strong> ${orarioArrivo}
+          <strong>{{ trans('messages.arrivo') }}:</strong> ${arrivo}<br>
+          <strong>{{ trans('messages.partenza') }}:</strong> ${partenza}<br>
+          <strong>{{ trans('messages.orario') }}:</strong> ${orarioArrivo}
       `;
 
       document.getElementById('riepilogo-ospiti').innerHTML = `
-          <strong>Adulti:</strong> ${numAdulti}<br>
-          <strong>Bambini:</strong> ${numBambini}
+          <strong>{{ trans('messages.numAdulti') }}:</strong> ${numAdulti}<br>
+          <strong>{{ trans('messages.numBambini') }}:</strong> ${numBambini}
       `;
 
       document.getElementById('riepilogo-personali').innerHTML = `
-          <strong>Nome:</strong> ${nome} <strong>Cognome:</strong> ${cognome}<br>
-          <strong>Email:</strong> ${email}<br>
-          <strong>Stato:</strong> ${stato}<br>
-          <strong>Telefono:</strong> ${telefono}`;
+          <strong>{{ trans('messages.nome') }}:</strong> ${nome} <strong>{{ trans('messages.cognome') }}:</strong> ${cognome}<br>
+          <strong>{{ trans('messages.email') }}:</strong> ${email}<br>
+          <strong>{{ trans('messages.tel') }}:</strong> ${telefono}<br>
+          <strong>{{ trans('messages.stato') }}:</strong> ${stato}<br>`;
+          
 
           document.getElementById('riepilogo-prezzo').innerHTML = `
           <strong>€${prezzo}</strong>`;
@@ -320,29 +321,28 @@
     <div class="container" id="container-w">
         <div class="form-box">
           <div class="progress">
-            
             <ul class="progress-steps">
               <li class="step active">
                 <span>1</span>
-                <p>Dati del soggiorno</p>
+                <p>{{ trans('messages.datiPrenotazione') }}</p>
               </li>
               <li class="step">
                 <span>2</span>
-                <p>Numero di ospiti</p>
+                <p>{{ trans('messages.numOspiti') }}</p>
               </li>
               <li class="step">
                 <span>3</span>
-                <p>Dati personali</p>
+                <p>{{ trans('messages.datiPersonali') }}</p>
               </li>
               <li class="step">
                 <span>4</span>
-                <p>Riepilogo</p>
+                <p>{{ trans('messages.riepilogo') }}</p>
               </li>
             </ul>
           </div>
           <form name="prenotazioniUtente" method="post" action="{{ route('prenotazioniUtente.store') }}">
             <div class="form-one form-step active">
-              <h2>Dati del soggiorno</h2>
+              <h2>{{ trans('messages.datiPrenotazione') }}</h2>
               <div>
                 <label for="arrivo" class="form-label">{{ trans('messages.arrivo') }}</label>       
                 <input class="form-control" type="date" id="arrivo" name="arrivo" value="{{ $arrivo }}"/>
@@ -359,35 +359,35 @@
                 <span class="invalid-input" id="invalid-orarioArrivo"></span>
               </div>
               <div class="form-group" style="background-color: var(--main-color); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <label>Prezzo Totale:</label>
+                <label>{{ trans('messages.prezzo') }}:</label>
                 <div id="prezzoTotale" class="prezzo-output">€<span id="prezzoTotaleNumero">0.00</span></div>
               </div>
             </div>
             <div class="form-two form-step">
-              <h2>Numero di ospiti</h2>
+              <h2>{{ trans('messages.numOspiti') }}</h2>
               <div class="mb-3">
                 <label for="numAdulti" class="form-label">{{ trans('messages.numAdulti') }}</label>
                 <select class="form-select shadow-none" id="numAdulti" name="numAdulti">
-                  <option value="1">Uno</option>
-                  <option value="2">Due</option>
-                  <option value="3">Tre</option>
-                  <option value="4">Quattro</option>
-                  <option value="5">Cinque</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
                 </select>
               </div>
               <div class="mb-3">
                 <label for="numBambini" class="form-label">{{ trans('messages.numBambini') }}</label>
                 <select class="form-select shadow-none" id="numBambini" name="numBambini">
-                  <option value="0">Zero</option>
-                  <option value="1">Uno</option>
-                  <option value="2">Due</option>
-                  <option value="3">Tre</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </div>
             </div>
 
             <div class="form-three form-step">
-              <h2>Dati personali</h2>
+              <h2>{{ trans('messages.datiPersonali') }}</h2>
               <div class="mb-3">
                 <div style="display: flex; gap: 10px;">
                   <div style="flex: 1;">
@@ -428,15 +428,15 @@
               
             </div>
             <div class="form-four form-step">
-              <h2 class="mb-3">Riepilogo dati prenotazione</h2>
+              <h2 class="mb-3">{{ trans('messages.riepilogo') }}</h2>
               <div class="mb-3">
                 <div style="display: flex; gap: 10px;">
                   <div style="flex: 1;">
-                    <h5>Dati del soggiorno:</h5>
+                    <h5>{{ trans('messages.datiPrenotazione') }}</h5>
                     <p id="riepilogo-soggiorno"></p>
                   </div>
                   <div style="flex: 1;">
-                    <h5>Dati personali:</h5>
+                    <h5>{{ trans('messages.datiPersonali') }}</h5>
                     <p id="riepilogo-personali"></p>
                   </div>
                 </div>
@@ -445,11 +445,11 @@
               <div class="mb-3"> 
                 <div style="display: flex; gap: 10px;">
                   <div style="flex: 1;">
-                    <h5>Numero ospiti:</h5>
+                    <h5>{{ trans('messages.numOspiti') }}</h5>
                     <p id="riepilogo-ospiti"></p>
                   </div>     
                   <div style="flex: 1; background-color: var(--main-color); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <h5><strong>Prezzo:</strong></h5>
+                    <h5><strong>{{ trans('messages.prezzo') }}:</strong></h5>
                     <span id="riepilogo-prezzo" class="prezzo-output"></span>
                   </div>     
                 </div>

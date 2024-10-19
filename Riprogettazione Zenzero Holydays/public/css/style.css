@@ -421,9 +421,9 @@ ul.regole{
 }
 .progress ul.progress-steps li > span{
     position: relative;
-    width: 40px;
-    height: 40px;
-    font-size: 3em;
+    width: 39px;
+    height: 39px;
+    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -595,7 +595,7 @@ ul.regole{
     .form-box .progress{
         flex: 1 1 10%;
         min-width: 300px;
-        padding-top: 20%;
+        padding-top: 25%;
         padding-right: 10em;
     }
 
@@ -630,6 +630,9 @@ ul.regole{
     }
     .progress ul li p span{
         display: block;
+    }
+    .progress ul.progress-steps li{
+        width: 100%;
     }
     .progress ul.progress-steps li > span{
         margin-right: 1em;

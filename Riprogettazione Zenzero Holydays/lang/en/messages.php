@@ -41,12 +41,12 @@ return [
 
     'prenEn' => '\'s booking list',
     'prenIt' => '', 
-    'arrivo' => 'Arrival',
-     'partenza' => 'Departure',
+    'arrivo' => 'Check-in',
+     'partenza' => 'Check-out',
      'numAdulti' => ' Number of Adults',
      'numBambini' => 'Number of Children',
      'prezzo' => 'Total Price',
-     'email' => 'Email',
+     'email' => 'E-mail',
      'tel' => 'Phone',
      'stato' => 'Country',
      'orario' => 'Arrival Time',
@@ -67,14 +67,12 @@ return [
     'placeholder_email' => 'Enter your email',
     'placeholder_telefono' => 'Enter your phone number',
 
+    'datiPrenotazione' => 'Booking details',
+    'numOspiti' => 'Guests details',
+    'datiPersonali' => 'Your details',
+    'riepilogo' => 'Booking Summary',
 
 
 
-    'my_library' => 'My Library',
-    'books_list' => 'Books List',
-    'authors_list' => 'Authors List',
-    'manage_categories' => 'Manage Categories',
-    'proverb' => 'Sow an act, and you reap a habit; sow a habit, and you reap a character; sow a character, and you reap a destiny.',    
-    'citation' => 'Indian proverb',
 
 ];

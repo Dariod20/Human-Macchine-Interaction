@@ -48,7 +48,7 @@ return [
      'numAdulti' => 'Numero Adulti',
      'numBambini' => 'Numero Bambini',
      'prezzo' => 'Prezzo Totale',
-     'email' => 'Email',
+     'email' => 'E-mail',
      'tel' => 'Telefono',
      'stato' => 'Stato',
      'orario' => 'Orario Arrivo',
@@ -67,6 +67,12 @@ return [
     'placeholder_cognome' => 'Inserisci il tuo cognome',
     'placeholder_email' => 'Inserisci la tua email',
     'placeholder_telefono' => 'Inserisci il tuo numero di telefono',
+
+    'datiPrenotazione' => 'Dati della prenotazione',
+    'numOspiti' => 'Numero di ospiti',
+    'datiPersonali' => 'Dati personali',
+    'riepilogo' => 'Riepilogo Prenotazione',
+
 
 
 
