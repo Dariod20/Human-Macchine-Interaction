@@ -11,7 +11,9 @@ return [
     'modifica' => 'Edit',
     'elimina' => 'Delete',
     'annulla' => 'Back',
-
+    'indietro' => 'Previous',
+    'avanti' => 'Next',
+    'confermaPren' => 'Confirm Booking ',
 
 
 

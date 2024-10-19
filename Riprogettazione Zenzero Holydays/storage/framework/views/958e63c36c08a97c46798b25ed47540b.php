@@ -300,7 +300,8 @@
       `;
 
       document.getElementById('riepilogo-ospiti').innerHTML = `
-          <strong>Adulti:</strong> ${numAdulti} <strong>Bambini:</strong> ${numBambini}
+          <strong>Adulti:</strong> ${numAdulti}<br>
+          <strong>Bambini:</strong> ${numBambini}
       `;
 
       document.getElementById('riepilogo-personali').innerHTML = `
@@ -392,12 +393,12 @@
                 <div style="display: flex; gap: 10px;">
                   <div style="flex: 1;">
                     <label for="nome" class="form-label"><?php echo e(trans('messages.nome')); ?></label>
-                    <input class="form-control" type="text" id="nome" name="nome" placeholder="<?php echo e(trans('messages.nome')); ?>" />
+                    <input class="form-control" type="text" id="nome" name="nome" placeholder="<?php echo e(trans('messages.placeholder_nome')); ?>" />
                     <span class="invalid-input" id="invalid-firstName"></span>
                   </div>
                   <div style="flex: 1;">
                     <label for="cognome" class="form-label"><?php echo e(trans('messages.cognome')); ?></label>
-                    <input class="form-control" type="text" id="cognome" name="cognome" />
+                    <input class="form-control" type="text" id="cognome" name="cognome" placeholder="<?php echo e(trans('messages.placeholder_cognome')); ?>"/>
                     <span class="invalid-input" id="invalid-lastName"></span>
                   </div>
                 </div>
@@ -405,13 +406,13 @@
 
               <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
-                <input class="form-control" type="text"  id="email" name="email" />
+                <input class="form-control" type="text"  id="email" name="email" placeholder="<?php echo e(trans('messages.placeholder_email')); ?>"/>
                 <span class="invalid-input" id="invalid-email"></span>
               </div>
               
               <div class="mb-3">
                 <label for="telefono" class="form-label"><?php echo e(trans('messages.tel')); ?></label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
                 <span class="invalid-input" id="invalid-telefono"></span>
               </div>
 
@@ -456,9 +457,9 @@
               </div>
             </div>
             <div class="btn-group" style=" display: flex; flex-direction: row; justify-content: center;">
-              <button type="button" class="btn-prev" disabled>Indietro</button>
-              <button type="button" class="btn-next">Avanti</button>
-              <label for="mySubmit" class="btn-submit w-100"><i class="bi bi-floppy2-fill"></i> <?php echo e(trans('messages.salva')); ?></label>
+              <button type="button" class="btn-prev" disabled><?php echo e(trans('button.indietro')); ?></button>
+              <button type="button" class="btn-next"><?php echo e(trans('button.avanti')); ?></button>
+              <label for="mySubmit" class="btn-submit w-100"></i><?php echo e(trans('button.confermaPren')); ?><i class="bi bi-check-circle-fill"></i></label>
               <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">
             </div>
           </form>

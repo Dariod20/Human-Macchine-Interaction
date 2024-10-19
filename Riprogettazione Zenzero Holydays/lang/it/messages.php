@@ -63,6 +63,11 @@ return [
     Ricorda che la prenotazione può essere cancellata gratuitamente solo fino a due giorni prima della data di arrivo. Trascorso questo periodo, sarà rimborsato solo il 75% del costo.',
     'cancellation_success' => 'La prenotazione è stata cancellata con successo! Sarai contattato a breve via email per il rimborso.',
 
+    'placeholder_nome' => 'Inserisci il tuo nome',
+    'placeholder_cognome' => 'Inserisci il tuo cognome',
+    'placeholder_email' => 'Inserisci la tua email',
+    'placeholder_telefono' => 'Inserisci il tuo numero di telefono',
+
 
 
 

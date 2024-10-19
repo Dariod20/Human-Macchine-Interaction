@@ -11,8 +11,6 @@
 *,::before,::after{
     box-sizing: border-box;
 }
-
-
 div.card {
     width: 100%; /*Imposto larghezza e altezzza delle cards*/
     height: 100%;
@@ -36,7 +34,7 @@ div#titolo{
     background-color: #cececebc;
 }
 
-#cardsHome, #topHome, #descrizione2{
+#cardsHome, #topHome, #descrizione2, #formPrenota{
     background-color: #929fba
 }
 
@@ -266,10 +264,6 @@ body {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-}
-
-form {
-    margin-top: 20px;
 }
 
 .btn-primary {
@@ -567,6 +561,13 @@ ul.regole{
 }
 .form-four.active ~ .btn-group .btn-submit{
     display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Per centrare il contenuto */
+    text-align: center; /* Per il testo */
+}
+.bi-check-circle-fill {
+    margin-left: 5px; /* Questo crea lo spazio tra l'icona e il testo */
 }
 .form-four.active ~ .btn-group{
     justify-content: space-between;

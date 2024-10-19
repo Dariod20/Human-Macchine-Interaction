@@ -11,7 +11,9 @@ return [
     'modifica' => 'Modifica',
     'elimina' => 'Elimina',
     'annulla' => 'Annulla',
-
+    'indietro' => 'Indietro',
+    'avanti' => 'Avanti',
+    'confermaPren' => 'Conferma Prenotazione ',
 
 
 

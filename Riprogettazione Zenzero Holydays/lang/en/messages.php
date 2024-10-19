@@ -62,7 +62,10 @@ return [
      'cancellation_success' => 'The reservation has been successfully canceled! You will be contacted shortly via email regarding your refund.',
 
 
-
+    'placeholder_nome' => 'Enter your first name',
+    'placeholder_cognome' => 'Enter your last name',
+    'placeholder_email' => 'Enter your email',
+    'placeholder_telefono' => 'Enter your phone number',
 
 
 
