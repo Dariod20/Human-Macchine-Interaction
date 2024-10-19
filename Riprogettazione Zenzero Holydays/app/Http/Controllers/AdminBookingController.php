@@ -182,7 +182,7 @@ class AdminBookingController extends Controller
 
     public function confermaPrenotazione($arrivo)
     {
-        return view('adminPrenotazioni.editPrenotazione')->with('arrivo', $arrivo);
+        return view('utentePrenotazioni.confirmPrenotazione')->with('arrivo', $arrivo);
     }
 
 

@@ -1,3 +1,18 @@
+:root{
+    --main-color: #929fba;
+    --secondary-color: #cececebc;
+    --dark-color: #929fba;
+    --lighter-color:#cececebc;
+    --light-color: #cececebc;
+
+    --font-smaller: 14px;
+    --font-bigger: 20px;  
+}
+*,::before,::after{
+    box-sizing: border-box;
+}
+
+
 div.card {
     width: 100%; /*Imposto larghezza e altezzza delle cards*/
     height: 100%;

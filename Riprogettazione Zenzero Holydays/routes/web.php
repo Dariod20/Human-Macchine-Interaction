@@ -28,9 +28,9 @@ Route::group(['middleware' => ['lang']], function() {
 
 
 Route::group(['middleware' => ['authCustom','isRegisteredUser', 'lang']], function() {
+    Route::get('/confermaPrenotazione/{arrivo}', [AdminBookingController::class, 'confermaPrenotazione'])->name('prenotazione.conferma');
     Route::resource('prenotazioniUtente', BookingController::class);
     Route::get('/prenotazioniUtente/{id}/destroy/confirm', [BookingController::class, 'confirmDestroy'])->name('prenotazioniUtente.destroy.confirm');
-    Route::get('/confermaPrenotazione/{arrivo}', [AdminBookingController::class, 'confermaPrenotazione'])->name('prenotazione.conferma');
 });
 
 Route::group(['middleware' => ['authCustom','isRegisteredOrAdmin', 'lang']], function() {
