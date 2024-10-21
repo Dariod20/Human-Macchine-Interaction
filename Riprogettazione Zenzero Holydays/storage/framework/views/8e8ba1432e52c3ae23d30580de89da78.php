@@ -68,8 +68,8 @@
             <?php endif; ?>
             </ul>
             <ul class="navbar-nav">
-              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'en'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/en.png" width="20"/></a></li>
-              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'it'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/it.png" width="16"/></a></li>
+              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'en'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/en.png" width="20" alt="UK flag"/></a></li>
+              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'it'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/it.png" width="16" alt="Italian flag"/></a></li>
               <?php if(session('logged')): ?>
                 <li class="nav-item"><i><?php echo e(trans('messages.welcome')); ?> <?php echo e(session('loggedName')); ?></i> <a href="<?php echo e(route('user.logout')); ?>"><i class="bi bi-box-arrow-right"></i></a></li>
               <?php else: ?>

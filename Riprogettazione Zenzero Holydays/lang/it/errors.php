@@ -16,8 +16,9 @@ return [
     'emailErr' => "Inserisci un'e-mail valida.",
     'stato' => "Lo Stato è obbligatorio.",
     'dateOcc' => "Alcune delle date inserite sono già occupate. Ci sono già prenotazioni: ",
-    'dateChiuse' => "La casa vacanze è chiusa in queste date, controllare il calendario",
-
+    'dateChiuse' => "La casa vacanze è chiusa in queste date, controllare il calendario.",
+    'dateDal' => 'dal',
+    'dateAl' => 'al',
 
 
 

@@ -16,7 +16,9 @@ return [
     'emailErr' => "Please enter a valid e-mail.",
     'stato' => "State is required.",
     'dateOcc' => "Some of the entered dates are already booked. There are existing reservations: ",
-    'dateChiuse' => "The holiday home is closed on these dates; please check the calendar.",
+    'dateChiuse' => "The holiday home is closed on these dates, please check the calendar.",
+    'dateDal' => 'from',
+    'dateAl' => 'to',
 
 
 

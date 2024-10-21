@@ -1,9 +1,9 @@
 :root{
     --main-color: #929fba;
     --secondary-color: #cececebc;
-    --dark-color: #929fba;
-    --lighter-color:#cececebc;
-    --light-color: #cececebc;
+    --dark-color: #667aa3;
+    --lighter-color:#e1e1e1;
+    --light-color: #e1e1e1;
 
     --font-smaller: 14px;
     --font-bigger: 20px;  
@@ -525,7 +525,7 @@ ul.regole{
 .form-box form > div.active > h2{
     text-align: center;
 }
-.btn-group{
+.btn-group, .btn-calendar{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -536,7 +536,7 @@ ul.regole{
 
     
 }
-.btn-group [class*="btn-"]{
+.btn-group [class*="btn-"], .btn-calendar{
     background-color: var(--main-color);
     color: white;
     padding: 1em 2.5em;
@@ -551,7 +551,7 @@ ul.regole{
     border: var(--lighter-color);
     cursor: text;
 }
-.btn-group [class*="btn-"]:hover:not(:disabled){
+.btn-group [class*="btn-"]:hover:not(:disabled), .btn-calendar:hover{
     background-color: var(--dark-color);
     border-color: var(--light-color);
 }

@@ -25,6 +25,7 @@ class AuthController extends Controller
             session(['loggedID' => $dl->getUserID($request->input('email'))]);
             session(['loggedName' => $dl->getUserName($request->input('email'))]);
             session(['role' => $dl->getUserRole($request->input('email'))]);
+            session(['user_email' => $request->input('email')]);
 
 
             return Redirect::to(route('home'));

@@ -9,6 +9,7 @@
 
 <?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('home')); ?>">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo e(route('calendario')); ?>"><?php echo e(trans(key: 'button.book')); ?></a></li>
 <li class="breadcrumb-item active" aria-current="page"><?php echo e(trans('messages.conferma')); ?></li>
 <?php $__env->stopSection(); ?>
 
@@ -17,6 +18,22 @@
 <?php $__env->startSection('corpo'); ?>
 
 <script>
+
+  document.getElementById('arrivo').addEventListener('change', function() {
+      // Ottieni la data di arrivo selezionata
+      var arrivo = $('#arrivo').val();
+      var partenza = $('#partenza').val();
+      
+      // Se la data di arrivo è valida, aggiorna la data di partenza
+      if (!isNaN(arrivo)) {
+          // Imposta la data di partenza uguale alla data di arrivo
+         
+          inputPartenza.value = arrivo;  // Imposta il valore di partenza
+          inputPartenza.min = arrivo;  // Limita la selezione della partenza a partire dalla data di arrivo
+      }
+  });
+
+
   function populate(s1, s2) {
       var s1 = document.getElementById(s1);
       var s2 = document.getElementById(s2);
@@ -38,6 +55,7 @@
         var optionArray = ["0|0", "1|1"];
       } else if (s1.value == "6") {
         s2.disabled = true;
+        s2.value =0;
         var optionArray = ["0|0"];
       }
       for (var option in optionArray) {
@@ -142,6 +160,12 @@
         }
     };
 
+    function decodeHtmlEntities(str) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = str;
+      return txt.value;
+    }
+
     // Validazione del primo step
     function validateStep1() {
         var arrivo = document.getElementById('arrivo').value;
@@ -175,7 +199,8 @@
         }
 
         if (orarioArrivo.trim() === "") {
-            document.getElementById('invalid-orarioArrivo').textContent = "<?php echo e(trans('errors.orario')); ?>";
+            var errorMsg = "<?php echo e(trans('errors.orario')); ?>"; // Usa la sintassi sicura di Laravel
+            document.getElementById('invalid-orarioArrivo').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
             error = true;
             $("#orarioArrivo").focus();
         } else {
@@ -184,7 +209,6 @@
 
         return !error; // Ritorna true se non ci sono errori
     }
-    
     
     // Validazione del secondo step
     function validateStep3() {
@@ -235,9 +259,10 @@
         }
 
         if (email.trim() === "") {
-            document.getElementById('invalid-email').textContent = "<?php echo e(trans('errors.email')); ?>";
-            error = true;
-            $("input[name='email']").focus();
+          var errorMsg = "<?php echo e(trans('errors.email')); ?>"; // Usa la sintassi sicura di Laravel
+          document.getElementById('invalid-email').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
+          error = true;
+          $("input[name='email']").focus();
         } else if (!regexEmail.test(email)) {
             document.getElementById('invalid-email').textContent = "<?php echo e(trans('errors.emailErr')); ?>";
             error = true;
@@ -276,7 +301,7 @@
                     console.log(data)
                     var occupiedDatesText = "<?php echo e(trans('errors.dateOcc')); ?>";
                     data.occupiedDates.forEach(function (date) {
-                        occupiedDatesText += "dal " + date.arrivo + " al " + date.partenza + ", ";
+                        occupiedDatesText += "<?php echo e(trans('errors.dateDal')); ?> " + date.arrivo + " <?php echo e(trans('errors.dateAl')); ?> " + date.partenza + ", ";
                     });
                     occupiedDatesText = occupiedDatesText.slice(0, -2); // Rimuovi l'ultima virgola
                     $("#invalid-arrivo").text(occupiedDatesText);
@@ -382,21 +407,22 @@
             </ul>
           </div>
           <form name="prenotazioniUtente" method="post" action="<?php echo e(route('prenotazioniUtente.store')); ?>">
+            <?php echo csrf_field(); ?>
             <div class="form-one form-step active">
               <h2><?php echo e(trans('messages.datiPrenotazione')); ?></h2>
               <div class="mb-3">
                 <label for="arrivo" class="form-label"><?php echo e(trans('messages.arrivo')); ?></label>       
-                <input class="form-control" type="date" id="arrivo" name="arrivo" value="<?php echo e($arrivo); ?>"/>
+                <input class="form-control" type="date" id="arrivo" name="arrivo" value="<?php echo e($arrivo); ?>" min="<?php echo date("Y-m-d"); ?>"/>
                 <span class="invalid-input" id="invalid-arrivo"></span>
               </div>
               <div class="mb-3">
                 <label for="partenza" class="form-label"><?php echo e(trans('messages.partenza')); ?></label>
-                <input class="form-control" type="date" id="partenza" name="partenza"/>
+                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>"/>
                 <span class="invalid-input" id="invalid-partenza"></span>
               </div>
               <div class="mb-3">
                 <label for="orarioArrivo" class="form-label"><?php echo e(trans('messages.orario')); ?></label>
-                <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo" min="10:00">
+                <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo">
                 <div class="form-text"style="max-width: 400px;">
                   <?php echo e(trans('messages.infoOrario')); ?>
 
@@ -451,7 +477,7 @@
 
               <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
-                <input class="form-control" type="text"  id="email" name="email" placeholder="<?php echo e(trans('messages.placeholder_email')); ?>"/>
+                <input class="form-control" type="text"  id="email" name="email" placeholder="<?php echo e(trans('messages.placeholder_email')); ?>" value="<?php echo e(session('user_email') ? htmlspecialchars(session('user_email')) : ''); ?>" />
                 <div class="form-text" style="max-width: 424px;">
                   <?php echo e(trans('messages.infoEmail')); ?>
 
@@ -512,9 +538,10 @@
             <div class="btn-group" style=" display: flex; flex-direction: row; justify-content: center;">
               <button type="button" class="btn-prev" disabled><?php echo e(trans('button.indietro')); ?></button>
               <button type="button" class="btn-next"><?php echo e(trans('button.avanti')); ?></button>
-              <label for="mySubmit" class="btn-submit w-100"></i><?php echo e(trans('button.confermaPren')); ?><i class="bi bi-check-circle-fill"></i></label>
-              <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">
+              <label for="mySubmit" class="btn-submit w-100"><?php echo e(trans('button.confermaPren')); ?><i class="bi bi-check-circle-fill"></i></label>
+              <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">   
             </div>
+            <button type="button" class="btn-calendar" onclick="window.location.href='<?php echo e(route('calendario')); ?>'"><?php echo e(trans('button.calendario')); ?><i class="bi bi-calendar-date"></i><i class="bi bi-arrow-return-left"></i></button>
           </form>
         </div>
     </div>

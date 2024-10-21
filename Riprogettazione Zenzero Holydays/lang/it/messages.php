@@ -75,7 +75,7 @@ return [
 
     'infoOrario' =>'Le richieste di check-in prima delle 15:00 saranno soggette a conferma via email, in base alla disponibilità.',
     'infoLetti' =>'Ricorda che ci sono 6 posti letto disponibili: 2 in soggiorno e 4 in camera da letto.',
-    'infoEmail' =>'L\’e-mail di conferma sarà inviata a questo indirizzo. Assicurati che l\'indirizzo sia corretto.',
+    'infoEmail' =>'L’e-mail di conferma sarà inviata a questo indirizzo. Assicurati che l\'indirizzo sia corretto.',
     'infoTel' =>'Il numero di telefono fornito sarà utilizzato per contattarti. Assicurati che sia corretto.',
 
 

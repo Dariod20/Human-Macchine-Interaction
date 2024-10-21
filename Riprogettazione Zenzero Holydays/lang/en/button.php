@@ -14,6 +14,8 @@ return [
     'indietro' => 'Previous',
     'avanti' => 'Next',
     'confermaPren' => 'Confirm Booking ',
+    'calendario' => 'Back to Calendar',
+
 
 
 

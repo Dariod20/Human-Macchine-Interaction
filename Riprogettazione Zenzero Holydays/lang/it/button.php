@@ -14,6 +14,7 @@ return [
     'indietro' => 'Indietro',
     'avanti' => 'Avanti',
     'confermaPren' => 'Conferma Prenotazione ',
+    'calendario' => 'Torna al calendario',
 
 
 

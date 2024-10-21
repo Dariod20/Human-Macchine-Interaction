@@ -68,8 +68,8 @@
             @endif
             </ul>
             <ul class="navbar-nav">
-              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'en']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/en.png" width="20"/></a></li>
-              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'it']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/it.png" width="16"/></a></li>
+              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'en']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/en.png" width="20" alt="UK flag"/></a></li>
+              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'it']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/it.png" width="16" alt="Italian flag"/></a></li>
               @if(session('logged'))
                 <li class="nav-item"><i>{{ trans('messages.welcome') }} {{ session('loggedName') }}</i> <a href="{{ route('user.logout') }}"><i class="bi bi-box-arrow-right"></i></a></li>
               @else

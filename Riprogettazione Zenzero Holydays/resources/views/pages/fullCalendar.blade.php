@@ -8,7 +8,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item" aria-current="page"><a href="{{ route('home') }}">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">{{ trans('button.book') }}</li>
+<li class="breadcrumb-item active" aria-current="page">{{ trans(key: 'button.book') }}</li>
 @endsection
  
 <?php

@@ -8,6 +8,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item" aria-current="page"><a href="{{ route('home') }}">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('calendario') }}">{{ trans(key: 'button.book') }}</a></li>
 <li class="breadcrumb-item active" aria-current="page">{{ trans('messages.conferma') }}</li>
 @endsection
 
@@ -16,6 +17,7 @@
 @section('corpo')
 
 <script>
+  
   function populate(s1, s2) {
       var s1 = document.getElementById(s1);
       var s2 = document.getElementById(s2);
@@ -37,6 +39,7 @@
         var optionArray = ["0|0", "1|1"];
       } else if (s1.value == "6") {
         s2.disabled = true;
+        s2.value =0;
         var optionArray = ["0|0"];
       }
       for (var option in optionArray) {
@@ -141,6 +144,12 @@
         }
     };
 
+    function decodeHtmlEntities(str) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = str;
+      return txt.value;
+    }
+
     // Validazione del primo step
     function validateStep1() {
         var arrivo = document.getElementById('arrivo').value;
@@ -174,7 +183,8 @@
         }
 
         if (orarioArrivo.trim() === "") {
-            document.getElementById('invalid-orarioArrivo').textContent = "{{ trans('errors.orario') }}";
+            var errorMsg = "{{ trans('errors.orario') }}"; // Usa la sintassi sicura di Laravel
+            document.getElementById('invalid-orarioArrivo').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
             error = true;
             $("#orarioArrivo").focus();
         } else {
@@ -183,7 +193,6 @@
 
         return !error; // Ritorna true se non ci sono errori
     }
-    
     
     // Validazione del secondo step
     function validateStep3() {
@@ -234,9 +243,10 @@
         }
 
         if (email.trim() === "") {
-            document.getElementById('invalid-email').textContent = "{{ trans('errors.email') }}";
-            error = true;
-            $("input[name='email']").focus();
+          var errorMsg = "{{ trans('errors.email') }}"; // Usa la sintassi sicura di Laravel
+          document.getElementById('invalid-email').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
+          error = true;
+          $("input[name='email']").focus();
         } else if (!regexEmail.test(email)) {
             document.getElementById('invalid-email').textContent = "{{ trans('errors.emailErr') }}";
             error = true;
@@ -275,7 +285,7 @@
                     console.log(data)
                     var occupiedDatesText = "{{ trans('errors.dateOcc') }}";
                     data.occupiedDates.forEach(function (date) {
-                        occupiedDatesText += "dal " + date.arrivo + " al " + date.partenza + ", ";
+                        occupiedDatesText += "{{ trans('errors.dateDal') }} " + date.arrivo + " {{ trans('errors.dateAl') }} " + date.partenza + ", ";
                     });
                     occupiedDatesText = occupiedDatesText.slice(0, -2); // Rimuovi l'ultima virgola
                     $("#invalid-arrivo").text(occupiedDatesText);
@@ -381,21 +391,22 @@
             </ul>
           </div>
           <form name="prenotazioniUtente" method="post" action="{{ route('prenotazioniUtente.store') }}">
+            @csrf
             <div class="form-one form-step active">
               <h2>{{ trans('messages.datiPrenotazione') }}</h2>
               <div class="mb-3">
                 <label for="arrivo" class="form-label">{{ trans('messages.arrivo') }}</label>       
-                <input class="form-control" type="date" id="arrivo" name="arrivo" value="{{ $arrivo }}"/>
+                <input class="form-control" type="date" id="arrivo" name="arrivo" value="{{ $arrivo }}" min="<?php echo date("Y-m-d"); ?>"/>
                 <span class="invalid-input" id="invalid-arrivo"></span>
               </div>
               <div class="mb-3">
                 <label for="partenza" class="form-label">{{ trans('messages.partenza') }}</label>
-                <input class="form-control" type="date" id="partenza" name="partenza"/>
+                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>"/>
                 <span class="invalid-input" id="invalid-partenza"></span>
               </div>
               <div class="mb-3">
                 <label for="orarioArrivo" class="form-label">{{ trans('messages.orario') }}</label>
-                <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo" min="10:00">
+                <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo">
                 <div class="form-text"style="max-width: 400px;">
                   {{ trans('messages.infoOrario') }}
                 </div>
@@ -448,7 +459,7 @@
 
               <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
-                <input class="form-control" type="text"  id="email" name="email" placeholder="{{ trans('messages.placeholder_email') }}"/>
+                <input class="form-control" type="text"  id="email" name="email" placeholder="{{ trans('messages.placeholder_email') }}" value="{{ session('user_email') ? htmlspecialchars(session('user_email')) : '' }}" />
                 <div class="form-text" style="max-width: 424px;">
                   {{ trans('messages.infoEmail') }}
                 </div>
@@ -507,9 +518,10 @@
             <div class="btn-group" style=" display: flex; flex-direction: row; justify-content: center;">
               <button type="button" class="btn-prev" disabled>{{ trans('button.indietro') }}</button>
               <button type="button" class="btn-next">{{ trans('button.avanti') }}</button>
-              <label for="mySubmit" class="btn-submit w-100"></i>{{ trans('button.confermaPren') }}<i class="bi bi-check-circle-fill"></i></label>
-              <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">
+              <label for="mySubmit" class="btn-submit w-100">{{ trans('button.confermaPren') }}<i class="bi bi-check-circle-fill"></i></label>
+              <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">   
             </div>
+            <button type="button" class="btn-calendar" onclick="window.location.href='{{ route('calendario') }}'">{{ trans('button.calendario') }}<i class="bi bi-calendar-date"></i><i class="bi bi-arrow-return-left"></i></button>
           </form>
         </div>
     </div>
