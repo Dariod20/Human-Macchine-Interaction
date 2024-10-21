@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTariffeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LangController;
+Route::get('/form', [FrontController::class,'getForm'])->name('form')->middleware(['lang']);
 
 
 Route::group(['middleware' => ['lang']], function() {

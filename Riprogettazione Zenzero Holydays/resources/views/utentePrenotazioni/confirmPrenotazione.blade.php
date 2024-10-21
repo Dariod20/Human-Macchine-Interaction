@@ -16,6 +16,42 @@
 @section('corpo')
 
 <script>
+  function populate(s1, s2) {
+      var s1 = document.getElementById(s1);
+      var s2 = document.getElementById(s2);
+      s2.innerHTML = "";
+      if (s1.value == "1") {
+        s2.disabled = false;
+        var optionArray = ["0|0", "1|1", "2|2", "3|3", "4|4", "5|5"];
+      } else if (s1.value == "2") {
+        s2.disabled = false;
+        var optionArray = ["0|0", "1|1", "2|2", "3|3", "4|4"];
+      } else if (s1.value == "3") {
+        s2.disabled = false;
+        var optionArray = ["0|0", "1|1", "2|2", "3|3"];
+      } else if (s1.value == "4") {
+        s2.disabled = false;
+        var optionArray = ["0|0", "1|1", "2|2"];
+      } else if (s1.value == "5") {
+        s2.disabled = false;
+        var optionArray = ["0|0", "1|1"];
+      } else if (s1.value == "6") {
+        s2.disabled = true;
+        var optionArray = ["0|0"];
+      }
+      for (var option in optionArray) {
+        var pair = optionArray[option].split("|");
+        var newOption = document.createElement("option");
+        newOption.value = pair[0];
+        newOption.innerHTML = pair[1];
+        s2.options.add(newOption);
+      }
+    }
+
+    window.onload = function () {
+      populate('numAdulti', 'numBambini');  // Popola la select per i bambini all'apertura
+    };
+  
   $(document).ready(function(){
     const nextButton = document.querySelector('.btn-next');
     const prevButton = document.querySelector('.btn-prev');
@@ -23,6 +59,7 @@
     const form_step = document.querySelectorAll('.form-step');
     let active = 1;
 
+   
     $('#arrivo, #partenza').change(function() {
         var arrivo = $('#arrivo').val();
         var partenza = $('#partenza').val();
@@ -52,13 +89,15 @@
                 checkAvailabilityAndProceed(); // Controlla la disponibilità tramite AJAX prima di avanzare
             }
         } else if (active === 2) {
-            active++;
-            if (active > steps.length) {
-               active = steps.length;
-            }
-            updateProgress();
+            
+          active++;
+          if (active > steps.length) {
+            active = steps.length;
+          }
+          updateProgress();
+            
         }else if (active === 3) {
-            if (validateStep2()) {
+            if (validateStep3()) {
                 active++;
                 if (active > steps.length) {
                     active = steps.length;
@@ -112,7 +151,7 @@
         var error = false;
 
         if (arrivo.trim() === "") {
-            document.getElementById('invalid-arrivo').textContent = "La data di arrivo è obbligatoria.";
+            document.getElementById('invalid-arrivo').textContent = "{{ trans('errors.arrivo') }}";
             error = true;
             $("#arrivo").focus();
         } else {
@@ -120,7 +159,7 @@
         }
 
         if (partenza.trim() === "") {
-            document.getElementById('invalid-partenza').textContent = "La data di partenza è obbligatoria.";
+            document.getElementById('invalid-partenza').textContent = "{{ trans('errors.partenza') }}";
             error = true;
             $("#partenza").focus();
         } else {
@@ -128,14 +167,14 @@
         }
 
         if (arrivo && partenza && arrivo >= partenza) {
-            document.getElementById('invalid-arrivo').textContent = "La data di arrivo deve precedere la partenza.";
-            document.getElementById('invalid-partenza').textContent = "La data di partenza deve essere successiva alla data di arrivo.";
+            document.getElementById('invalid-arrivo').textContent = "{{ trans('errors.arrivoErr') }}";
+            document.getElementById('invalid-partenza').textContent = "{{ trans('errors.partenzaErr') }}";
             $("#partenza").focus();
             error = true;
         }
 
         if (orarioArrivo.trim() === "") {
-            document.getElementById('invalid-orarioArrivo').textContent = "L'orario di arrivo è obbligatorio.";
+            document.getElementById('invalid-orarioArrivo').textContent = "{{ trans('errors.orario') }}";
             error = true;
             $("#orarioArrivo").focus();
         } else {
@@ -144,9 +183,10 @@
 
         return !error; // Ritorna true se non ci sono errori
     }
-
+    
+    
     // Validazione del secondo step
-    function validateStep2() {
+    function validateStep3() {
         var firstName = document.getElementById('nome').value;
         var lastName = document.getElementById('cognome').value;
         var telefono = document.getElementById('telefono').value;
@@ -158,11 +198,11 @@
         var error = false;
 
         if (firstName.trim() === "") {
-            document.getElementById('invalid-firstName').textContent = "Il nome è obbligatorio.";
+            document.getElementById('invalid-firstName').textContent = "{{ trans('errors.nome') }}";
             error = true;
             $("input[name='nome']").focus();
         } else if (!regexName.test(firstName)) {
-            document.getElementById('invalid-firstName').textContent = "Il nome deve contenere solo lettere.";
+            document.getElementById('invalid-firstName').textContent = "{{ trans('errors.nomeErr') }}";
             error = true;
             $("input[name='nome']").focus();
         } else {
@@ -170,11 +210,11 @@
         }
 
         if (lastName.trim() === "") {
-            document.getElementById('invalid-lastName').textContent = "Il cognome è obbligatorio.";
+            document.getElementById('invalid-lastName').textContent = "{{ trans('errors.cognome') }}";
             error = true;
             $("input[name='cognome']").focus();
         } else if (!regexName.test(lastName)) {
-            document.getElementById('invalid-lastName').textContent = "Il cognome deve contenere solo lettere.";
+            document.getElementById('invalid-lastName').textContent = "{{ trans('errors.cognomeErr') }}";
             error = true;
             $("input[name='cognome']").focus();
         } else {
@@ -182,11 +222,11 @@
         }
 
         if (telefono.trim() === "") {
-            document.getElementById('invalid-telefono').textContent = "Il numero di telefono è obbligatorio.";
+            document.getElementById('invalid-telefono').textContent = "{{ trans('errors.tel') }}";
             error = true;
             $("input[name='telefono']").focus();
         } else if (!regexPhone.test(telefono)) {
-            document.getElementById('invalid-telefono').textContent = "Il numero di telefono deve contenere solo cifre.";
+            document.getElementById('invalid-telefono').textContent = "{{ trans('errors.telErr') }}";
             error = true;
             $("input[name='telefono']").focus();
         } else {
@@ -194,11 +234,11 @@
         }
 
         if (email.trim() === "") {
-            document.getElementById('invalid-email').textContent = "L'email è obbligatoria.";
+            document.getElementById('invalid-email').textContent = "{{ trans('errors.email') }}";
             error = true;
             $("input[name='email']").focus();
         } else if (!regexEmail.test(email)) {
-            document.getElementById('invalid-email').textContent = "Inserisci un'email valida.";
+            document.getElementById('invalid-email').textContent = "{{ trans('errors.emailErr') }}";
             error = true;
             $("input[name='email']").focus();
         } else {
@@ -206,7 +246,7 @@
         }
 
         if (stato.trim() === "") {
-            document.getElementById('invalid-stato').textContent = "Lo Stato è obbligatorio.";
+            document.getElementById('invalid-stato').textContent = "{{ trans('errors.stato') }}";
             error = true;
             $("input[name='email']").focus();
         } else {
@@ -233,7 +273,7 @@
             success: function (data) {
                 if (data.found) {
                     console.log(data)
-                    var occupiedDatesText = "Alcune delle date inserite sono già occupate. Ci sono già prenotazioni: ";
+                    var occupiedDatesText = "{{ trans('errors.dateOcc') }}";
                     data.occupiedDates.forEach(function (date) {
                         occupiedDatesText += "dal " + date.arrivo + " al " + date.partenza + ", ";
                     });
@@ -255,7 +295,7 @@
                       if (!response.available) {
                         error = true;
                         var message = (response.context === 'conferma') ?
-                          "La casa vacanze è chiusa in queste date, controllare il calendario" :
+                          "{{ trans('errors.dateChiuse') }}" :
                           response.message;
                         $("#invalid-arrivo").text(message);
                         $("#invalid-partenza").text(message);
@@ -343,19 +383,22 @@
           <form name="prenotazioniUtente" method="post" action="{{ route('prenotazioniUtente.store') }}">
             <div class="form-one form-step active">
               <h2>{{ trans('messages.datiPrenotazione') }}</h2>
-              <div>
+              <div class="mb-3">
                 <label for="arrivo" class="form-label">{{ trans('messages.arrivo') }}</label>       
                 <input class="form-control" type="date" id="arrivo" name="arrivo" value="{{ $arrivo }}"/>
                 <span class="invalid-input" id="invalid-arrivo"></span>
               </div>
-              <div>
-                <label for="arrivo" class="form-label">{{ trans('messages.partenza') }}</label>
+              <div class="mb-3">
+                <label for="partenza" class="form-label">{{ trans('messages.partenza') }}</label>
                 <input class="form-control" type="date" id="partenza" name="partenza"/>
                 <span class="invalid-input" id="invalid-partenza"></span>
               </div>
               <div class="mb-3">
                 <label for="orarioArrivo" class="form-label">{{ trans('messages.orario') }}</label>
-                <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo">
+                <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo" min="10:00">
+                <div class="form-text"style="max-width: 400px;">
+                  {{ trans('messages.infoOrario') }}
+                </div>
                 <span class="invalid-input" id="invalid-orarioArrivo"></span>
               </div>
               <div class="form-group" style="background-color: var(--main-color); display: flex; flex-direction: column; align-items: center; justify-content: center;">
@@ -367,21 +410,21 @@
               <h2>{{ trans('messages.numOspiti') }}</h2>
               <div class="mb-3">
                 <label for="numAdulti" class="form-label">{{ trans('messages.numAdulti') }}</label>
-                <select class="form-select shadow-none" id="numAdulti" name="numAdulti">
-                  <option value="1">1</option>
+                <select class="form-select shadow-none" id="numAdulti" name="numAdulti" onchange="populate(this.id,'numBambini')">
+                  <option value="1" selected>1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
+                  <option value="6">6</option>
                 </select>
+                <div class="form-text" style="max-width: 300px;">
+                  {{ trans('messages.infoLetti') }}
+                </div>
               </div>
               <div class="mb-3">
                 <label for="numBambini" class="form-label">{{ trans('messages.numBambini') }}</label>
                 <select class="form-select shadow-none" id="numBambini" name="numBambini">
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
                 </select>
               </div>
             </div>
@@ -406,12 +449,18 @@
               <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
                 <input class="form-control" type="text"  id="email" name="email" placeholder="{{ trans('messages.placeholder_email') }}"/>
+                <div class="form-text" style="max-width: 424px;">
+                  {{ trans('messages.infoEmail') }}
+                </div>
                 <span class="invalid-input" id="invalid-email"></span>
               </div>
               
               <div class="mb-3">
                 <label for="telefono" class="form-label">{{ trans('messages.tel') }}</label>
                 <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="{{ trans('messages.placeholder_telefono') }}">
+                <div class="form-text" style="max-width: 424px;">
+                  {{ trans('messages.infoTel') }}
+                </div>
                 <span class="invalid-input" id="invalid-telefono"></span>
               </div>
 
