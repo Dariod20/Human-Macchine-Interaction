@@ -401,7 +401,7 @@
               </div>
               <div class="mb-3">
                 <label for="partenza" class="form-label">{{ trans('messages.partenza') }}</label>
-                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>"/>
+                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>" value="2024-10-30"/>
                 <span class="invalid-input" id="invalid-partenza"></span>
               </div>
               <div class="mb-3">
@@ -521,7 +521,7 @@
               <label for="mySubmit" class="btn-submit w-100">{{ trans('button.confermaPren') }}<i class="bi bi-check-circle-fill"></i></label>
               <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">   
             </div>
-            <button type="button" class="btn-calendar" onclick="window.location.href='{{ route('calendario') }}'">{{ trans('button.calendario') }}<i class="bi bi-calendar-date"></i><i class="bi bi-arrow-return-left"></i></button>
+            <button type="button" class="btn-calendar" onclick="window.location.href='{{ route('calendario') }}'">{{ trans('button.calendario') }}<i class="bi bi-calendar-date" style="margin-left: -7%;"></i></button>
           </form>
         </div>
     </div>

@@ -18,22 +18,7 @@
 <?php $__env->startSection('corpo'); ?>
 
 <script>
-
-  document.getElementById('arrivo').addEventListener('change', function() {
-      // Ottieni la data di arrivo selezionata
-      var arrivo = $('#arrivo').val();
-      var partenza = $('#partenza').val();
-      
-      // Se la data di arrivo è valida, aggiorna la data di partenza
-      if (!isNaN(arrivo)) {
-          // Imposta la data di partenza uguale alla data di arrivo
-         
-          inputPartenza.value = arrivo;  // Imposta il valore di partenza
-          inputPartenza.min = arrivo;  // Limita la selezione della partenza a partire dalla data di arrivo
-      }
-  });
-
-
+  
   function populate(s1, s2) {
       var s1 = document.getElementById(s1);
       var s2 = document.getElementById(s2);
@@ -417,7 +402,7 @@
               </div>
               <div class="mb-3">
                 <label for="partenza" class="form-label"><?php echo e(trans('messages.partenza')); ?></label>
-                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>"/>
+                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>" value="2024-10-30"/>
                 <span class="invalid-input" id="invalid-partenza"></span>
               </div>
               <div class="mb-3">
@@ -541,7 +526,7 @@
               <label for="mySubmit" class="btn-submit w-100"><?php echo e(trans('button.confermaPren')); ?><i class="bi bi-check-circle-fill"></i></label>
               <input id="mySubmit" class="d-none btn-submit" type="submit" value="Save">   
             </div>
-            <button type="button" class="btn-calendar" onclick="window.location.href='<?php echo e(route('calendario')); ?>'"><?php echo e(trans('button.calendario')); ?><i class="bi bi-calendar-date"></i><i class="bi bi-arrow-return-left"></i></button>
+            <button type="button" class="btn-calendar" onclick="window.location.href='<?php echo e(route('calendario')); ?>'"><?php echo e(trans('button.calendario')); ?><i class="bi bi-calendar-date" style="margin-left: -7%;"></i></button>
           </form>
         </div>
     </div>
