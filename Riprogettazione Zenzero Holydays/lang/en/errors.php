@@ -4,7 +4,7 @@ return [
     'arrivo' => "Check-in date is required.",
     'partenza' => "Check-out date is required.",
     'arrivoErr' => "Check-in date must be before check-out date.",
-    'partenzaErr' => "Check-out date must be after check-in date.",
+    'partenzaErr' => "Check-out date must be later than check-in date.",
     'orario' => "Arrival time is required.",
     'nome' => "First name is required.",
     'nomeErr' => "First name must contain only letters.",

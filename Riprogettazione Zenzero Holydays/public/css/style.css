@@ -641,3 +641,16 @@ ul.regole{
     }
     
 }
+
+.input-group {
+    position: relative;
+}
+
+.input-group .input-group-addon {
+    position: absolute;
+    right: 10px; /* Distanza dall'estremità destra */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10; /* Assicura che l'icona sia sopra il campo input */
+    pointer-events: none;
+}

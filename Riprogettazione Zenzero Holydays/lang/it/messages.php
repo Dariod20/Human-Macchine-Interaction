@@ -79,6 +79,8 @@ return [
     'infoTel' =>'Il numero di telefono fornito sarà utilizzato per contattarti. Assicurati che sia corretto.',
 
     'dateRange' => 'Date di arrivo e partenza',
+    'selezionaOrario' => 'Seleziona un orario di arrivo',
+
 
 
 

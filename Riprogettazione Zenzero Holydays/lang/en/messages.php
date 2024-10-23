@@ -78,7 +78,7 @@ return [
     'infoTel' =>'The provided phone number will be used to contact you. Please ensure that it is correct',
 
     'dateRange' => 'Check-in and check-out dates',
-
+     'selezionaOrario' => 'Select an arrival time',
 
 
 
