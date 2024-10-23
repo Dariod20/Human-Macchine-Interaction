@@ -10,7 +10,25 @@ img.card-img-top{
 
 .navbar{
     transition: all 0.3s ease; /* Aggiunge una transizione fluida */
+}
 
+#login, #logout {
+    color: #007bff; /* Imposta il colore che desideri, es. nero */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-size: large;
+}
+
+#login:hover {
+    color: #0057b4; /* Cambia il colore al passaggio del mouse */
+}
+
+#logout:hover {
+    color: #0057b4; /* Cambia il colore al passaggio del mouse */
+}
+
+#welcomeUser {
+    font-size: large;
+    margin-right: 0.8em;
 }
 
 div#titolo{
@@ -93,7 +111,7 @@ div#titolo{
     font-family: "exotc350_dmbd_btdemi-bold";
     margin-bottom:0;
     margin-top:0;
-} 
+}
 
 li a.active {
     background-color: lightgray;
@@ -118,32 +136,32 @@ footer {
     padding: 15px 0; /* Ridotto da 30px a 15px per diminuire l'altezza */
     margin-top: 40px; /* Aumentato il margine superiore per maggior distanziamento */
 }
-  
+
 /* Stile per i link nel footer */
 footer a {
     color: white;
     text-decoration: none;
     margin-bottom: 10px;
 }
-  
+
 footer a:hover {
     text-decoration: underline;
 }
-  
+
 /* Stile per gli elementi di intestazione del footer */
 footer h6 {
     font-weight: bold;
     margin-bottom: 15px;
     text-align: left;
 }
-  
+
 /* Stile per gli elementi del corpo del footer */
 footer p {
     margin-bottom: 10px;
     margin-left: 0;
     text-align: left;
 }
-  
+
 /* Stile per gli elementi di icone */
 footer i {
     margin-right: 10px;
@@ -354,7 +372,7 @@ header h1 {
     text-decoration: none;
     margin-bottom: 10px;
 }
-      
+
 .contact-text :hover{
     text-decoration: underline;
 }
