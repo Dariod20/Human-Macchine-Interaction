@@ -78,6 +78,7 @@ return [
     'infoEmail' =>'L’e-mail di conferma sarà inviata a questo indirizzo. Assicurati che l\'indirizzo sia corretto.',
     'infoTel' =>'Il numero di telefono fornito sarà utilizzato per contattarti. Assicurati che sia corretto.',
 
+    'dateRange' => 'Date di arrivo e partenza',
 
 
 

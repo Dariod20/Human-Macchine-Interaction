@@ -5,6 +5,13 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('active_prenota', 'active'); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
@@ -63,10 +70,51 @@
     const form_step = document.querySelectorAll('.form-step');
     let active = 1;
 
+    // Date arrivano in formato DD-MM-YYYY
+    $('#arrivo').val('<?php echo e($arrivo); ?>'); 
+    $('#partenza').val('<?php echo e($arrivoDopo); ?>');
+    // Converto in formato YYYY-MM-DD per il database
+    var arrivo = moment($('#arrivo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+    var partenza = moment($('#partenza').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+    // Imposto i valori formattati nel campo input
+    $('#arrivo').val(arrivo); 
+    $('#partenza').val(partenza); 
+
+    var lang = '<?php echo e(app()->getLocale()); ?>'
+    var minDate = moment().startOf('day'); // Imposta a mezzanotte di oggi
+
+    $(function () {
+    // Configura il daterangepicker
+    $('input[name="daterange"]').daterangepicker({
+      opens: 'right',
+      autoApply: true,
+      startDate: '<?php echo e($arrivo); ?>',
+      endDate: '<?php echo e($arrivoDopo); ?>',
+      minDate: minDate, // Imposta la data minima
+      locale: {
+        format: 'DD/MM/YYYY', // Imposta il formato corretto
+        firstDay: lang === 'it' ? 1 : 0, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
+        daysOfWeek: lang === 'it' ? [ "Dom","Lun", "Mar", "Mer", "Gio", "Ven", "Sab"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        monthNames: lang === 'it' ? [
+          "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 
+          "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+        ] : [
+          "January", "February", "March", "April", "May", "June", 
+          "July", "August", "September", "October", "November", "December"
+        ]
+      }
+      
+    }, function (start, end, label) {
+      $('#arrivo').val(start.format('YYYY-MM-DD'));
+      $('#partenza').val(end.format('YYYY-MM-DD'));
+    });
+  });
+
    
     $('#arrivo, #partenza').change(function() {
         var arrivo = $('#arrivo').val();
         var partenza = $('#partenza').val();
+
 
         if (arrivo && partenza) {
             $.ajax({
@@ -120,14 +168,10 @@
     });
 
     const updateProgress = () => {
-        console.log('steps.length  =>' + steps.length);
-        console.log('active => ' + active);
-
         steps.forEach((step, i) => {
             if (i == active - 1) {
                 step.classList.add('active');
                 form_step[i].classList.add('active');
-                console.log('i =>'+ i);
             } else {
                 step.classList.remove('active');
                 form_step[i].classList.remove('active');
@@ -163,23 +207,22 @@
         if (arrivo.trim() === "") {
             document.getElementById('invalid-arrivo').textContent = "<?php echo e(trans('errors.arrivo')); ?>";
             error = true;
-            $("#arrivo").focus();
+            $("#daterange").focus();
         } else {
             document.getElementById('invalid-arrivo').textContent = "";
         }
 
         if (partenza.trim() === "") {
-            document.getElementById('invalid-partenza').textContent = "<?php echo e(trans('errors.partenza')); ?>";
+            document.getElementById('invalid-arrivo').textContent = "<?php echo e(trans('errors.partenza')); ?>";
             error = true;
-            $("#partenza").focus();
+            $("#daterange").focus();
         } else {
-            document.getElementById('invalid-partenza').textContent = "";
+            document.getElementById('invalid-arrivo').textContent = "";
         }
 
         if (arrivo && partenza && arrivo >= partenza) {
             document.getElementById('invalid-arrivo').textContent = "<?php echo e(trans('errors.arrivoErr')); ?>";
-            document.getElementById('invalid-partenza').textContent = "<?php echo e(trans('errors.partenzaErr')); ?>";
-            $("#partenza").focus();
+            $("#daterange").focus();
             error = true;
         }
 
@@ -283,15 +326,13 @@
             },
             success: function (data) {
                 if (data.found) {
-                    console.log(data)
                     var occupiedDatesText = "<?php echo e(trans('errors.dateOcc')); ?>";
                     data.occupiedDates.forEach(function (date) {
                         occupiedDatesText += "<?php echo e(trans('errors.dateDal')); ?> " + date.arrivo + " <?php echo e(trans('errors.dateAl')); ?> " + date.partenza + ", ";
                     });
                     occupiedDatesText = occupiedDatesText.slice(0, -2); // Rimuovi l'ultima virgola
                     $("#invalid-arrivo").text(occupiedDatesText);
-                    $("#invalid-partenza").text(occupiedDatesText);
-                    $("#partenza").focus();
+                    $("#daterange").focus();
                 } else {
                   // Chiamata AJAX per verificare le tariffe disponibili
                   $.ajax({
@@ -309,8 +350,7 @@
                           "<?php echo e(trans('errors.dateChiuse')); ?>" :
                           response.message;
                         $("#invalid-arrivo").text(message);
-                        $("#invalid-partenza").text(message);
-                        $("#arrivo").focus();
+                        $("#daterange").focus();
                       } else {
                         // Se tutto è valido, avanza al prossimo step
                         active++;
@@ -331,8 +371,10 @@
 
     // Funzione per mostrare il riepilogo finale
     const showSummary = () => {
-        const arrivo = document.getElementById('arrivo').value;
-        const partenza = document.getElementById('partenza').value;
+        const arrivoDaFormattare = document.getElementById('arrivo').value;
+        const arrivo = moment(arrivoDaFormattare, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        const partenzaDaFormattare = document.getElementById('partenza').value;
+        const partenza = moment(partenzaDaFormattare, 'YYYY-MM-DD').format('DD-MM-YYYY');
         const numAdulti = document.getElementById('numAdulti').value;
         const numBambini = document.getElementById('numBambini').value;
         const orarioArrivo = document.getElementById('orarioArrivo').value;
@@ -396,15 +438,13 @@
             <div class="form-one form-step active">
               <h2><?php echo e(trans('messages.datiPrenotazione')); ?></h2>
               <div class="mb-3">
-                <label for="arrivo" class="form-label"><?php echo e(trans('messages.arrivo')); ?></label>       
-                <input class="form-control" type="date" id="arrivo" name="arrivo" value="<?php echo e($arrivo); ?>" min="<?php echo date("Y-m-d"); ?>"/>
+                <label for="daterange" class="form-label"><?php echo e(trans('messages.dateRange')); ?></label>
+                <input class="form-control" type="text" id="daterange" name="daterange" />
                 <span class="invalid-input" id="invalid-arrivo"></span>
               </div>
-              <div class="mb-3">
-                <label for="partenza" class="form-label"><?php echo e(trans('messages.partenza')); ?></label>
-                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>" value="2024-10-30"/>
-                <span class="invalid-input" id="invalid-partenza"></span>
-              </div>
+              <!-- Campi nascosti per inviare arrivo e partenza -->
+              <input type="hidden" id="arrivo" name="arrivo" value="<?php echo e($arrivo); ?>">
+              <input type="hidden" id="partenza" name="partenza">
               <div class="mb-3">
                 <label for="orarioArrivo" class="form-label"><?php echo e(trans('messages.orario')); ?></label>
                 <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo">

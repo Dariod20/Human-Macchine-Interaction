@@ -26,8 +26,7 @@ class AuthController extends Controller
             session(['loggedName' => $dl->getUserName($request->input('email'))]);
             session(['role' => $dl->getUserRole($request->input('email'))]);
             session(['user_email' => $request->input('email')]);
-
-
+            
             return Redirect::to(route('home'));
         } else 
         {
@@ -43,6 +42,8 @@ class AuthController extends Controller
         session()->forget('loggedID');
         session()->forget('loggedName');
         session()->forget('role');
+        session()->forget('user_email');
+
         return Redirect::to(route('home'));
     }
 

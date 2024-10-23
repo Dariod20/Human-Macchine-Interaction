@@ -4,6 +4,13 @@
 {{ trans('messages.conferma') }}
 @endsection
 
+@section('script')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+@endsection
+
 @section('active_prenota', 'active')
 
 @section('breadcrumb')
@@ -62,10 +69,51 @@
     const form_step = document.querySelectorAll('.form-step');
     let active = 1;
 
+    // Date arrivano in formato DD-MM-YYYY
+    $('#arrivo').val('{{ $arrivo }}'); 
+    $('#partenza').val('{{ $arrivoDopo }}');
+    // Converto in formato YYYY-MM-DD per il database
+    var arrivo = moment($('#arrivo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+    var partenza = moment($('#partenza').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+    // Imposto i valori formattati nel campo input
+    $('#arrivo').val(arrivo); 
+    $('#partenza').val(partenza); 
+
+    var lang = '{{ app()->getLocale() }}'
+    var minDate = moment().startOf('day'); // Imposta a mezzanotte di oggi
+
+    $(function () {
+    // Configura il daterangepicker
+    $('input[name="daterange"]').daterangepicker({
+      opens: 'right',
+      autoApply: true,
+      startDate: '{{ $arrivo }}',
+      endDate: '{{ $arrivoDopo }}',
+      minDate: minDate, // Imposta la data minima
+      locale: {
+        format: 'DD/MM/YYYY', // Imposta il formato corretto
+        firstDay: lang === 'it' ? 1 : 0, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
+        daysOfWeek: lang === 'it' ? [ "Dom","Lun", "Mar", "Mer", "Gio", "Ven", "Sab"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        monthNames: lang === 'it' ? [
+          "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 
+          "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+        ] : [
+          "January", "February", "March", "April", "May", "June", 
+          "July", "August", "September", "October", "November", "December"
+        ]
+      }
+      
+    }, function (start, end, label) {
+      $('#arrivo').val(start.format('YYYY-MM-DD'));
+      $('#partenza').val(end.format('YYYY-MM-DD'));
+    });
+  });
+
    
     $('#arrivo, #partenza').change(function() {
         var arrivo = $('#arrivo').val();
         var partenza = $('#partenza').val();
+
 
         if (arrivo && partenza) {
             $.ajax({
@@ -119,14 +167,10 @@
     });
 
     const updateProgress = () => {
-        console.log('steps.length  =>' + steps.length);
-        console.log('active => ' + active);
-
         steps.forEach((step, i) => {
             if (i == active - 1) {
                 step.classList.add('active');
                 form_step[i].classList.add('active');
-                console.log('i =>'+ i);
             } else {
                 step.classList.remove('active');
                 form_step[i].classList.remove('active');
@@ -162,23 +206,22 @@
         if (arrivo.trim() === "") {
             document.getElementById('invalid-arrivo').textContent = "{{ trans('errors.arrivo') }}";
             error = true;
-            $("#arrivo").focus();
+            $("#daterange").focus();
         } else {
             document.getElementById('invalid-arrivo').textContent = "";
         }
 
         if (partenza.trim() === "") {
-            document.getElementById('invalid-partenza').textContent = "{{ trans('errors.partenza') }}";
+            document.getElementById('invalid-arrivo').textContent = "{{ trans('errors.partenza') }}";
             error = true;
-            $("#partenza").focus();
+            $("#daterange").focus();
         } else {
-            document.getElementById('invalid-partenza').textContent = "";
+            document.getElementById('invalid-arrivo').textContent = "";
         }
 
         if (arrivo && partenza && arrivo >= partenza) {
             document.getElementById('invalid-arrivo').textContent = "{{ trans('errors.arrivoErr') }}";
-            document.getElementById('invalid-partenza').textContent = "{{ trans('errors.partenzaErr') }}";
-            $("#partenza").focus();
+            $("#daterange").focus();
             error = true;
         }
 
@@ -282,15 +325,13 @@
             },
             success: function (data) {
                 if (data.found) {
-                    console.log(data)
                     var occupiedDatesText = "{{ trans('errors.dateOcc') }}";
                     data.occupiedDates.forEach(function (date) {
                         occupiedDatesText += "{{ trans('errors.dateDal') }} " + date.arrivo + " {{ trans('errors.dateAl') }} " + date.partenza + ", ";
                     });
                     occupiedDatesText = occupiedDatesText.slice(0, -2); // Rimuovi l'ultima virgola
                     $("#invalid-arrivo").text(occupiedDatesText);
-                    $("#invalid-partenza").text(occupiedDatesText);
-                    $("#partenza").focus();
+                    $("#daterange").focus();
                 } else {
                   // Chiamata AJAX per verificare le tariffe disponibili
                   $.ajax({
@@ -308,8 +349,7 @@
                           "{{ trans('errors.dateChiuse') }}" :
                           response.message;
                         $("#invalid-arrivo").text(message);
-                        $("#invalid-partenza").text(message);
-                        $("#arrivo").focus();
+                        $("#daterange").focus();
                       } else {
                         // Se tutto è valido, avanza al prossimo step
                         active++;
@@ -330,8 +370,10 @@
 
     // Funzione per mostrare il riepilogo finale
     const showSummary = () => {
-        const arrivo = document.getElementById('arrivo').value;
-        const partenza = document.getElementById('partenza').value;
+        const arrivoDaFormattare = document.getElementById('arrivo').value;
+        const arrivo = moment(arrivoDaFormattare, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        const partenzaDaFormattare = document.getElementById('partenza').value;
+        const partenza = moment(partenzaDaFormattare, 'YYYY-MM-DD').format('DD-MM-YYYY');
         const numAdulti = document.getElementById('numAdulti').value;
         const numBambini = document.getElementById('numBambini').value;
         const orarioArrivo = document.getElementById('orarioArrivo').value;
@@ -395,15 +437,13 @@
             <div class="form-one form-step active">
               <h2>{{ trans('messages.datiPrenotazione') }}</h2>
               <div class="mb-3">
-                <label for="arrivo" class="form-label">{{ trans('messages.arrivo') }}</label>       
-                <input class="form-control" type="date" id="arrivo" name="arrivo" value="{{ $arrivo }}" min="<?php echo date("Y-m-d"); ?>"/>
+                <label for="daterange" class="form-label">{{ trans('messages.dateRange') }}</label>
+                <input class="form-control" type="text" id="daterange" name="daterange" />
                 <span class="invalid-input" id="invalid-arrivo"></span>
               </div>
-              <div class="mb-3">
-                <label for="partenza" class="form-label">{{ trans('messages.partenza') }}</label>
-                <input class="form-control" type="date" id="partenza" name="partenza" min="<?php echo date("Y-m-d"); ?>" value="2024-10-30"/>
-                <span class="invalid-input" id="invalid-partenza"></span>
-              </div>
+              <!-- Campi nascosti per inviare arrivo e partenza -->
+              <input type="hidden" id="arrivo" name="arrivo" value="{{ $arrivo }}">
+              <input type="hidden" id="partenza" name="partenza">
               <div class="mb-3">
                 <label for="orarioArrivo" class="form-label">{{ trans('messages.orario') }}</label>
                 <input type="time" class="form-control" id="orarioArrivo" name="orarioArrivo">

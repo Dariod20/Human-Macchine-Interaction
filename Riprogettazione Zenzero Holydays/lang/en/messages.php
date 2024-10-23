@@ -77,6 +77,8 @@ return [
      'infoEmail' =>'A confirmation email will be sent to this address. Please ensure that the address is correct.',
     'infoTel' =>'The provided phone number will be used to contact you. Please ensure that it is correct',
 
+    'dateRange' => 'Check-in and check-out dates',
+
 
 
 

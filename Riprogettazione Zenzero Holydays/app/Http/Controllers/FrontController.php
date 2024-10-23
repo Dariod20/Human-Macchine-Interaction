@@ -30,11 +30,7 @@ class FrontController extends Controller
     {
         return view('pages.contatti');
     }
-    public function getForm()
-    {
-        return view('utentePrenotazioni.changeformselect');
-    }
-    
+   
     
     
 }
