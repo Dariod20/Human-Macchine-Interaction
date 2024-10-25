@@ -10,6 +10,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src="<?php echo e(url('/')); ?>/js/phoneValidationScript.js"></script>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('active_prenota', 'active'); ?>
@@ -411,7 +412,7 @@
         const cognome = document.getElementById('cognome').value;
         const email = document.getElementById('email').value;
         const stato = document.getElementById('stato').value;
-        const telefono = document.getElementById('telefono').value;
+        const telefono = document.getElementById('num-telefono').value;
         const prezzo=document.getElementById('prezzoTotaleNumero').innerText;
 
         document.getElementById('riepilogo-soggiorno').innerHTML = `
@@ -574,27 +575,44 @@
                 </div>
                 <span class="invalid-input" id="invalid-email"></span>
               </div>
+
+              <div class="mb-3">
+                <label for="stato" class="form-label"><?php echo e(trans('messages.stato')); ?></label>
+                <select class="form-control" id="stato" name="stato">
+                  <option value="" disabled selected><?php echo e(trans('messages.placeholder_stato')); ?></option>
+                  <!-- Opzioni generate dinamicamente con JavaScript -->
+                </select>
+                <span class="invalid-input" id="invalid-stato"></span>
+              </div>
               
               <div class="mb-3">
                 <label for="telefono" class="form-label"><?php echo e(trans('messages.tel')); ?></label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
+                <div class="select-box">
+                  <div class="selected-option">
+                    <div>
+                      <span class="iconify" data-icon="flag:gb-4x3"></span>
+                      <strong>+1</strong>
+                    </div>
+                    <input type="tel" class="form-control" id="telefono" name="tel" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
+                  </div>
+                  <div class="options">
+                    <input type="text" class="search-box" placeholder="Search Country Name">
+                    <ol>
+                
+                    </ol>
+                  </div>
+                </div>
                 <div class="form-text" style="max-width: 424px;">
                   <?php echo e(trans('messages.infoTel')); ?>
 
                 </div>
                 <span class="invalid-input" id="invalid-telefono"></span>
+                <input type="hidden" id="num-telefono" name="num-telefono">
               </div>
 
-              <div class="mb-3">
-                <label for="stato" class="form-label"><?php echo e(trans('messages.stato')); ?></label>
-                <select class="form-control" id="stato" name="stato">
-                  <option value="italia">Italia</option>
-                  <option value="francia">Francia</option>
-                  <option value="germania">Germania</option>
-                  <!-- Aggiungi altre opzioni secondo necessità -->
-                </select>
-                <span class="invalid-input" id="invalid-stato"></span>
-              </div>
+            
+
+    
               
             </div>
             <div class="form-four form-step">
