@@ -73,8 +73,8 @@
             </ul>
             @endif
             <ul class="navbar-nav">
-              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'en']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/en.png" width="28"/></a></li>
-              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'it']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/it.png" width="22"/></a></li>
+              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'en']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/en.png" width="28" alt="UK flag"/></a></li>
+              <li class="nav-item"><a href="{{ route('setLang', ['lang' => 'it']) }}" class="nav-link"><img src="{{ url('/') }}/img/flags/it.png" width="22"  alt="Italian flag"/></a></li>
               @if(session('logged'))
                 <li class="nav-item">
                     <a href="{{ route('user.logout') }}" id="logout" class="nav-link">{{ trans('button.logout') }} <i class="bi bi-box-arrow-right"></i> </a>

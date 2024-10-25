@@ -39,6 +39,9 @@ class BookingController extends Controller
         $numAdulti = $request->input('numAdulti');
         $numBambini = $request->input('numBambini');
    
+        if (is_null($numBambini)) {
+            $numBambini = 0; // Imposta a 0 se è null
+        }
 
 
         //aggiungo libro al db con metodo del datalayer

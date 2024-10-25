@@ -182,7 +182,9 @@ class AdminBookingController extends Controller
 
     public function confermaPrenotazione($arrivo)
     {
-        return view('adminPrenotazioni.editPrenotazione')->with('arrivo', $arrivo);
+        $arrivo= Carbon::parse($arrivo)->format('d-m-Y');
+        $arrivoDopo = Carbon::parse($arrivo)->addDay()->format('d-m-Y');
+        return view('utentePrenotazioni.confirmPrenotazione')->with(['arrivo'=> $arrivo, 'arrivoDopo'=> $arrivoDopo]);
     }
 
 

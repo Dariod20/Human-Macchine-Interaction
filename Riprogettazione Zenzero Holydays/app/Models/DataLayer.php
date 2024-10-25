@@ -132,8 +132,8 @@ class DataLayer extends Model
                )
            ) {
                $occupiedDates[] = [
-                   'arrivo' => $prenotazioneArrivo->toDateString(),
-                   'partenza' => $prenotazionePartenza->toDateString()
+                   'arrivo' => $prenotazioneArrivo->format('d-m-y'),
+                   'partenza' => $prenotazionePartenza->format('d-m-y')
                ];
            }
        }

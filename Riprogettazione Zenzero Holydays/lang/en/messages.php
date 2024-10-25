@@ -41,12 +41,12 @@ return [
 
     'prenEn' => '\'s booking list',
     'prenIt' => '', 
-    'arrivo' => 'Arrival',
-     'partenza' => 'Departure',
+    'arrivo' => 'Check-in',
+     'partenza' => 'Check-out',
      'numAdulti' => ' Number of Adults',
      'numBambini' => 'Number of Children',
      'prezzo' => 'Total Price',
-     'email' => 'Email',
+     'email' => 'E-mail',
      'tel' => 'Phone',
      'stato' => 'Country',
      'orario' => 'Arrival Time',
@@ -62,16 +62,25 @@ return [
      'cancellation_success' => 'The reservation has been successfully canceled! You will be contacted shortly via email regarding your refund.',
 
 
+    'placeholder_nome' => 'Enter your first name',
+    'placeholder_cognome' => 'Enter your last name',
+    'placeholder_email' => 'Enter your email',
+    'placeholder_telefono' => 'Enter your phone number',
+
+    'datiPrenotazione' => 'Booking details',
+    'numOspiti' => 'Guests details',
+    'datiPersonali' => 'Your details',
+    'riepilogo' => 'Booking Summary',
+
+    'infoOrario' =>'Check-in requests before 3:00 PM will be subject to confirmation via email, based on availability.',
+     'infoLetti' =>'Please note that there are 6 available beds: 2 in the living room and 4 in the bedroom.',
+     'infoEmail' =>'A confirmation email will be sent to this address. Please ensure that the address is correct.',
+    'infoTel' =>'The provided phone number will be used to contact you. Please ensure that it is correct',
+
+    'dateRange' => 'Check-in and check-out dates',
+     'selezionaOrario' => 'Select an arrival time',
 
 
 
-
-
-    'my_library' => 'My Library',
-    'books_list' => 'Books List',
-    'authors_list' => 'Authors List',
-    'manage_categories' => 'Manage Categories',
-    'proverb' => 'Sow an act, and you reap a habit; sow a habit, and you reap a character; sow a character, and you reap a destiny.',    
-    'citation' => 'Indian proverb',
 
 ];

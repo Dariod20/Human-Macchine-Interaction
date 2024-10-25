@@ -48,7 +48,7 @@ return [
      'numAdulti' => 'Numero Adulti',
      'numBambini' => 'Numero Bambini',
      'prezzo' => 'Prezzo Totale',
-     'email' => 'Email',
+     'email' => 'E-mail',
      'tel' => 'Telefono',
      'stato' => 'Stato',
      'orario' => 'Orario Arrivo',
@@ -62,6 +62,24 @@ return [
     'reservation_success' => 'La prenotazione è stata confermata con successo! Sarai contattato a breve via email per il pagamento.
     Ricorda che la prenotazione può essere cancellata gratuitamente solo fino a due giorni prima della data di arrivo. Trascorso questo periodo, sarà rimborsato solo il 75% del costo.',
     'cancellation_success' => 'La prenotazione è stata cancellata con successo! Sarai contattato a breve via email per il rimborso.',
+
+    'placeholder_nome' => 'Inserisci il tuo nome',
+    'placeholder_cognome' => 'Inserisci il tuo cognome',
+    'placeholder_email' => 'Inserisci la tua email',
+    'placeholder_telefono' => 'Inserisci il tuo numero di telefono',
+
+    'datiPrenotazione' => 'Dati della prenotazione',
+    'numOspiti' => 'Numero di ospiti',
+    'datiPersonali' => 'Dati personali',
+    'riepilogo' => 'Riepilogo Prenotazione',
+
+    'infoOrario' =>'Le richieste di check-in prima delle 15:00 saranno soggette a conferma via email, in base alla disponibilità.',
+    'infoLetti' =>'Ricorda che ci sono 6 posti letto disponibili: 2 in soggiorno e 4 in camera da letto.',
+    'infoEmail' =>'L’e-mail di conferma sarà inviata a questo indirizzo. Assicurati che l\'indirizzo sia corretto.',
+    'infoTel' =>'Il numero di telefono fornito sarà utilizzato per contattarti. Assicurati che sia corretto.',
+
+    'dateRange' => 'Date di arrivo e partenza',
+    'selezionaOrario' => 'Seleziona un orario di arrivo',
 
 
 
@@ -80,10 +98,5 @@ return [
 
 
 
-    'books_list' => 'Lista dei Libri',
-    'authors_list' => 'Lista degli Autori',
-    'manage_categories' => 'Gestione Categorie',
-
-    'citation' => 'Proverbio indiano',
 
 ];

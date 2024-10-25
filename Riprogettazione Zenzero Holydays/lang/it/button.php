@@ -13,7 +13,11 @@ return [
     'annulla' => 'Annulla',
     'login' => 'Accedi',
     'logout' => 'Esci',
-    'registrati' => 'Registrati',
+    'indietro' => 'Indietro',
+    'avanti' => 'Avanti',
+    'confermaPren' => 'Conferma Prenotazione ',
+    'calendario' => 'Torna al calendario',
+
 
 
 

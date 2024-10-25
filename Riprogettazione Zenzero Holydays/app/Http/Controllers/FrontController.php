@@ -30,7 +30,7 @@ class FrontController extends Controller
     {
         return view('pages.contatti');
     }
-    
+   
     
     
 }

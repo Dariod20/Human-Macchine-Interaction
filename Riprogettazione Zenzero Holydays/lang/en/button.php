@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -14,8 +15,15 @@ return [
     'login' => 'Login',
     'logout' => 'Logout',
     'registrati' => 'Register',
+    'indietro' => 'Previous',
+    'avanti' => 'Next',
+    'confermaPren' => 'Confirm Booking ',
+    'calendario' => 'Back to Calendar',
+
+
 
 
 
 
 ];
+
