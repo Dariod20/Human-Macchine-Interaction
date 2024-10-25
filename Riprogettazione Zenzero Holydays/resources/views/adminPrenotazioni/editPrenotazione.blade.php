@@ -185,7 +185,7 @@
                             $("#invalid-partenza").text(occupiedDatesText);
                             $("#arrivo").focus();
                         } else {
-                            
+
                             // Chiamata AJAX per verificare le tariffe disponibili
                             $.ajax({
                                 type: 'GET',
@@ -193,13 +193,13 @@
                                 data: {
                                     arrivo: arrivo.trim(),
                                     partenza: partenza.trim(),
-                                    context: "{{ isset($arrivo) ? 'conferma' : 'altro' }}" 
+                                    context: "{{ isset($arrivo) ? 'conferma' : 'altro' }}"
                                 },
                                 success: function (response) {
                                     if (!response.available) {
                                         error = true;
-                                        var message = (response.context === 'conferma') ? 
-                                            "La casa vacanze è chiusa in queste date, controllare il calendario" : 
+                                        var message = (response.context === 'conferma') ?
+                                            "La casa vacanze è chiusa in queste date, controllare il calendario" :
                                             response.message;
                                         $("#invalid-arrivo").text(message);
                                         $("#invalid-partenza").text(message);
@@ -212,23 +212,23 @@
                         }
                     }
                 });
-                
+
             }
 
 
 
 
 
-                
-            
+
+
         });
     });
-    
+
 
     </script>
 
     <div class="container-fluid px-lg-4 mt-4">
-        
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @if(isset($prenotazione->id))
@@ -248,7 +248,7 @@
                     <form class="form-horizontal" name="prenotazioniAdmin" method="post" action="{{ route('prenotazioniAdmin.store') }}">
                 @endif
                 @csrf
-                
+
 
 
                 <div class="mb-3">
@@ -331,7 +331,7 @@
                     @else
                         <input class="form-control" type="text" id="cognome" name="cognome"/>
                         <span class="invalid-input" id="invalid-lastName"></span>
-                    @endif            
+                    @endif
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -341,9 +341,9 @@
                     @else
                         <input class="form-control" type="text" name="email"/>
                         <span class="invalid-input" id="invalid-email"></span>
-                    @endif 
+                    @endif
                 </div>
-            
+
                 <div class="mb-3">
                     <label for="stato" class="form-label">{{ trans('messages.stato') }}</label>
                     @if(isset($prenotazione->id))
@@ -387,7 +387,7 @@
                     <input id="mySubmit" class="d-none" type="submit" value="Save">
                 </div>
                 <div class="form-group row mb-3">
-                        <a class="btn btn-danger w-100" href="{{ route('prenotazioniAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> {{ trans('messages.annulla') }}</a>
+                        <a class="btn btn-secondary w-100" href="{{ route('prenotazioniAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> {{ trans('messages.annulla') }}</a>
                 </div>
 
             </form>
@@ -397,9 +397,8 @@
 
 
 
-    
-       
-    
+
+
+
 @endsection
 
-   

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     // Pagination feature
     var currentPage = 1;
     var rowsPerPage = parseInt($("#rowsPerPage").val()); // Numero di righe per pagina

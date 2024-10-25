@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -11,6 +12,9 @@ return [
     'modifica' => 'Edit',
     'elimina' => 'Delete',
     'annulla' => 'Back',
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'registrati' => 'Register',
     'indietro' => 'Previous',
     'avanti' => 'Next',
     'confermaPren' => 'Confirm Booking ',
@@ -22,3 +26,4 @@ return [
 
 
 ];
+

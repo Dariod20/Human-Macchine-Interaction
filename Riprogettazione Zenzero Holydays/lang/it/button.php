@@ -11,6 +11,8 @@ return [
     'modifica' => 'Modifica',
     'elimina' => 'Elimina',
     'annulla' => 'Annulla',
+    'login' => 'Accedi',
+    'logout' => 'Esci',
     'indietro' => 'Indietro',
     'avanti' => 'Avanti',
     'confermaPren' => 'Conferma Prenotazione ',
@@ -18,5 +20,5 @@ return [
 
 
 
-   
+
 ];
