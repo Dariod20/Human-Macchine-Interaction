@@ -11,8 +11,9 @@ return [
     'modifica' => 'Edit',
     'elimina' => 'Delete',
     'annulla' => 'Back',
-
-
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'registrati' => 'Register',
 
 
 

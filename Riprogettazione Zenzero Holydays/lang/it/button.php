@@ -11,9 +11,10 @@ return [
     'modifica' => 'Modifica',
     'elimina' => 'Elimina',
     'annulla' => 'Annulla',
+    'login' => 'Accedi',
+    'logout' => 'Esci',
+    'registrati' => 'Registrati',
 
 
 
-
-   
 ];

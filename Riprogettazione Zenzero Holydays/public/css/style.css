@@ -10,8 +10,115 @@ img.card-img-top{
 
 .navbar{
     transition: all 0.3s ease; /* Aggiunge una transizione fluida */
-
 }
+
+#login, #logout {
+    color: #007bff; /* Imposta il colore che desideri, es. nero */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-size: large;
+}
+
+#login:hover {
+    color: #0057b4; /* Cambia il colore al passaggio del mouse */
+}
+
+#logout:hover {
+    color: #0057b4; /* Cambia il colore al passaggio del mouse */
+}
+
+#welcomeUser {
+    font-size: large;
+    margin-right: 0.8em;
+}
+
+#login-body {
+    background: linear-gradient(rgba(223, 221, 221, 0.5), rgba(206, 205, 205, 0.5)),
+    url(/img/sirmione-hd.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+#login-container {
+    background-color: white;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 1em;
+}
+
+#zenzero-login {
+    margin-bottom: 0.5em;
+    font: 24pt normal;
+}
+
+.form-group {
+    margin-bottom: 2em;
+}
+
+#pills-tab {
+    margin-left: 2em;
+}
+
+.login-bi {
+    font: 16pt normal;
+    margin-top: 0.5em;
+    margin-right: 2em;
+}
+
+.toggle-pwd {
+    display: flex;
+    margin-right: 1em;
+    float: right;
+    margin-top: -1.5em;
+    margin-bottom: 0.6em;
+    font-size: larger;
+    transition: color 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.toggle-pwd:hover {
+    color: rgb(197, 186, 186);
+  }
+
+.login-label {
+    margin-left: 0.5em;
+    margin-bottom: 0.3em;
+    display: flex;
+}
+
+.btn-login {
+    margin-top: 0.7em;
+    width: 45%;
+}
+
+.bi-info-circle-fill {
+    margin-right: 0.4em;
+}
+
+#info-pwd {
+    margin-left: 0.5em;
+    margin-bottom: 0.2em;
+    display: flex;
+    text-align: left;
+    font-size: small;
+}
+
+.invalid-input {
+    margin-left: 0.5em;
+    float: left;
+    color: #bd2626;
+    font-weight: bold;
+}
+
+#password-space {
+    margin-bottom: 2.7em;
+}
+
+
 
 div#titolo{
     max-width: 680px;
@@ -93,7 +200,7 @@ div#titolo{
     font-family: "exotc350_dmbd_btdemi-bold";
     margin-bottom:0;
     margin-top:0;
-} 
+}
 
 li a.active {
     background-color: lightgray;
@@ -118,32 +225,32 @@ footer {
     padding: 15px 0; /* Ridotto da 30px a 15px per diminuire l'altezza */
     margin-top: 40px; /* Aumentato il margine superiore per maggior distanziamento */
 }
-  
+
 /* Stile per i link nel footer */
 footer a {
     color: white;
     text-decoration: none;
     margin-bottom: 10px;
 }
-  
+
 footer a:hover {
     text-decoration: underline;
 }
-  
+
 /* Stile per gli elementi di intestazione del footer */
 footer h6 {
     font-weight: bold;
     margin-bottom: 15px;
     text-align: left;
 }
-  
+
 /* Stile per gli elementi del corpo del footer */
 footer p {
     margin-bottom: 10px;
     margin-left: 0;
     text-align: left;
 }
-  
+
 /* Stile per gli elementi di icone */
 footer i {
     margin-right: 10px;
@@ -343,18 +450,13 @@ header h1 {
     font-size: 3.5rem;
 }
 
-.invalid-input {
-    color: #bd2626;
-    font-weight: bold;
-}
-
 .contact-text{
     font-size: 1.25rem;
     color: black;
     text-decoration: none;
     margin-bottom: 10px;
 }
-      
+
 .contact-text :hover{
     text-decoration: underline;
 }
