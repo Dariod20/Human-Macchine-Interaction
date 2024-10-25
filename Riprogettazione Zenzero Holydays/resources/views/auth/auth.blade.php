@@ -85,46 +85,14 @@
                     var name = $("input[name='name']").val();
                     var email = $("input[name='registration-email']").val();
                     var password = $("input[name='registration-password']").val();
+                    //L'email è composta del seguente formato:
+                    //lettera/numero + . (opzionale) + ettera/numero + @ + lettera/numero + (. + lettera/numero)->opzionale + . + 2/3 lettere
+                    var emailRegex = /^[A-Za-z][A-Za-z0-9]*(\.[A-Za-z0-9]+)*@[A-Za-z0-9]+(\.)*([A-Za-z0-9]+)*\.[A-Za-z]{2,3}$/;
                     // Espressione regolare per la password (almeno 8 caratteri, almeno una cifra, almeno
                     // un carattere speciale tra ! - * [ ] $ & /)
-                    var passwordRegex = /^(?=.*[0-9])(?=.*[!-\*\[\]\$&\/]).{8,}$/;
+                    var passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!-\*\[\]\$&\/]).{8,}$/;
                     var confirmPassword = $("input[name='confirm-password']").val();
                     var error = false;
-
-                    // Verifica se il campo "confirm-password" è vuoto
-                    if (confirmPassword.trim() === "") {
-                        error = true;
-                        $("#invalid-confirmPassword").text("La re-immissione della password è obbligatoria.");
-                        event.preventDefault(); // Impedisce l'invio del modulo
-                        $("input[name='confirm-password']").focus();
-                    } else {
-                        $("#invalid-confirmPassword").text("");
-                    }
-
-                    // Verifica se il campo "password" è vuoto
-                    if (password.trim() === "") {
-                        error = true;
-                        $("#invalid-registrationPassword").text("La password è obbligatoria.");
-                        event.preventDefault(); // Impedisce l'invio del modulo
-                        $("input[name='registration-password']").focus();
-                    } else if(!passwordRegex.test(password)) {
-                        error = true;
-                        $("#invalid-registrationPassword").text("Il formato della password è sbagliato (almeno 8 caratteri, di cui almeno una cifra e un carattere tra ! - * [ ] $ & /).");
-                        event.preventDefault(); // Impedisce l'invio del modulo
-                        $("input[name='registration-password']").focus();
-                    } else {
-                        $("#invalid-registrationPassword").text("");
-                    }
-
-                    // Verifica se il campo "email" è vuoto
-                    if (email.trim() === "") {
-                        error = true;
-                        $("#invalid-registrationEmail").text("L'indirizzo email è obbligatorio.");
-                        event.preventDefault(); // Impedisce l'invio del modulo
-                        $("input[name='registration-email']").focus();
-                    } else {
-                        $("#invalid-registrationEmail").text("");
-                    }
 
                     // Verifica se il campo "name" è vuoto
                     if (name.trim() === "") {
@@ -136,17 +104,51 @@
                         $("#invalid-name").text("");
                     }
 
-                    if(!error) {
-                        // Verifica che la password sia state editata due volte correttamente
-                        if(confirmPassword.trim() !== password.trim())
-                        {
-                            $("#invalid-confirmPassword").text("Immettere la stessa password due volte.");
-                            event.preventDefault(); // Impedisce l'invio del modulo
-                            $("input[name='confirm-password']").focus();
-                        } else {
-                            $("#invalid-confirmPassword").text("");
-                        }
+                    // Verifica se il campo "email" è vuoto
+                    if (email.trim() === "") {
+                        error = true;
+                        $("#invalid-registrationEmail").text("L'indirizzo email è obbligatorio.");
+                        event.preventDefault(); // Impedisce l'invio del modulo
+                        $("input[name='registration-email']").focus();
+                    } else if(!emailRegex.test(email)) {
+                        $("#invalid-registrationEmail").text("Il formato dell'email è sbagliato.");
+                        error = true;
+                        event.preventDefault(); // Impedisce l'invio del modulo
+                    } else{
+                        $("#invalid-registrationEmail").text("");
+                    }
 
+                    // Verifica se il campo "password" è vuoto
+                    if (password.trim() === "") {
+                        error = true;
+                        $("#invalid-registrationPassword").text("La password è obbligatoria.");
+                        event.preventDefault(); // Impedisce l'invio del modulo
+                        $("input[name='registration-password']").focus();
+                    } else if(!passwordRegex.test(password)) {
+                        error = true;
+                        $("#invalid-registrationPassword").text("Il formato della password è sbagliato.");
+                        event.preventDefault(); // Impedisce l'invio del modulo
+                        $("input[name='registration-password']").focus();
+                    } else {
+                        $("#invalid-registrationPassword").text("");
+                    }
+
+                    // Verifica se il campo "confirm-password" è vuoto
+                    if (confirmPassword.trim() === "") {
+                        error = true;
+                        $("#invalid-confirmPassword").text("La conferma della password è obbligatoria.");
+                        event.preventDefault(); // Impedisce l'invio del modulo
+                        $("input[name='confirm-password']").focus();
+                    // Verifica che la password sia state editata due volte correttamente
+                    } else if(confirmPassword.trim() !== password.trim()) {
+                        $("#invalid-confirmPassword").text("Immettere la stessa password due volte.");
+                        event.preventDefault(); // Impedisce l'invio del modulo
+                        $("input[name='confirm-password']").focus();
+                    } else {
+                        $("#invalid-confirmPassword").text("");
+                    }
+
+                    if(!error) {
                         // effettua chiamata AJAX per verificare che l'email dell'utente non sia già presente nel DB
                         event.preventDefault(); // Impedisce preventivamente l'invio del modulo prima del controllo
                         $.ajax({
@@ -175,7 +177,7 @@
 
         <div class="container col-lg-4" id="login-container">
             <div class="row">
-                <h1 id="zenzero-space"> Zenzero Holidays <i class="bi bi-house-door-fill"></i> </h1>
+                <h1 id="zenzero-login"> Zenzero Holidays <i class="bi bi-house-door-fill"></i> </h1>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
@@ -202,7 +204,7 @@
 
                             <div>
                                 <a href="{{ route('home') }}" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Login" class="btn btn-primary btn-login"><i class="bi-check-lg"></i> Login</label>
+                                <label for="Login" class="btn btn-primary btn-login"><i class="bi bi-door-open"></i> Login</label>
                                 <input id="Login" type="submit" value="Login" class="d-none"/>
                             </div>
                         </form>
@@ -222,11 +224,13 @@
                                 <span class="invalid-input" id="invalid-registrationEmail"></span>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" id="password-space">
                             <label for="password" class="login-label">Password</label>
                                 <input type="password" name="registration-password" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
-                                <span class="invalid-input" id="invalid-registrationPassword"></span>
+                                <p id="info-pwd"><i class="bi-info-circle-fill"></i> La password deve essere lunga minimo 8 caratteri
+                                    e contenere almeno una maiuscola, una cifra e un carattere tra ! - * [ ] $ & / </p>
+                                <p class="invalid-input" id="invalid-registrationPassword"></p>
                             </div>
 
                             <div class="form-group">
@@ -237,7 +241,7 @@
                             </div>
                             <div>
                                 <a href="{{ route('home') }}" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Register" class="btn btn-primary btn-login"><i class="bi-check-lg"></i> Register</label>
+                                <label for="Register" class="btn btn-primary btn-login"><i class="bi bi-person-plus"></i> Register</label>
                                 <input id="Register" type="submit" value="Register" class="d-none"/>
                             </div>
                         </form>
