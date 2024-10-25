@@ -31,6 +31,70 @@ img.card-img-top{
     margin-right: 0.8em;
 }
 
+#login-body {
+    background: linear-gradient(rgba(223, 221, 221, 0.5), rgba(206, 205, 205, 0.5)),
+    url(/img/sirmione-hd.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+#login-container {
+    background-color: white;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 3em;
+}
+
+#zenzero-space {
+    margin-bottom: 0.5em;
+}
+
+.form-group {
+    margin-bottom: 2em;
+}
+
+#pills-tab {
+    margin-left: 2em;
+}
+
+.login-bi {
+    font: 16pt normal;
+    margin-top: 0.5em;
+    margin-right: 2em;
+}
+
+.toggle-pwd {
+    display: flex;
+    margin-right: 1em;
+    float: right;
+    margin-top: -1.5em;
+    margin-bottom: 0.6em;
+    font-size: larger;
+    transition: color 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.toggle-pwd:hover {
+    color: rgb(197, 186, 186);
+  }
+
+.login-label {
+    margin-left: 0.5em;
+    margin-bottom: 0.3em;
+    display: flex;
+}
+
+.btn-login {
+    width: 45%;
+}
+
+
+
 div#titolo{
     max-width: 680px;
 }

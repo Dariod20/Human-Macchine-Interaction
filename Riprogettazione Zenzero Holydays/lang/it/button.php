@@ -13,7 +13,7 @@ return [
     'annulla' => 'Annulla',
     'login' => 'Accedi',
     'logout' => 'Esci',
-
+    'registrati' => 'Registrati',
 
 
 
