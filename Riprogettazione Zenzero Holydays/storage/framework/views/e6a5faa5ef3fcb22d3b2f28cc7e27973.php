@@ -73,8 +73,8 @@
             </ul>
             <?php endif; ?>
             <ul class="navbar-nav">
-              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'en'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/en.png" width="28"/></a></li>
-              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'it'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/it.png" width="22"/></a></li>
+              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'en'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/en.png" width="28" alt="UK flag"/></a></li>
+              <li class="nav-item"><a href="<?php echo e(route('setLang', ['lang' => 'it'])); ?>" class="nav-link"><img src="<?php echo e(url('/')); ?>/img/flags/it.png" width="22"  alt="Italian flag"/></a></li>
               <?php if(session('logged')): ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('user.logout')); ?>" id="logout" class="nav-link"><?php echo e(trans('button.logout')); ?> <i class="bi bi-box-arrow-right"></i> </a>

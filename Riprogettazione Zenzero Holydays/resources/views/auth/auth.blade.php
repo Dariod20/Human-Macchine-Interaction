@@ -78,6 +78,67 @@
                     } else {
                         $("#invalid-email").text("");
                     }
+
+                    if(!error) {
+                        event.preventDefault();
+                        $.ajax('/loginEmailCheck', {
+                            method: 'GET',
+                            data: {email: email.trim()},
+                            success: function (result) {
+                                if (result.found) {
+                                    $.ajax('/loginPasswordCheck', {
+                                        method: 'GET',
+                                        data: {email: email.trim(),
+                                                password: password.trim()},
+                                        success: function (result) {
+                                            if (result.found) {
+                                                $("form")[0].submit();
+                                            } else {
+                                                $("#invalid-password").text("Password sbagliata: prova a inserirla di nuovo.");
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $("#invalid-email").text("Email inesistente: prova a inserirla di nuovo.");
+                                }
+                            }
+                        });
+                    }
+
+                    /*if(!error) {
+                        event.preventDefault();
+                        $.ajax({
+                            type: 'GET',
+                            url: '/loginUsernameCheck',
+                            data: {email: email.trim()},
+                            success: function (data) {
+                                if (data.found) {
+                                    $('form[id=login-form]').submit();
+                                } else {
+                                    error = true;
+                                    $("#invalid-email").text("Email inesistente: prova a inserirla di nuovo.");
+                                }
+                            }
+                        });
+                    }
+
+                    if(!error) {
+                        event.preventDefault();
+                        $.ajax({
+                            type: 'GET',
+                            url: '/loginPasswordCheck',
+                            data: {email: email.trim(),
+                                    password: password.trim()},
+                            success: function (data) {
+                                if (data.found) {
+                                    $('form[id=login-form]').submit();
+                                } else {
+                                    error = true;
+                                    $("#invalid-password").text("Password sbagliata: prova a inserirla di nuovo.");
+                                }
+                            }
+                        });
+                    }*/
                 });
 
                 $("#register-form").submit(function(event) {

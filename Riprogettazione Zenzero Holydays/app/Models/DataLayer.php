@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class DataLayer extends Model
 {
+    public function validPassword($username, $password) {
+        $user = User::where('email', $username)->first();
+
+        if($user && Hash::check($password, $user->password))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function listaPrenotazioni(){
         $prenotazioni= Prenotazione::orderBy('arrivo', 'desc')->get();
         return $prenotazioni;
@@ -34,14 +45,14 @@ class DataLayer extends Model
 
         // Estrai le tariffe per ciascun giorno di pernottamento e calcola il costo totale
         $costoTotale = Tariffa::where('giorno', '>=', $arrivo)->where('giorno', '<', $partenza)->sum('prezzo');
-        
+
         return $costoTotale;
     }
-    
-    
+
+
 
    public function addPrenotazione($arrivo,$partenza,$numAdulti,$numBambini,$prezzoTotale,$nome,$cognome,$email,$telefono,$stato,$orarioArrivo,$userID){
-   
+
     $prenotazione = new Prenotazione();
     $prenotazione->arrivo = $arrivo;
     $prenotazione->partenza = $partenza;
@@ -56,7 +67,7 @@ class DataLayer extends Model
     $prenotazione->orarioArrivo = $orarioArrivo;
     $prenotazione->user_id = $userID;
 
-    $prenotazione->save(); 
+    $prenotazione->save();
     Tariffa::where('giorno', '>=', $arrivo)->where('giorno', '<', $partenza)->update(['prenotazione_id' => $prenotazione->id]);
    }
 
@@ -67,7 +78,7 @@ class DataLayer extends Model
         $tariffa->prenotazione_id = null;
         $tariffa->save(); // Salva la tariffa per applicare la modifica
     }
-    
+
     Tariffa::where('giorno', '>=', $arrivo)->where('giorno', '<', $partenza)->update(['prenotazione_id' => $prenotazione->id]);
 
     $prenotazione->arrivo = $arrivo;
@@ -82,10 +93,10 @@ class DataLayer extends Model
     $prenotazione->stato = $stato;
     $prenotazione->orarioArrivo = $orarioArrivo;
 
-  
+
 
     $prenotazione->save();
-   
+
 
 
    }
@@ -102,12 +113,12 @@ class DataLayer extends Model
    }
 
    public function addTariffa($giorno,$prezzo){
-   
+
     $tariffa = new Tariffa();
     $tariffa->giorno = $giorno;
     $tariffa->prezzo = $prezzo;
-    
-    $tariffa->save(); 
+
+    $tariffa->save();
 /*     Prenotazione::where('giorno', '>=', $arrivo)->where('giorno', '<', $partenza)->update(['prenotazione_id' => $prenotazione->id]);
  */   }
 
@@ -185,16 +196,6 @@ class DataLayer extends Model
         return $bookings;
     }
 
-    public function validUser($email, $password) {
-        $user = User::where('email', $email)->first();
-        
-        if($user && Hash::check($password, $user->password))
-        {
-            return true;
-        } else {
-            return false;
-        }        
-    }
 
     public function getUserID($email) {
         $users = User::where('email',$email)->get(['id']);
@@ -213,7 +214,7 @@ class DataLayer extends Model
 
     public function findUserByemail($email) {
         $users = User::where('email', $email)->get();
-        
+
         if (count($users) == 0) {
             return false;
         } else {
@@ -232,14 +233,14 @@ class DataLayer extends Model
     }
 
 
-    public function listaPrenotazioniUtente($userID) {     
-        $bookings  = Prenotazione::where('user_id',$userID)->orderBy('arrivo','desc')->get();   
+    public function listaPrenotazioniUtente($userID) {
+        $bookings  = Prenotazione::where('user_id',$userID)->orderBy('arrivo','desc')->get();
         return $bookings;
     }
 
     public function findTariffaByGiorno($giorno, $giornoFino){
         $tariffe = Tariffa::whereBetween('giorno', [$giorno, $giornoFino])->get();
-        
+
         return $tariffe;
     }
 
@@ -247,10 +248,10 @@ class DataLayer extends Model
         $tariffa = Tariffa::find($id);
         $tariffa->giorno = $giorno;
         $tariffa->prezzo = $prezzo;
-        
-    
+
+
         $tariffa->save();
-    
+
        }
 
     public function deleteTariffa($id)
@@ -281,7 +282,7 @@ class DataLayer extends Model
         }
 
     }
-    
+
 
 }
 

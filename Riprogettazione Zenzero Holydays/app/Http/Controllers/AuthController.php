@@ -15,23 +15,51 @@ class AuthController extends Controller
         return view('auth.auth');
     }
 
+    public function loginCheckForEmail(Request $req) {
+        $dl = new DataLayer();
+        if($dl->findUserByEmail($req->input('email'))) {
+            $response = array('found'=>true);
+        } else {
+            $response = array('found'=>false);
+        }
+        return response()->json($response);
+    }
+
+    public function loginCheckForPassword(Request $req) {
+        $dl = new DataLayer();
+        if($dl->validPassword($req->input('email'), $req->input('password'))) {
+            $response = array('found'=>true);
+        } else {
+            $response = array('found'=>false);
+        }
+        return response()->json($response);
+    }
+
     public function login(Request $request) {
-        
+
         session_start();
         $dl = new DataLayer();
-        if($dl->validUser($request->input('email'), $request->input('password')))
+        session(['logged' => true]);
+        session(['loggedID' => $dl->getUserID($request->input('email'))]);
+        session(['loggedName' => $dl->getUserName($request->input('email'))]);
+        session(['role' => $dl->getUserRole($request->input('email'))]);
+        session(['user_email' => $request->input('email')]);
+        return Redirect::to(route('home'));
+
+
+        /*if($dl->validUser($request->input('email'), $request->input('password')))
         {
             session(['logged' => true]);
             session(['loggedID' => $dl->getUserID($request->input('email'))]);
             session(['loggedName' => $dl->getUserName($request->input('email'))]);
             session(['role' => $dl->getUserRole($request->input('email'))]);
             session(['user_email' => $request->input('email')]);
-            
+
             return Redirect::to(route('home'));
-        } else 
+        } else
         {
             return view('errors.404')->with('message','Wrong authentication credentials!');
-        }
+        }*/
     }
 
     public function logout() {
@@ -49,16 +77,16 @@ class AuthController extends Controller
 
     public function registration(Request $request) {
         $dl = new DataLayer();
-        
+
         $dl->addUser($request->input('name'), $request->input('registration-password'), $request->input('registration-email'));
-       
+
         return Redirect::to(route('user.login'));
     }
 
     public function ajaxCheckForEmail(Request $request)
     {
         $dl = new DataLayer();
-        
+
         if($dl->findUserByEmail($request->input('email')))
         {
             $response = array('found'=>true);

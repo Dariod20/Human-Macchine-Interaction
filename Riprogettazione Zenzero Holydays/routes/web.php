@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTariffeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LangController;
+
 Route::get('/form', [FrontController::class,'getForm'])->name('form')->middleware(['lang']);
 
 
@@ -21,6 +22,8 @@ Route::group(['middleware' => ['lang']], function() {
 
     Route::get('/user/login', [AuthController::class, 'authentication'])->name('user.login');
     Route::post('/user/login', [AuthController::class, 'login'])->name('user.login');
+    Route::get('/loginEmailCheck', [AuthController::class, 'loginCheckForEmail']);
+    Route::get('/loginPasswordCheck', [AuthController::class, 'loginCheckForPassword']);
     Route::get('/user/logout', [AuthController::class, 'logout'])->name('user.logout');
     Route::post('/user/register', [AuthController::class, 'registration'])->name('user.register');
     Route::get('/ajaxUser', [AuthController::class, 'ajaxCheckForEmail']);
@@ -35,7 +38,7 @@ Route::group(['middleware' => ['authCustom','isRegisteredUser', 'lang']], functi
 });
 
 Route::group(['middleware' => ['authCustom','isRegisteredOrAdmin', 'lang']], function() {
-    
+
     Route::get('/ajaxCheckPrenotazione', [AdminBookingController::class, 'ajaxCheckPrenotazione'])->name('ajaxCheckPrenotazione');
     Route::get('/ajaxCheckTariffePrenotazione', [AdminBookingController::class, 'ajaxCheckTariffePrenotazione'])->name('ajaxCheckTariffePrenotazione');
     Route::get('/ajaxCalcolaPrezzoTotale', [AdminBookingController::class, 'ajaxCalcolaPrezzoTotale'])->name('ajaxCalcolaPrezzoTotale');
@@ -54,7 +57,7 @@ Route::group(['middleware' => ['authCustom','isAdmin', 'lang']], function() {
     Route::post('/tariffeAdmin/updateGruppo', [AdminTariffeController::class, 'updateGruppo'])->name('tariffeAdmin.updateGruppo');
     Route::get('/deleteGruppo', [AdminTariffeController::class, 'deleteGruppo'])->name('tariffeAdmin.deleteGruppo');
 
-    
+
 
 });
 
