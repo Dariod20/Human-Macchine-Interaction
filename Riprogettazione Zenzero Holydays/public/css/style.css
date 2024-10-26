@@ -6,7 +6,7 @@
     --light-color: #e1e1e1;
 
     --font-smaller: 14px;
-    --font-bigger: 20px;  
+    --font-bigger: 20px;
 }
 *,::before,::after{
     box-sizing: border-box;
@@ -131,7 +131,10 @@ img.card-img-top{
     margin-bottom: 2.7em;
 }
 
-
+#registration_success {
+    margin-top: 1em;
+    width: 45%;
+}
 
 div#titolo{
     max-width: 680px;
@@ -545,7 +548,7 @@ ul.regole{
     font-size: var(--font-smaller);
     color: var(--light-color);
     display: none;
-    
+
 }
 .progress ul li p{
     position: absolute;
@@ -558,7 +561,7 @@ ul.regole{
     width: 100%;
     padding: 3em 1em;
     background-color: white;
-    border-radius: 30px 30px 15px 15px;    
+    border-radius: 30px 30px 15px 15px;
 }
 .form-box .form-one > div{
     max-width: 400px;
@@ -608,8 +611,8 @@ ul.regole{
         -webkit-transform: translateX(0);
         transform: translateY(0);
     }
-    
-    
+
+
 }
 .form-box form > div.active{
     display: flex;
@@ -636,7 +639,7 @@ ul.regole{
     margin-right: 50%;
     margin: 1em auto;
 
-    
+
 }
 .btn-group [class*="btn-"], .btn-calendar{
     background-color: var(--main-color);
@@ -723,7 +726,7 @@ ul.regole{
     }
     .form-box form{
         padding: 3em;
-        border-radius: 0px 15px 15px 0px;    
+        border-radius: 0px 15px 15px 0px;
     }
     .progress ul li p{
         position: relative;
@@ -741,7 +744,7 @@ ul.regole{
         margin-top: 0%;
 
     }
-    
+
 }
 
 .input-group {
@@ -779,7 +782,7 @@ ul.regole{
     width: 100%;
     padding: -1rem .6rem;
     font-size: 1.1rem;
-    
+
     border: .1rem solid transparent;
     outline: none;
 }
@@ -817,7 +820,7 @@ input[type="tel"] {
     right: .8rem;
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
-    
+
     width: .8rem;
     height: .8rem;
     border-right: .12rem solid var(--primary);
@@ -833,7 +836,7 @@ input[type="tel"] {
 .select-box .options {
     position: absolute;
     top: 4rem;
-    
+
     width: 100%;
     background-color: #fff;
     border-radius: .5rem;

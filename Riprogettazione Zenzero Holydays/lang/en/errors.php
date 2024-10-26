@@ -20,6 +20,14 @@ return [
     'dateDal' => 'from',
     'dateAl' => 'to',
 
+    'password' => 'Password is required.',
+    'passwordSbagliata' => 'Wrong Password: try again.',
+    'emailInesistente' => 'Email not found: try again.',
+    'formatoEmail' => "Wrong email format.",
+    'formatoPassword' => "Wrong password format.",
+    'confermaPassword' => 'Confirm of the password is required.',
+    'stessaPassword' => "Passwords must match.",
+    'emailEsistente' => "This email is already in use. Choose another one.",
 
 
 

@@ -80,7 +80,7 @@ class AuthController extends Controller
 
         $dl->addUser($request->input('name'), $request->input('registration-password'), $request->input('registration-email'));
 
-        return Redirect::to(route('user.login'));
+        return Redirect::to(route('user.login'))->with('registration_success', __('messages.registration_success'));
     }
 
     public function ajaxCheckForEmail(Request $request)

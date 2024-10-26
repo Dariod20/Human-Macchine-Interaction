@@ -20,6 +20,13 @@ return [
     'dateDal' => 'dal',
     'dateAl' => 'al',
 
-
+    'password' => 'La password è obbligatoria.',
+    'passwordSbagliata' => 'Password sbagliata: prova a inserirla di nuovo.',
+    'emailInesistente' => 'Email inesistente: prova a inserirla di nuovo.',
+    'formatoEmail' => "Il formato dell'email è sbagliato.",
+    'formatoPassword' => "Il formato della password è sbagliato.",
+    'confermaPassword' => 'La conferma della password è obbligatoria.',
+    'stessaPassword' => "Le due password devono combaciare.",
+    'emailEsistente' => "Questa email è già in uso. Scegline un'altra.",
 
 ];

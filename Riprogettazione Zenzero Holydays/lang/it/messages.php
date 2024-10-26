@@ -4,9 +4,9 @@ return [
 
     'carosello' => 'Il punto di riferimento per le tue vacanze sul lago di Garda',
     'titoloHome' => 'Casa vacanze Zenzero Holidays!',
-    'testoHome' => 'Zenzero Holidays, la casa vacanze perfetta per le tue vacanze sul lago di Garda! 
+    'testoHome' => 'Zenzero Holidays, la casa vacanze perfetta per le tue vacanze sul lago di Garda!
              Situata in punto strategico a pochi minuti da Gardaland e le principali mete turistiche del basso lago,
-    ideale per le tue vacanze in famiglia o tra amici.',    
+    ideale per le tue vacanze in famiglia o tra amici.',
     'card1' => 'Scopri la gallery e le informazioni principali della nostra accogliente casa vacanze a conduzione familiare.',
     'card2' => 'Zenzero Holidays è vicinissima a Gardaland e a molti dei più bei paesi del lago di Garda e d\'Italia, vieni a scoprirli.',
     'position' => 'Dove siamo',
@@ -15,14 +15,14 @@ return [
     'titoloCasa' => 'Benvenuti alla Casa Vacanze Zenzero Holidays',
     'titolo2Casa' => 'L\'appartamento',
     'testoCasa' => 'La nostra casa vacanze è il luogo perfetto per trascorrere le vostre vacanze sul lago di Garda.
-                    Situata in una piccola frazione confinante con Peschiera del Garda, la Casa Vacanze Zenzero Holidays vi accoglie 
+                    Situata in una piccola frazione confinante con Peschiera del Garda, la Casa Vacanze Zenzero Holidays vi accoglie
                     con il calore e l\'ospitalità tipici di una struttura a conduzione familiare.
-                    Strategicamente posizionata a pochi minuti dal rinomato parco divertimenti Gardaland e nelle vicinanze delle 
+                    Strategicamente posizionata a pochi minuti dal rinomato parco divertimenti Gardaland e nelle vicinanze delle
                     incantevoli località di Peschiera, Lazise e Sirmione, la nostra casa vacanze offre un punto di partenza ideale per esplorare le meraviglie del lago di Garda.',
     'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno.
-                    L\'ampio soggiorno è dotato di aria condizionata e la cucina è completamente attrezzata con forno e microonde. Con due bagni, di cui uno con doccia e uno con vasca e lavatrice, e una camera da letto con aria condizionata, 
-                    troverete tutto ciò di cui avete bisogno per un soggiorno indimenticabile. È inoltre presente un balcone con tavolino e sedie. 
-                    Nella piazzetta proprio sotto la struttura puoi trovare un bar dove fare colazione e un negozio di parrucchiere. In centro paese (300 metri) troverai market, panificio, bar, pub, ristorante, pizzeria, farmacia, 
+                    L\'ampio soggiorno è dotato di aria condizionata e la cucina è completamente attrezzata con forno e microonde. Con due bagni, di cui uno con doccia e uno con vasca e lavatrice, e una camera da letto con aria condizionata,
+                    troverete tutto ciò di cui avete bisogno per un soggiorno indimenticabile. È inoltre presente un balcone con tavolino e sedie.
+                    Nella piazzetta proprio sotto la struttura puoi trovare un bar dove fare colazione e un negozio di parrucchiere. In centro paese (300 metri) troverai market, panificio, bar, pub, ristorante, pizzeria, farmacia,
                     erboristeria, chiesa, banca e negozi vari, abbigliamento, merceria, articoli regalo.',
      'galleria' => 'Sfoglia la gallery',
      'distanza' => 'Distanza',
@@ -52,7 +52,7 @@ return [
      'tel' => 'Telefono',
      'stato' => 'Stato',
      'orario' => 'Orario Arrivo',
-     
+
     'conferma' => 'Conferma prenotazione',
     'nome' => 'Nome',
     'cognome' => 'Cognome',
@@ -81,16 +81,10 @@ return [
     'dateRange' => 'Date di arrivo e partenza',
     'selezionaOrario' => 'Seleziona un orario di arrivo',
 
+    'infoPassword' => 'La password deve essere lunga minimo 8 caratteri e contenere almeno una maiuscola, una cifra e un carattere tra ! - * [ ] $ & /',
+    'registration_success' => 'La registrazione è stata completata correttamente. Accedi con le tue credenziali.',
 
 
-
-
-
-
-
-
-
-    
 
 
 

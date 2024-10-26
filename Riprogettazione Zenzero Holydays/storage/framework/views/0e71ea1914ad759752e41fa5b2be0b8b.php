@@ -62,7 +62,7 @@
                     // Verifica se il campo "password" è vuoto
                     if (password.trim() === "") {
                         error = true;
-                        $("#invalid-password").text("La password è obbligatoria.");
+                        $("#invalid-password").text("<?php echo e(trans('errors.password')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='password']").focus();
                     } else {
@@ -72,7 +72,7 @@
                     // Verifica se il campo "email" è vuoto
                     if (email.trim() === "") {
                         error = true;
-                        $("#invalid-email").text("L'indirizzo email è obbligatorio.");
+                        $("#invalid-email").text("<?php echo e(trans('errors.email')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='email']").focus();
                     } else {
@@ -94,51 +94,16 @@
                                             if (result.found) {
                                                 $("form")[0].submit();
                                             } else {
-                                                $("#invalid-password").text("Password sbagliata: prova a inserirla di nuovo.");
+                                                $("#invalid-password").text("<?php echo e(trans('errors.passwordSbagliata')); ?>");;
                                             }
                                         }
                                     });
                                 } else {
-                                    $("#invalid-email").text("Email inesistente: prova a inserirla di nuovo.");
+                                    $("#invalid-email").text("<?php echo e(trans('errors.emailInesistente')); ?>");
                                 }
                             }
                         });
                     }
-
-                    /*if(!error) {
-                        event.preventDefault();
-                        $.ajax({
-                            type: 'GET',
-                            url: '/loginUsernameCheck',
-                            data: {email: email.trim()},
-                            success: function (data) {
-                                if (data.found) {
-                                    $('form[id=login-form]').submit();
-                                } else {
-                                    error = true;
-                                    $("#invalid-email").text("Email inesistente: prova a inserirla di nuovo.");
-                                }
-                            }
-                        });
-                    }
-
-                    if(!error) {
-                        event.preventDefault();
-                        $.ajax({
-                            type: 'GET',
-                            url: '/loginPasswordCheck',
-                            data: {email: email.trim(),
-                                    password: password.trim()},
-                            success: function (data) {
-                                if (data.found) {
-                                    $('form[id=login-form]').submit();
-                                } else {
-                                    error = true;
-                                    $("#invalid-password").text("Password sbagliata: prova a inserirla di nuovo.");
-                                }
-                            }
-                        });
-                    }*/
                 });
 
                 $("#register-form").submit(function(event) {
@@ -158,7 +123,7 @@
                     // Verifica se il campo "name" è vuoto
                     if (name.trim() === "") {
                         error = true;
-                        $("#invalid-name").text("Il nome è obbligatorio.");
+                        $("#invalid-name").text("<?php echo e(trans('errors.nome')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='name']").focus();
                     } else {
@@ -168,11 +133,11 @@
                     // Verifica se il campo "email" è vuoto
                     if (email.trim() === "") {
                         error = true;
-                        $("#invalid-registrationEmail").text("L'indirizzo email è obbligatorio.");
+                        $("#invalid-registrationEmail").text("<?php echo trans('errors.email'); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='registration-email']").focus();
                     } else if(!emailRegex.test(email)) {
-                        $("#invalid-registrationEmail").text("Il formato dell'email è sbagliato.");
+                        $("#invalid-registrationEmail").text("<?php echo trans('errors.formatoEmail'); ?>");
                         error = true;
                         event.preventDefault(); // Impedisce l'invio del modulo
                     } else{
@@ -182,12 +147,12 @@
                     // Verifica se il campo "password" è vuoto
                     if (password.trim() === "") {
                         error = true;
-                        $("#invalid-registrationPassword").text("La password è obbligatoria.");
+                        $("#invalid-registrationPassword").text("<?php echo e(trans('errors.password')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='registration-password']").focus();
                     } else if(!passwordRegex.test(password)) {
                         error = true;
-                        $("#invalid-registrationPassword").text("Il formato della password è sbagliato.");
+                        $("#invalid-registrationPassword").text("<?php echo e(trans('errors.formatoPassword')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='registration-password']").focus();
                     } else {
@@ -197,12 +162,12 @@
                     // Verifica se il campo "confirm-password" è vuoto
                     if (confirmPassword.trim() === "") {
                         error = true;
-                        $("#invalid-confirmPassword").text("La conferma della password è obbligatoria.");
+                        $("#invalid-confirmPassword").text("<?php echo e(trans('errors.confermaPassword')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='confirm-password']").focus();
                     // Verifica che la password sia state editata due volte correttamente
                     } else if(confirmPassword.trim() !== password.trim()) {
-                        $("#invalid-confirmPassword").text("Immettere la stessa password due volte.");
+                        $("#invalid-confirmPassword").text("<?php echo e(trans('errors.stessaPassword')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='confirm-password']").focus();
                     } else {
@@ -224,8 +189,8 @@
 
                                 if (data.found)
                                 {
-                                    error = true;
-                                    $("#invalid-registrationEmail").text("L'email esiste già nel database.");
+                                    //error = true;
+                                    $("#invalid-registrationEmail").text("<?php echo trans('errors.emailEsistente'); ?>");
                                 } else {
                                     $("form")[1].submit();
                                 }
@@ -236,15 +201,25 @@
             });
         </script>
 
+        <?php if(session('registration_success')): ?>
+            <div class="d-flex justify-content-center"> <!-- Contenitore per centrare -->
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="registration_success">
+                    <?php echo e(session('registration_success')); ?>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="container col-lg-4" id="login-container">
             <div class="row">
                 <h1 id="zenzero-login"> Zenzero Holidays <i class="bi bi-house-door-fill"></i> </h1>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
+                        <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true"> <?php echo e(trans('button.login')); ?> </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Register</button>
+                        <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false"> <?php echo e(trans('button.registrati')); ?> </button>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -264,8 +239,8 @@
                             </div>
 
                             <div>
-                                <a href="<?php echo e(route('home')); ?>" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Login" class="btn btn-primary btn-login"><i class="bi bi-door-open"></i> Login</label>
+                                <a href="<?php echo e(route('home')); ?>" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> <?php echo e(trans('button.annulla')); ?> </a>
+                                <label for="Login" class="btn btn-primary btn-login"><i class="bi bi-door-open"></i> <?php echo e(trans('button.login')); ?> </label>
                                 <input id="Login" type="submit" value="Login" class="d-none"/>
                             </div>
                         </form>
@@ -274,7 +249,7 @@
                         <form id="register-form" action="<?php echo e(route('user.register')); ?>" method="post" style="margin-top: 0.3em">
                             <?php echo csrf_field(); ?>
                             <div class="form-group">
-                            <label for="email" class="login-label">Name</label>
+                            <label for="email" class="login-label"><?php echo e(trans('button.nome')); ?></label>
                                 <input type="text" name="name" class="form-control" value=""/>
                                 <span class="invalid-input" id="invalid-name"></span>
                             </div>
@@ -289,20 +264,19 @@
                             <label for="password" class="login-label">Password</label>
                                 <input type="password" name="registration-password" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
-                                <p id="info-pwd"><i class="bi-info-circle-fill"></i> La password deve essere lunga minimo 8 caratteri
-                                    e contenere almeno una maiuscola, una cifra e un carattere tra ! - * [ ] $ & / </p>
+                                <p id="info-pwd"><i class="bi-info-circle-fill"></i> <?php echo e(trans('messages.infoPassword')); ?> </p>
                                 <p class="invalid-input" id="invalid-registrationPassword"></p>
                             </div>
 
                             <div class="form-group">
-                            <label for="conform-password" class="login-label">Confirm Password</label>
+                            <label for="conform-password" class="login-label"><?php echo e(trans('button.conferma')); ?></label>
                                 <input type="password" name="confirm-password" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
                                 <span class="invalid-input" id="invalid-confirmPassword"></span>
                             </div>
                             <div>
-                                <a href="<?php echo e(route('home')); ?>" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Register" class="btn btn-primary btn-login"><i class="bi bi-person-plus"></i> Register</label>
+                                <a href="<?php echo e(route('home')); ?>" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> <?php echo e(trans('button.annulla')); ?> </a>
+                                <label for="Register" class="btn btn-primary btn-login"><i class="bi bi-person-plus"></i> <?php echo e(trans('button.registrati')); ?> </label>
                                 <input id="Register" type="submit" value="Register" class="d-none"/>
                             </div>
                         </form>

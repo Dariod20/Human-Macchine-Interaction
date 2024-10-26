@@ -19,7 +19,8 @@ return [
     'avanti' => 'Next',
     'confermaPren' => 'Confirm Booking ',
     'calendario' => 'Back to Calendar',
-
+    'nome' => 'Name',
+    'conferma' => 'Confirm Password',
 
 
 
