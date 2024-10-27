@@ -84,9 +84,12 @@ return [
     'infoPassword' => 'La password deve essere lunga minimo 8 caratteri e contenere almeno una maiuscola, una cifra e un carattere tra ! - * [ ] $ & /',
     'registration_success' => 'La registrazione è stata completata correttamente. Accedi con le tue credenziali.',
 
-
-
-
+    'confermaCancellazione' => 'Vuoi cancellare la tua prenotazione dal ',
+    'al' => ' al ',
+    'dettagli' => 'Dettagli della prenotazione',
+    'prenotazione' => 'La prenotazione',
+    'cancellata' => 'sarà cancellata',
+    'nonCancellata' => 'NON sarà cancellata'
 
 
 

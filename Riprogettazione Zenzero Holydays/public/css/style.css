@@ -16,6 +16,10 @@ div.card {
     height: 100%;
 }
 
+.card-conferma-eliminazione {
+    height: 80%;
+}
+
 img.card-img-top{
     height: 500px; /*Imposta grandezza standard per le foto e fa in modo che non si deformino*/
     object-fit: cover;

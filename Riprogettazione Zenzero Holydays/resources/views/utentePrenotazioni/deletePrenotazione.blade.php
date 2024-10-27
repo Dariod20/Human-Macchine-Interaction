@@ -1,4 +1,4 @@
-@extends('layouts.delete') 
+@extends('layouts.delete')
 
 @section('titolo')
     Elimina la tua prenotazione
@@ -15,13 +15,10 @@
 @section('corpo')
     <div class="container-fluid px-lg-4 mt-4">
         <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
+            <div class="col-md-9 text-center">
                 <h2>
-                    Stai per cancellare la tua prenotazione dal {{ $prenotazione->arrivo }} al {{ $prenotazione->partenza }} dal prezzo di €{{ $prenotazione->prezzoTotale }}
+                {{ trans('messages.confermaCancellazione') }} {{ $prenotazione->arrivo }} {{ trans('messages.al') }} {{ $prenotazione->partenza }}?
                 </h2>
-                <p class="confirm">
-                    Confermi?
-                </p>
             </div>
         </div>
 
@@ -30,21 +27,21 @@
             <div class="col-md-8"> <!-- Puoi adattare la larghezza se necessario -->
                 <div class="card border-secondary">
                     <div class="card-header text-center">
-                        Dettagli della Prenotazione
+                    {{ trans('messages.dettagli') }}
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6 text-left">
                                 <!-- Colonna per intestazioni -->
-                                <p><strong>Arrivo:</strong></p>
-                                <p><strong>Partenza:</strong></p>
-                                <p><strong>Numero Adulti:</strong></p>
-                                <p><strong>Numero Bambini:</strong></p>
-                                <p><strong>Prezzo Totale:</strong></p>
+                                <p><strong>{{ trans('messages.arrivo') }}:</strong></p>
+                                <p><strong>{{ trans('messages.partenza') }}:</strong></p>
+                                <p><strong>{{ trans('messages.numAdulti') }}:</strong></p>
+                                <p><strong>{{ trans('messages.numBambini') }}:</strong></p>
+                                <p><strong>{{ trans('messages.prezzo') }}:</strong></p>
                                 <p><strong>Email:</strong></p>
-                                <p><strong>Telefono:</strong></p>
-                                <p><strong>Stato Prenotazione:</strong></p>
-                                <p><strong>Orario Arrivo:</strong></p>
+                                <p><strong>{{ trans('messages.tel') }}:</strong></p>
+                                <p><strong>{{ trans('messages.stato') }}:</strong></p>
+                                <p><strong>{{ trans('messages.orario') }}:</strong></p>
                             </div>
                             <div class="col-6 text-left">
                                 <!-- Colonna per i dati -->
@@ -66,15 +63,13 @@
 
         <!-- Card di conferma cancellazione -->
         <div class="row justify-content-center mt-4">
-            <div class="col-md-4">
-                <div class="card border-secondary ">
+            <div class="col-md-4 card-conferma-eliminazione">
+                <div class="card border-secondary">
                     <div class="card-header text-center ">
-                        Conferma
+                    {{ trans('messages.prenotazione') }} <strong>{{ trans('messages.cancellata') }}</strong>
                     </div>
                     <div class="card-body text-center">
-                        <p>
-                            La prenotazione <strong>sarà cancellata</strong>
-                        </p>
+
                         <form name="prenotazione" method="post" action="{{ route('prenotazioniUtente.destroy', ['prenotazioniUtente' => $prenotazione->id]) }}">
                             @method('DELETE')
                             @csrf
@@ -86,15 +81,12 @@
             </div>
 
             <!-- Card per annullare la cancellazione -->
-            <div class="col-md-4 mt-4 mt-md-0">
+            <div class="col-md-4 mt-4 mt-md-0 card-conferma-eliminazione">
                 <div class="card border-secondary card-custom-width">
                     <div class="card-header text-center">
-                        Annulla
+                    {{ trans('messages.prenotazione') }} <strong>{{ trans('messages.nonCancellata') }}</strong>
                     </div>
                     <div class="card-body text-center">
-                        <p>
-                            La prenotazione <strong>non sarà cancellata</strong>
-                        </p>
                         <a class="btn btn-secondary w-100" href="{{ route('prenotazioniUtente.index') }}"><i class="bi bi-box-arrow-left"></i> {{ trans('button.annulla') }}</a>
                     </div>
                 </div>

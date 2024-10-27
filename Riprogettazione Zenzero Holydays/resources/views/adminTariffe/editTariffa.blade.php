@@ -36,7 +36,7 @@
             var isEditGruppo = $("input[name='isEditGruppo']").val() === "true"; // Nuovo campo
             var isAddGruppo = $("input[name='isAddGruppo']").val() === "true"; // Nuovo campo
 
-                 
+
             if (giorno.trim() === "") {
                 error = true;
                 $("#invalid-giorno").text("Il giorno è obbligatorio.");
@@ -61,7 +61,7 @@
                     $("#invalid-giorno_fino").text("");
                 }
             }
-            
+
 
             if (prezzo.trim() === "") {
                 error = true;
@@ -79,7 +79,7 @@
             }
             if(!error)
             {
-                
+
                 var metodoHttp = $('input[name="_method"]').val();
                  // la pagina è state caricata per creare una nuova tariffa
                 if (metodoHttp === undefined && !isEditGruppo ){
@@ -108,7 +108,7 @@
                             $("form")[0].submit();
                         }
                     }
-                }); 
+                });
                 }
 
                 if (isEditGruppo) {
@@ -127,7 +127,7 @@
                                 data: {
                                     arrivo: giorno.trim(),
                                     partenza: giorno_fino.trim(),
-                                    context: 'altro' 
+                                    context: 'altro'
                                 },
                                 success: function (response) {
                                     if (!response.available) {
@@ -143,27 +143,27 @@
                         }
                     }
                 });
-                    
+
                 }
-                
-                
+
+
             }
 
 
 
 
 
-                
-            
+
+
         });
     });
-    
+
 
     </script>
 
-    
+
     <div class="container-fluid px-lg-4 mt-4">
-        
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @if(isset($tariffa->id))
@@ -220,7 +220,7 @@
                     <input id="mySubmit" class="d-none" type="submit" value="Save">
                 </div>
                 <div class="form-group mb-3">
-                    <a class="btn btn-danger w-100" href="{{ route('tariffeAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> Annulla</a>
+                    <a class="btn btn-secondary w-100" href="{{ route('tariffeAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> Annulla</a>
                 </div>
 
             </form>
@@ -230,9 +230,8 @@
 
 
 
-    
-       
-    
+
+
+
 @endsection
 
-   

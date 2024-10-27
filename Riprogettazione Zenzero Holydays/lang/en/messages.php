@@ -83,6 +83,12 @@ return [
     'infoPassword' => 'The password must be at least 8 characters long and contain at least one capital letter, one digit and one character between ! - * [ ] $ & /',
     'registration_success' => 'Registration was completed successfully. Login with your credentials.',
 
+    'confermaCancellazione' => 'Do you want to cancel your reservation from ',
+    'al' => ' to ',
+    'dettagli' => 'Reservation details',
+    'prenotazione' => 'The reservation',
+    'cancellata' => 'will be deleted',
+    'nonCancellata' => 'will NOT be deleted'
 
 
 
