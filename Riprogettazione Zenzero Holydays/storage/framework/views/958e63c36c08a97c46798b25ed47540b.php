@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('titolo'); ?>
 <?php echo e(trans('messages.conferma')); ?>
 
@@ -271,11 +269,12 @@
     function validateStep3() {
         var firstName = document.getElementById('nome').value;
         var lastName = document.getElementById('cognome').value;
-        var telefono = document.getElementById('telefono').value;
+        var telefono = document.getElementById('num-telefono').value;
         var email = document.getElementById('email').value;
         var stato = document.getElementById('stato').value;
         var regexName = /^[a-zA-Z\s]+$/;
         var regexPhone = /^[0-9]+$/;
+        var regexPhoneLength = /^.{7,15}$/;
         var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         var error = false;
 
@@ -302,13 +301,17 @@
         } else {
             document.getElementById('invalid-lastName').textContent = "";
         }
-
+        
         if (telefono.trim() === "") {
             document.getElementById('invalid-telefono').textContent = "<?php echo e(trans('errors.tel')); ?>";
             error = true;
             $("input[name='telefono']").focus();
         } else if (!regexPhone.test(telefono)) {
             document.getElementById('invalid-telefono').textContent = "<?php echo e(trans('errors.telErr')); ?>";
+            error = true;
+            $("input[name='telefono']").focus();
+        } else if (!regexPhoneLength.test(telefono)) {
+            document.getElementById('invalid-telefono').textContent = "<?php echo e(trans('errors.telErrLength')); ?>";
             error = true;
             $("input[name='telefono']").focus();
         } else {
@@ -412,7 +415,7 @@
         const cognome = document.getElementById('cognome').value;
         const email = document.getElementById('email').value;
         const stato = document.getElementById('stato').value;
-        const telefono = document.getElementById('num-telefono').value;
+        const telefono = document.getElementById('telefono').value;
         const prezzo=document.getElementById('prezzoTotaleNumero').innerText;
 
         document.getElementById('riepilogo-soggiorno').innerHTML = `
@@ -593,7 +596,7 @@
                       <span class="iconify" data-icon="flag:gb-4x3"></span>
                       <strong>+1</strong>
                     </div>
-                    <input type="tel" class="form-control" id="telefono" name="tel" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
+                    <input type="tel" class="form-control" id="num-telefono" name="tel" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
                   </div>
                   <div class="options">
                     <input type="text" class="search-box" placeholder="Search Country Name">
@@ -607,7 +610,7 @@
 
                 </div>
                 <span class="invalid-input" id="invalid-telefono"></span>
-                <input type="hidden" id="num-telefono" name="num-telefono">
+                <input type="hidden" id="telefono" name="telefono">
               </div>
 
             

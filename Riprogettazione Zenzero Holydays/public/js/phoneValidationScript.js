@@ -257,8 +257,8 @@ $(document).ready(function(){
 
     select_box = document.querySelector('.options'),
     search_box = document.querySelector('.search-box'),
-    input_box = document.getElementById('num-telefono'),
-    telefono_input = document.getElementById('telefono'), // Campo numero di telefono visibile
+    input_box = document.getElementById('telefono'),
+    telefono_input = document.getElementById('num-telefono'), // Campo numero di telefono visibile
     selected_option = document.querySelector('.selected-option div');
     stato_select = document.getElementById('stato');
 
