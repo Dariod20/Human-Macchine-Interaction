@@ -95,7 +95,6 @@
                     },
 
                     success: function (data) {
-                        console.log(data)
                         if (data.found) {
                             error = true;
                             // Mostra il messaggio con la lista di tariffe trovate
@@ -113,6 +112,7 @@
 
                 if (isEditGruppo) {
                     event.preventDefault(); // Blocca l'invio del modulo
+                    
                     $.ajax({
                         type: 'GET',
                         url: '{{ route("tariffeAdmin.ajaxCheckTariffePrenotazioni") }}',
@@ -125,11 +125,12 @@
                                 type: 'GET',
                                 url: '{{ route("ajaxCheckTariffePrenotazione") }}',
                                 data: {
-                                    arrivo: giorno.trim(),
-                                    partenza: giorno_fino.trim(),
+                                    giorno: giorno.trim(),
+                                    giorno_fino: giorno_fino.trim(),
                                     context: 'altro' 
                                 },
                                 success: function (response) {
+                                    
                                     if (!response.available) {
                                         error = true;
                                         $("#invalid-giorno").text(response.message);
@@ -188,7 +189,7 @@
                 <input type="hidden" name="isAddGruppo" value="{{ Route::currentRouteName() === 'tariffeAdmin.create' ? 'true' : 'false' }}">
 
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="giorno" class="form-label">Giorno</label>
                     @if(isset($tariffa->id))
                         <input class="form-control" type="date" id="giorno" name="giorno" value="{{ $tariffa->giorno }}"/>
@@ -198,14 +199,14 @@
                     <span class="invalid-input" id="invalid-giorno"></span>
                 </div>
                 @if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create'))
-                    <div class="mb-3" id="giorno_fino_container">
+                    <div class="mb-4" id="giorno_fino_container">
                         <label for="giorno_fino" class="form-label">Fino al giorno</label>
                         <input class="form-control" type="date" id="giorno_fino" name="giornoFino" />
                         <span class="invalid-input" id="invalid-giorno_fino"></span>
                     </div>
                 @endif
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="prezzo" class="form-label">Prezzo</label>
                     @if(isset($tariffa->id))
                         <input class="form-control" type="number" id="prezzo" name="prezzo" value="{{ $tariffa->prezzo }}"/>

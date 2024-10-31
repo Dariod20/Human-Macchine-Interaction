@@ -113,6 +113,9 @@
 
                 if (isEditGruppo) {
                     event.preventDefault(); // Blocca l'invio del modulo
+                    console.log(giorno_fino.trim());
+                    console.log(giorno.trim());
+
                     $.ajax({
                         type: 'GET',
                         url: '<?php echo e(route("tariffeAdmin.ajaxCheckTariffePrenotazioni")); ?>',
@@ -125,11 +128,12 @@
                                 type: 'GET',
                                 url: '<?php echo e(route("ajaxCheckTariffePrenotazione")); ?>',
                                 data: {
-                                    arrivo: giorno.trim(),
-                                    partenza: giorno_fino.trim(),
+                                    giorno: giorno.trim(),
+                                    giorno_fino: giorno_fino.trim(),
                                     context: 'altro' 
                                 },
                                 success: function (response) {
+                                    
                                     if (!response.available) {
                                         error = true;
                                         $("#invalid-giorno").text(response.message);
@@ -188,7 +192,7 @@
                 <input type="hidden" name="isAddGruppo" value="<?php echo e(Route::currentRouteName() === 'tariffeAdmin.create' ? 'true' : 'false'); ?>">
 
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="giorno" class="form-label">Giorno</label>
                     <?php if(isset($tariffa->id)): ?>
                         <input class="form-control" type="date" id="giorno" name="giorno" value="<?php echo e($tariffa->giorno); ?>"/>
@@ -198,14 +202,14 @@
                     <span class="invalid-input" id="invalid-giorno"></span>
                 </div>
                 <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create')): ?>
-                    <div class="mb-3" id="giorno_fino_container">
+                    <div class="mb-4" id="giorno_fino_container">
                         <label for="giorno_fino" class="form-label">Fino al giorno</label>
                         <input class="form-control" type="date" id="giorno_fino" name="giornoFino" />
                         <span class="invalid-input" id="invalid-giorno_fino"></span>
                     </div>
                 <?php endif; ?>
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="prezzo" class="form-label">Prezzo</label>
                     <?php if(isset($tariffa->id)): ?>
                         <input class="form-control" type="number" id="prezzo" name="prezzo" value="<?php echo e($tariffa->prezzo); ?>"/>

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 
-
 class AdminBookingController extends Controller
 {
     /**
@@ -146,14 +145,15 @@ class AdminBookingController extends Controller
     
     public function ajaxCheckTariffePrenotazione(Request $request)
     {
-        $arrivo = Carbon::parse($request->input('arrivo'));
-        $partenza = Carbon::parse($request->input('partenza'));
+        $giorno = Carbon::parse($request->input('giorno'));
+        $giornoFino = Carbon::parse($request->input('giorno_fino'));
         $context = $request->input('context'); // Ottieni il parametro context
 
     
         $dl = new DataLayer();
-        $result = $dl->checkTariffeDisponibili($arrivo, $partenza);
-    
+        $result = $dl->checkTariffeDisponibili($giorno, $giornoFino);
+
+
         if (!$result['allTariffeExist']) {
             return response()->json([
                 'available' => false,

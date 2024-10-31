@@ -120,7 +120,7 @@ class AdminTariffeController extends Controller
         
         $tariffeTrovate= $dl->findTariffaByGiorno($giorno, $giornoFino);
           
-        if (!empty($tariffeTrovate)) {
+        if ($tariffeTrovate->isNotEmpty()) {
             return response()->json(['found' => true, 'tariffe' => $tariffeTrovate]);
         }
 
