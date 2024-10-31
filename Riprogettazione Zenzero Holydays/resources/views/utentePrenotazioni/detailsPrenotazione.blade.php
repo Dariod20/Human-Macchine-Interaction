@@ -120,13 +120,13 @@ Dettagli Prenotazione
         </div>
 
         <div class="col-md-2">
-            
+        @if (Carbon\Carbon::parse($prenotazione->arrivo)->isFuture() || Carbon\Carbon::parse($prenotazione->arrivo)->isToday())                
             <div class="row mb-3">
                 <div class="col-md-12">
                     <a class="btn btn-danger w-100" href="{{ route('prenotazioniUtente.destroy.confirm', ['id' => $prenotazione->id]) }}"><i class="bi bi-trash"></i>{{ trans('button.elimina') }}</a>
                 </div>
             </div>
-
+        @endif
             <div class="row mb-3">
                 <div class="col-md-12">
                     <a class="btn btn-secondary w-100" href="{{ url()->previous() }}"><i class="bi bi-box-arrow-left"></i>{{ trans('button.annulla') }}</a>

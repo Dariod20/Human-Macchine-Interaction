@@ -131,13 +131,13 @@ Dettagli Prenotazione
         </div>
 
         <div class="col-md-2">
-            
+        <?php if(Carbon\Carbon::parse($prenotazione->arrivo)->isFuture() || Carbon\Carbon::parse($prenotazione->arrivo)->isToday()): ?>                
             <div class="row mb-3">
                 <div class="col-md-12">
                     <a class="btn btn-danger w-100" href="<?php echo e(route('prenotazioniUtente.destroy.confirm', ['id' => $prenotazione->id])); ?>"><i class="bi bi-trash"></i><?php echo e(trans('button.elimina')); ?></a>
                 </div>
             </div>
-
+        <?php endif; ?>
             <div class="row mb-3">
                 <div class="col-md-12">
                     <a class="btn btn-secondary w-100" href="<?php echo e(url()->previous()); ?>"><i class="bi bi-box-arrow-left"></i><?php echo e(trans('button.annulla')); ?></a>

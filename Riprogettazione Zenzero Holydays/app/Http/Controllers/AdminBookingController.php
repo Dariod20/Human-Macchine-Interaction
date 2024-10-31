@@ -121,7 +121,7 @@ class AdminBookingController extends Controller
         // Invia la mail al cliente
         $mailData = [
             'title' => 'Notifica di Cancellazione Prenotazione',
-            'body' => 'La tua prenotazione dal ' . $prenotazione->arrivo . ' al ' . $prenotazione->partenza . ' presso Zenzero Holidays è stata cancellata.',
+            'body' => 'La tua prenotazione dal ' . $prenotazione->arrivo . ' al ' . $prenotazione->partenza . ' presso Zenzero Holidays è stata cancellata dall\'admin.  Se hai domande, contattaci.',
             'nome' => $prenotazione->nome,
             'cognome' => $prenotazione->cognome,
             'telefono' => $prenotazione->telefono,
