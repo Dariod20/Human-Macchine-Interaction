@@ -904,3 +904,24 @@ input.search-box {
 .select-box ol li .country-name {
     margin-left: .4rem;
 }
+
+
+
+
+
+.form-price {
+    background-color: var(--main-color);
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; justify-content: center;
+}
+.disabled-button {
+    pointer-events: none; /* Disabilita l'interazione con il mouse */
+    cursor: default; /* Cambia il cursore in modo che non sembri cliccabile */
+    opacity: 0.65; /* Opzionale: rende il bottone un po' più trasparente per indicare che è disabilitato */
+}
+
+.disabled-button:hover {
+    background-color: transparent; /* Rimuove l'effetto hover */
+    color: inherit; /* Rimuove eventuali cambi di colore su hover */
+}

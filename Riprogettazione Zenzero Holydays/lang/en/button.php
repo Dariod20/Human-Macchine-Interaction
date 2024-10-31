@@ -19,6 +19,10 @@ return [
     'avanti' => 'Next',
     'confermaPren' => 'Confirm Booking ',
     'calendario' => 'Back to Calendar',
+    'mesePrec' => 'Previous Month',
+    'meseCorr' => 'Current Month',
+    'meseSucc' => 'Next Month',
+
 
 
 

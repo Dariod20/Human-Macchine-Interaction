@@ -18,7 +18,9 @@ if (!function_exists('build_calendar')){
        
     
      // Create array containing abbreviations of days of week.
-     $daysOfWeek = array('Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato');
+     $daysOfWeek = trans('messages.days');
+     $startDay = app()->getLocale() === 'it' ? 1 : 0;
+
 
      // What is the first day of the month in question?
      $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
@@ -31,7 +33,7 @@ if (!function_exists('build_calendar')){
      $dateComponents = getdate($firstDayOfMonth);
 
      // What is the name of the month in question?
-     $monthName = $dateComponents['month'];
+     $monthName = trans('messages.months')[$month - 1];
 
      // What is the index value (0-6) of the first day of the
      // month in question.
@@ -41,25 +43,46 @@ if (!function_exists('build_calendar')){
      
     $datetoday = date('Y-m-d');
     
+    if ($startDay === 1 && $dayOfWeek === 0) {
+        $dayOfWeek = 6;  // Imposta la domenica come ultimo giorno
+    } elseif ($startDay === 1) {
+        $dayOfWeek--; // Riduci di uno per iniziare da lunedì
+    }
     
     
     $calendar = "<table class='table table-bordered'>";
+    $prevMonth = date('m', mktime(0, 0, 0, $month - 1, 1, $year));
+    $prevYear = date('Y', mktime(0, 0, 0, $month - 1, 1, $year));
+    
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+    
+    $nextMonth = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
+    $nextYear = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
+    
+
     $calendar .= "<center><h2>$monthName $year</h2>";
-    $calendar.= "<a class='btn btn-xs btn-custom' href='?month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."'>Mese Precedente</a> ";
-    
-    $calendar.= " <a class='btn btn-xs btn-custom' href='?month=".date('m')."&year=".date('Y')."'>Mese Corrente</a> ";
-    
-    $calendar.= "<a class='btn btn-xs btn-custom' href='?month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."'>Mese Successivo</a></center><br>";
-    
-    
+    $calendar .= "<div class='btn-group'>"; 
+    // Controlla se il mese corrente è uguale al mese passato
+    if ($month == $currentMonth && $year == $currentYear) {
+        // Se siamo nel mese corrente, disabilita il tasto mese precedente
+        $calendar .= "<button class='btn btn-xs btn-prev' disabled>" . trans('button.mesePrec') . "</button> ";
+        $calendar .= "<button class='btn btn-xs' disabled>" . trans('button.meseCorr') . "</button> ";
+    } else {
+        $calendar .= "<a class='btn btn-xs btn-prev' href='?month=$prevMonth&year=$prevYear'>" . trans('button.mesePrec') . "</a> ";
+        $calendar .= "<a class='btn btn-xs' href='?month=$currentMonth&year=$currentYear'>" . trans('button.meseCorr') . "</a> ";
+    }
+    $calendar .= "<a class='btn btn-xs btn-next' href='?month=$nextMonth&year=$nextYear'>" . trans('button.meseSucc') . "</a> ";
+    $calendar .= "</div></center>";
+ 
         
       $calendar .= "<tr>";
 
      // Create the calendar headers
 
-     foreach($daysOfWeek as $day) {
-          $calendar .= "<th  class='header'>$day</th>";
-     } 
+     foreach ($daysOfWeek as $day) {
+        $calendar .= "<th class='header'>$day</th>";
+    }
 
      // Create the rest of the calendar
 
@@ -103,15 +126,15 @@ if (!function_exists('build_calendar')){
             $tariffa = $tariffe->firstWhere('giorno', $date);
 
             if ($date < date('Y-m-d')) {
-                $calendar .= "<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>/</button></td>";
+                $calendar .= "<td class='$today'><h4>$currentDay</h4> <span class='btn btn-danger btn-xs disabled-button'>/</span></td>";
             } elseif ($tariffa) {
                 if ($tariffa->prenotazione_id) {
-                    $calendar .= "<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>/</button></td>";
+                    $calendar .= "<td class='$today'><h4>$currentDay</h4> <span class='btn btn-danger btn-xs disabled-button'>/</span></td>";
                 } else {
                     $calendar .= "<td class='$today selectable'><h4>$currentDay</h4> <a href='" . route('prenotazione.conferma', ['arrivo' => $date]) . "' class='btn btn-success btn-xs'>€ $tariffa->prezzo </a></td>";
                 }
             } else {
-                $calendar .= "<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>/</button></td>";
+                $calendar .= "<td class='$today'><h4>$currentDay</h4> <span class='btn btn-danger btn-xs disabled-button'>/</span></td>";
             }
             
             
@@ -152,8 +175,7 @@ if (!function_exists('build_calendar')){
 
 <?php $__env->startSection('corpo'); ?>
         <style>
-        @media only screen and (max-width: 760px),
-            (min-device-width: 802px) and (max-device-width: 1020px) {
+        @media only screen and (max-device-width: 802px){
 
                 /* Force table to not be like tables anymore */
                 table, thead, tbody, th, td, tr {

@@ -523,7 +523,7 @@
                 </div>
                 <span class="invalid-input" id="invalid-orarioArrivo"></span>
               </div>
-              <div class="form-group" style="background-color: var(--main-color); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <div class="form-price">
                 <label>{{ trans('messages.prezzo') }}:</label>
                 <div id="prezzoTotale" class="prezzo-output">€<span id="prezzoTotaleNumero">0.00</span></div>
               </div>

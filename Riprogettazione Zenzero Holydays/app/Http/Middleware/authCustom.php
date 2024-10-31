@@ -19,6 +19,10 @@ class authCustom
         session_start();
 
         if (!(session('logged'))) {
+                // Aggiungi il messaggio di feedback
+            session()->flash('login_feedback', trans('messages.login_feedback'));
+            // Salva l'URL corrente come URL di ritorno
+            session(['return_url' => route('calendario')]);  // Indirizza al calendario
             return Redirect::to(route('user.login'));
         }
 

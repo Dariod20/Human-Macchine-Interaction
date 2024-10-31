@@ -7,7 +7,6 @@ use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTariffeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LangController;
-Route::get('/form', [FrontController::class,'getForm'])->name('form')->middleware(['lang']);
 
 
 Route::group(['middleware' => ['lang']], function() {
@@ -28,7 +27,7 @@ Route::group(['middleware' => ['lang']], function() {
 });
 
 
-Route::group(['middleware' => ['authCustom','isRegisteredUser', 'lang']], function() {
+Route::group(['middleware' => [ 'lang','authCustom','isRegisteredUser']], function() {
     Route::get('/confermaPrenotazione/{arrivo}', [AdminBookingController::class, 'confermaPrenotazione'])->name('prenotazione.conferma');
     Route::resource('prenotazioniUtente', BookingController::class);
     Route::get('/prenotazioniUtente/{id}/destroy/confirm', [BookingController::class, 'confirmDestroy'])->name('prenotazioniUtente.destroy.confirm');

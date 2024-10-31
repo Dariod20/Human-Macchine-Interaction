@@ -20,20 +20,20 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Christian Girardelli',
             'email' => 'c.girardelli@studenti.unibs.it',
-            'password' => 'christian',
+            'password' => 'Christian20!',
             'role' => 'admin'
         ]);
 
         User::factory()->create([
             'name' => 'Marco Rossi',
             'email' => 'marco.rossi@gmail.it',
-            'password' => 'marco'
+            'password' => 'Marco1965!'
         ]);
 
         User::factory()->create([
             'name' => 'David Black',
             'email' => 'david.black@gmail.it',
-            'password' => 'david'
+            'password' => 'David300!'
         ]);
         // User::factory(10)->create();
 
@@ -70,10 +70,18 @@ class DatabaseSeeder extends Seeder
 
         $startDate = Carbon::create(2024, 06, 1);
         $endDate = Carbon::create(2024, 12, 31);
-        $price = 100;
+        $count = 0;
 
         for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
-            Tariffa::factory()->count(1)->create(['giorno' => $date, 'prezzo' => $price ]);
+            $count++;
+            if($count <= 4){
+                Tariffa::factory()->count(1)->create(['giorno' => $date, 'prezzo' => 70 ]);
+            } else{
+                Tariffa::factory()->count(1)->create(['giorno' => $date, 'prezzo' => 100 ]);
+                if($count ==7){
+                    $count = 0;
+                }
+            }
 
         }
 

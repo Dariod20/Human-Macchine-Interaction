@@ -80,6 +80,14 @@ return [
     'dateRange' => 'Check-in and check-out dates',
      'selezionaOrario' => 'Select an arrival time',
 
+     'months' => [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    'days' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+
+    'login_feedback' => 'To complete the booking, please log in or register if you don’t have an account yet.',
+
 
 
 
