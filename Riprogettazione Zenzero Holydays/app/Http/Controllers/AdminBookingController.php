@@ -6,6 +6,8 @@ use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use App\Mail\DemoMail;
+use Illuminate\Support\Facades\Mail;
 
 class AdminBookingController extends Controller
 {
@@ -112,8 +114,25 @@ class AdminBookingController extends Controller
     public function destroy(string $id)
     {
         $dl = new DataLayer();
+        $prenotazione = $dl->findPrenotazioneById($id);
+        $emailCliente = $prenotazione->email;
+        
         $dl->deletePrenotazione($id);
-        return Redirect::to(route('prenotazioniAdmin.index'));
+        // Invia la mail al cliente
+        $mailData = [
+            'title' => 'Notifica di Cancellazione Prenotazione',
+            'body' => 'La tua prenotazione dal ' . $prenotazione->arrivo . ' al ' . $prenotazione->partenza . ' presso Zenzero Holidays è stata cancellata.',
+            'nome' => $prenotazione->nome,
+            'cognome' => $prenotazione->cognome,
+            'telefono' => $prenotazione->telefono,
+            'prezzoTotale' => $prenotazione->prezzoTotale,
+            'arrivo' => $prenotazione->arrivo,
+            'partenza' => $prenotazione->partenza,
+        ];
+
+        Mail::to($emailCliente)->send(new DemoMail($mailData));
+
+        return redirect()->route('prenotazioniAdmin.index')->with('success', 'Prenotazione cancellata e mail inviata.');
     }
 
     public function confirmDestroy($id) {
