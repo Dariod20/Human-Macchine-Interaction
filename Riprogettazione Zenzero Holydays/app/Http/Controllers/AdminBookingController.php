@@ -24,15 +24,15 @@ class AdminBookingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    /* public function create()
     {
         return view('adminPrenotazioni.editPrenotazione');
-    }
+    } */
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
         $nome = $request->input('nome');
         $cognome= $request->input('cognome');
@@ -57,7 +57,7 @@ class AdminBookingController extends Controller
         //torno sulla vista della lista dei libri
         return Redirect::to(route('prenotazioniAdmin.index'));
     }
-
+ */
     /**
      * Display the specified resource.
      */
@@ -74,7 +74,7 @@ class AdminBookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    /* public function edit(string $id)
     {
         $dl = new DataLayer();
         $prenotazione = $dl->findPrenotazioneById($id);
@@ -82,11 +82,11 @@ class AdminBookingController extends Controller
         if ($prenotazione !== null) {
             return view('adminPrenotazioni.editPrenotazione')->with('prenotazione', $prenotazione);
         }
-    }
+    } */
 
     /**
      * Update the specified resource in storage.
-     */
+     *//* 
     public function update(Request $request, string $id)
     {
         //Recupero dati inseriti nei campi della form per aggiunta nuovo libro
@@ -106,7 +106,7 @@ class AdminBookingController extends Controller
         $costoTotale= $dl->calcoloCostoTotale($arrivo,$partenza);
         $dl->editPrenotazione($id, $arrivo,$partenza,$numAdulti,$numBambini,$costoTotale,$nome,$cognome,$email,$telefono,$stato,$orarioArrivo);
         return Redirect::to(route('prenotazioniAdmin.index'));
-    }
+    } */
 
     /**
      * Remove the specified resource from storage.
@@ -121,7 +121,7 @@ class AdminBookingController extends Controller
         // Invia la mail al cliente
         $mailData = [
             'title' => 'Notifica di Cancellazione Prenotazione',
-            'body' => 'La tua prenotazione dal ' . $prenotazione->arrivo . ' al ' . $prenotazione->partenza . ' presso Zenzero Holidays è stata cancellata dall\'admin.  Se hai domande, contattaci.',
+            'body' => 'La tua prenotazione dal ' . $prenotazione->arrivo . ' al ' . $prenotazione->partenza . ' presso Zenzero Holidays è stata cancellata dall\'admin.',
             'nome' => $prenotazione->nome,
             'cognome' => $prenotazione->cognome,
             'telefono' => $prenotazione->telefono,
@@ -132,7 +132,7 @@ class AdminBookingController extends Controller
 
         Mail::to($emailCliente)->send(new DemoMail($mailData));
 
-        return redirect()->route('prenotazioniAdmin.index')->with('success', 'Prenotazione cancellata e mail inviata.');
+        return redirect()->route('prenotazioniAdmin.index')->with('success', 'Prenotazione eliminata con successo e mail di notifica inviata.');
     }
 
     public function confirmDestroy($id) {
@@ -199,12 +199,7 @@ class AdminBookingController extends Controller
 
     
 
-    public function confermaPrenotazione($arrivo)
-    {
-        $arrivo= Carbon::parse($arrivo)->format('d-m-Y');
-        $arrivoDopo = Carbon::parse($arrivo)->addDay()->format('d-m-Y');
-        return view('utentePrenotazioni.confirmPrenotazione')->with(['arrivo'=> $arrivo, 'arrivoDopo'=> $arrivoDopo]);
-    }
+    
 
 
 }

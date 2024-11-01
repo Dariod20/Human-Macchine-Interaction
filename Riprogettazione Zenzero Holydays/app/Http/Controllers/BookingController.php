@@ -99,4 +99,11 @@ class BookingController extends Controller
         $tariffe= $dl->listaTariffe();
         return view('pages.fullCalendar')->with('tariffe', $tariffe);
     }
+
+    public function confermaPrenotazione($arrivo)
+    {
+        $arrivo= Carbon::parse($arrivo)->format('d-m-Y');
+        $arrivoDopo = Carbon::parse($arrivo)->addDay()->format('d-m-Y');
+        return view('utentePrenotazioni.confirmPrenotazione')->with(['arrivo'=> $arrivo, 'arrivoDopo'=> $arrivoDopo]);
+    }
 }

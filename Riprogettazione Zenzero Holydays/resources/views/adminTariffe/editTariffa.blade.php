@@ -6,7 +6,7 @@
 @elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo')
     Modifica gruppo di tariffe
 @else
-    Crea nuova tariffa
+    Aggiungi gruppo di tariffe
 @endif
 @endsection
 
@@ -54,6 +54,9 @@
                     $("#giorno_fino").focus();
                 } else if(giorno.trim() !== "" && giorno_fino.trim() !== "" && giorno > giorno_fino) {
                     error = true;
+                    document.getElementById('invalid-giorno').textContent = "{{ trans('errors.giornoErr') }}";
+                    document.getElementById('invalid-giorno_fino').textContent = "{{ trans('errors.giornoFinoErr') }}";
+
                     $("#invalid-giorno").text("Il giorno selezionato deve essere uguale o precedente alla data 'Fino al giorno'. Per favore, seleziona una data valida.");
                     event.preventDefault();
                     $("#giorno").focus();
@@ -190,7 +193,11 @@
 
 
                 <div class="mb-4">
-                    <label for="giorno" class="form-label">Giorno</label>
+                    @if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create'))
+                        <label for="giorno" class="form-label">Dal giorno</label>
+                    @else
+                        <label for="giorno" class="form-label">Giorno</label>
+                    @endif
                     @if(isset($tariffa->id))
                         <input class="form-control" type="date" id="giorno" name="giorno" value="{{ $tariffa->giorno }}"/>
                     @else

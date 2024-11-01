@@ -20,6 +20,8 @@ return [
     'dateChiuse' => "The holiday home is closed on these dates, please check the calendar.",
     'dateDal' => 'from',
     'dateAl' => 'to',
+    'giornoErr' => "The date must be before or the same as the 'Until' date.",
+    'giornoFinoErr' => "The date must be after or the same as the 'From' date.",
 
 
 

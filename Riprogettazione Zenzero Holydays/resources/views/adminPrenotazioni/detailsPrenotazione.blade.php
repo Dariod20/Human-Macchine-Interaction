@@ -127,11 +127,11 @@ Dettagli Prenotazione
         </div>
 
         <div class="col-md-2">
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <div class="col-md-12">
                     <a class="btn btn-primary w-100" href="{{ route('prenotazioniAdmin.edit', ['prenotazioniAdmin' => $prenotazione->id]) }}"><i class="bi bi-pencil-square"></i> Modifica</a>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row mb-3">
                 <div class="col-md-12">

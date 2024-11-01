@@ -6,7 +6,7 @@
 <?php elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo'): ?>
     Modifica gruppo di tariffe
 <?php else: ?>
-    Crea nuova tariffa
+    Aggiungi gruppo di tariffe
 <?php endif; ?>
 <?php $__env->stopSection(); ?>
 
@@ -54,6 +54,9 @@
                     $("#giorno_fino").focus();
                 } else if(giorno.trim() !== "" && giorno_fino.trim() !== "" && giorno > giorno_fino) {
                     error = true;
+                    document.getElementById('invalid-giorno').textContent = "<?php echo e(trans('errors.giornoErr')); ?>";
+                    document.getElementById('invalid-giorno_fino').textContent = "<?php echo e(trans('errors.giornoFinoErr')); ?>";
+
                     $("#invalid-giorno").text("Il giorno selezionato deve essere uguale o precedente alla data 'Fino al giorno'. Per favore, seleziona una data valida.");
                     event.preventDefault();
                     $("#giorno").focus();
@@ -95,7 +98,6 @@
                     },
 
                     success: function (data) {
-                        console.log(data)
                         if (data.found) {
                             error = true;
                             // Mostra il messaggio con la lista di tariffe trovate
@@ -113,9 +115,7 @@
 
                 if (isEditGruppo) {
                     event.preventDefault(); // Blocca l'invio del modulo
-                    console.log(giorno_fino.trim());
-                    console.log(giorno.trim());
-
+                    
                     $.ajax({
                         type: 'GET',
                         url: '<?php echo e(route("tariffeAdmin.ajaxCheckTariffePrenotazioni")); ?>',
@@ -193,7 +193,11 @@
 
 
                 <div class="mb-4">
-                    <label for="giorno" class="form-label">Giorno</label>
+                    <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create')): ?>
+                        <label for="giorno" class="form-label">Dal giorno</label>
+                    <?php else: ?>
+                        <label for="giorno" class="form-label">Giorno</label>
+                    <?php endif; ?>
                     <?php if(isset($tariffa->id)): ?>
                         <input class="form-control" type="date" id="giorno" name="giorno" value="<?php echo e($tariffa->giorno); ?>"/>
                     <?php else: ?>

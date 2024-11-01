@@ -54,12 +54,12 @@ Prenotazioni
                 <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="Cerca prenotazione...">
             </div>
         </div>
-        <div class="col-md-4 d-flex justify-content-end align-items-center">
+        <!-- <div class="col-md-4 d-flex justify-content-end align-items-center">
             <a class="btn btn-success" href="{{ route('prenotazioniAdmin.create') }}">
                 <i class="bi bi-database-add"></i>
                 Crea nuova prenotazione
             </a>
-        </div>
+        </div> -->
     </div>
 
     <nav aria-label="Page navigation example" id="paginationNav">
@@ -104,8 +104,8 @@ Prenotazioni
                                 <td>
                                     <div class="btn-group-vertical" role="group">
                                         <a class="btn btn-secondary mb-1" href="{{ route('prenotazioniAdmin.show', ['prenotazioniAdmin' => $prenotazione->id]) }}">Dettagli</a>
-                                        <a class="btn btn-primary mb-1" href="{{ route('prenotazioniAdmin.edit', ['prenotazioniAdmin' => $prenotazione->id]) }}"><i class="bi bi-pencil-square"></i> Modifica</a>
-                                        <a class="btn btn-danger" href="{{ route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id]) }}"><i class="bi bi-trash"></i> Elimina</a>
+<!--                                         <a class="btn btn-primary mb-1" href="{{ route('prenotazioniAdmin.edit', ['prenotazioniAdmin' => $prenotazione->id]) }}"><i class="bi bi-pencil-square"></i> Modifica</a>
+ -->                                     <a class="btn btn-danger" href="{{ route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id]) }}"><i class="bi bi-trash"></i> Elimina</a>
                                     </div>
                                 </td>
                             </tr>
