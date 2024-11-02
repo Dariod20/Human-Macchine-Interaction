@@ -22,11 +22,10 @@
 
         <section id="descrizione" class="px-lg-4">
             <div class="container">
-                <h1 class="text-center mb-3">{{ trans('button.luoghi') }}</h1>
                 <div class="row">
                     <div class="col-md-6">
                         <h2>{{ trans('messages.parchi') }}</h2>
-                        <ul>
+                        <ul class="posti">
                             <li>Gardaland - {{ trans('messages.distanza') }}: 3 km</li>
                             <li>Caneva Aquapark - {{ trans('messages.distanza') }}: 5 km</li>
                             <li>Movieland - {{ trans('messages.distanza') }}: 5 km</li>
@@ -39,7 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         <h2>{{ trans('messages.citta') }}</h2>
-                        <ul>
+                        <ul class="posti">
                             <li>Peschiera del Garda - {{ trans('messages.distanza') }}: 2 km</li>
                             <li>Lazise - {{ trans('messages.distanza') }}: 6 km</li>
                             <li>Sirmione - {{ trans('messages.distanza') }}: 8 km</li>
@@ -58,7 +57,7 @@
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <h2>{{ trans('messages.terme') }}</h2>
-                        <ul>
+                        <ul class="posti">
                             <li>Terme di Sirmione - {{ trans('messages.distanza') }}: 7 km</li>
                             <li>Parco termale del Garda - {{ trans('messages.distanza') }}: 4 km</li>
                             <li>Aquardens - {{ trans('messages.distanza') }}: 19 km</li>
@@ -68,7 +67,7 @@
                     </div>
                     <div class="col-md-6">
                         <h2>Sport</h2>
-                        <ul>
+                        <ul class="posti">
                             <li>{{ trans('messages.pesca') }} - {{ trans('messages.distanza') }}: 1 km</li>
                             <li>Golf Club Paradiso - {{ trans('messages.distanza') }}: 4 km</li>
                             <li>Sup Experience Garda Lake - {{ trans('messages.distanza') }}: 2 km</li>

@@ -32,7 +32,7 @@ return [
     'terme' => 'Thermal baths',
 
     'telefono' => 'Phone',
-    'regole' => 'House rules:',
+    'regole' => 'House rules',
     'regola1' => 'Check-in: from 3.00 PM to 8:00 PM',
     'regola2' => 'Check-out: by 10.00 AM',
     'regola3' => 'No smoking inside the house',
@@ -60,12 +60,21 @@ return [
      'reservation_success' => 'The reservation has been successfully confirmed! You will be contacted shortly via email for payment. 
      Please note that cancellations are free of charge only up to two days before the arrival date. After this period, only 75% of the cost will be refunded.',
      'cancellation_success' => 'The reservation has been successfully canceled! You will be contacted shortly via email regarding your refund.',
+     'elimination_success' => 'Booking successfully canceled and notification email sent.',
+     'rates_success' => 'Rates added successfully',
+     'ratesElim_success' => 'Rates deleted successfully',
+
 
 
     'placeholder_nome' => 'Enter your first name',
     'placeholder_cognome' => 'Enter your last name',
     'placeholder_email' => 'Enter your email',
     'placeholder_telefono' => 'Enter your phone number',
+    'placeholder_stato' => 'Select country',
+    'placeholder_prefisso' => 'Search country name',
+    'placeholder_prezzo' => 'Amount per night',
+
+
 
     'datiPrenotazione' => 'Booking details',
     'numOspiti' => 'Guests details',
@@ -88,7 +97,14 @@ return [
 
     'login_feedback' => 'To complete the booking, please log in or register if you don’t have an account yet.',
 
+    'infoBambini' => 'Up to 12 years old.',
+    'contact' => 'Contacts',
 
+    'edit_rate_group' => 'Edit Rate Group',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'rate' => 'Rate',
+    'save_changes' => 'Save Changes',
 
 
 ];

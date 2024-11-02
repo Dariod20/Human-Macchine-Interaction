@@ -41,6 +41,16 @@ Prenotazioni
         });
     });
 </script>
+
+<?php if(session('success')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?php echo e(session('success')); ?>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+
 <div class="container-fluid mb-3 pt-3 text-center">
     <h1>
         Lista prenotazioni

@@ -18,7 +18,7 @@
             <li><strong>Prezzo Totale:</strong> €<?php echo e($mailData['prezzoTotale']); ?></li>
             <li><strong>Telefono:</strong> <?php echo e($mailData['telefono']); ?></li>
         </ul>
-
+        <p> Nel caso tu abbia già effettuato il pagamento sarai contattato via mail per il rimborso. <br>Per qualsiasi altro dubbio non esitare a contattarci</p>
         <p>Distinti saluti,<br>Christian Girardelli - Zenzero Holidays</p>
     </body>
 </html>

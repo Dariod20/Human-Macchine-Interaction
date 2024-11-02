@@ -4,7 +4,8 @@
 <?php if(isset($tariffa->id)): ?>
     Modifica tariffa
 <?php elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo'): ?>
-    Modifica gruppo di tariffe
+<?php echo e(trans('messages.edit_rate_group')); ?>
+
 <?php else: ?>
     Aggiungi gruppo di tariffe
 <?php endif; ?>
@@ -19,7 +20,7 @@
 <?php if(isset($tariffa->id)): ?>
     <li class="breadcrumb-item active" aria-current="page">Modifica tariffa</li>
 <?php elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo'): ?>
-    <li class="breadcrumb-item active" aria-current="page">Modifica gruppo di tariffe</li>
+    <li class="breadcrumb-item active" aria-current="page"><?php echo e(trans('messages.edit_rate_group')); ?></li>
 <?php else: ?>
     <li class="breadcrumb-item active" aria-current="page">Aggiungi gruppo di tariffe</li>
 <?php endif; ?>
@@ -27,6 +28,13 @@
 
 <?php $__env->startSection('corpo'); ?>
 <script>
+
+    function decodeHtmlEntities(str) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = str;
+      return txt.value;
+    }
+
     $(document).ready(function(){
         $("form").submit(function(event) {
             var error = false;
@@ -54,10 +62,12 @@
                     $("#giorno_fino").focus();
                 } else if(giorno.trim() !== "" && giorno_fino.trim() !== "" && giorno > giorno_fino) {
                     error = true;
-                    document.getElementById('invalid-giorno').textContent = "<?php echo e(trans('errors.giornoErr')); ?>";
-                    document.getElementById('invalid-giorno_fino').textContent = "<?php echo e(trans('errors.giornoFinoErr')); ?>";
+                    var errorMsg = "<?php echo e(trans('errors.giornoErr')); ?>"; // Usa la sintassi sicura di Laravel
+                    document.getElementById('invalid-giorno').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
+                    var errorMsg = "<?php echo e(trans('errors.giornoFinoErr')); ?>"; // Usa la sintassi sicura di Laravel
+                    document.getElementById('invalid-giorno_fino').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
 
-                    $("#invalid-giorno").text("Il giorno selezionato deve essere uguale o precedente alla data 'Fino al giorno'. Per favore, seleziona una data valida.");
+                    
                     event.preventDefault();
                     $("#giorno").focus();
                 }else{
@@ -173,7 +183,7 @@
                 <?php if(isset($tariffa->id)): ?>
                     <h1>Modifica tariffa:</h1>
                 <?php elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo'): ?>
-                    <h1>Modifica gruppo di tariffe</h1>
+                    <h1><?php echo e(trans('messages.edit_rate_group')); ?></h1>
                 <?php else: ?>
                     <h1>Aggiungi gruppo di tariffe:</h1>
                 <?php endif; ?>
@@ -194,7 +204,7 @@
 
                 <div class="mb-4">
                     <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create')): ?>
-                        <label for="giorno" class="form-label">Dal giorno</label>
+                        <label for="giorno" class="form-label"><?php echo e(trans('messages.start_date')); ?></label>
                     <?php else: ?>
                         <label for="giorno" class="form-label">Giorno</label>
                     <?php endif; ?>
@@ -207,28 +217,28 @@
                 </div>
                 <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create')): ?>
                     <div class="mb-4" id="giorno_fino_container">
-                        <label for="giorno_fino" class="form-label">Fino al giorno</label>
+                        <label for="giorno_fino" class="form-label"><?php echo e(trans('messages.end_date')); ?></label>
                         <input class="form-control" type="date" id="giorno_fino" name="giornoFino" />
                         <span class="invalid-input" id="invalid-giorno_fino"></span>
                     </div>
                 <?php endif; ?>
 
                 <div class="mb-4">
-                    <label for="prezzo" class="form-label">Prezzo</label>
+                    <label for="prezzo" class="form-label"><?php echo e(trans('messages.rate')); ?></label>
                     <?php if(isset($tariffa->id)): ?>
                         <input class="form-control" type="number" id="prezzo" name="prezzo" value="<?php echo e($tariffa->prezzo); ?>"/>
                     <?php else: ?>
-                        <input class="form-control" type="number" id="prezzo" name="prezzo"/>
+                        <input class="form-control" type="number" id="prezzo" name="prezzo" placeholder="<?php echo e(trans('messages.placeholder_prezzo')); ?>"/>
                     <?php endif; ?>
                     <span class="invalid-input" id="invalid-prezzo"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> Salva</label>
+                    <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> <?php echo e(trans('messages.save_changes')); ?></label>
                     <input id="mySubmit" class="d-none" type="submit" value="Save">
                 </div>
                 <div class="form-group mb-3">
-                    <a class="btn btn-danger w-100" href="<?php echo e(route('tariffeAdmin.index')); ?>"><i class="bi bi-box-arrow-left"></i> Annulla</a>
+                    <a class="btn btn-danger w-100" href="<?php echo e(route('tariffeAdmin.index')); ?>"><i class="bi bi-box-arrow-left"></i> <?php echo e(trans('messages.annulla')); ?></a>
                 </div>
 
             </form>

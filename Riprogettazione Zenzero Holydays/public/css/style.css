@@ -137,12 +137,16 @@ div#titolo{
     max-width: 680px;
 }
 
-#titoloHome, #mapHome, #descrizione, #gallery, #prenotaOra #prenotazioniUtente{
+#titoloHome, #mapHome, #descrizione,#regole, #contatti, #prenotaOra #prenotazioniUtente{
     background-color: #cececebc;
 }
 
-#cardsHome, #topHome, #descrizione2, #formPrenota{
-    background-color: #929fba
+#cardsHome, #topHome, #descrizione2, #gallery, #formPrenota, #indicazioni{
+    background-color: #929fba;
+}
+
+#descrizione{
+    text-align: center;
 }
 
 #caroselloHome img{
@@ -150,7 +154,9 @@ div#titolo{
     object-fit: cover; /* Copre completamente la scatola mantenendo le proporzioni */
     object-position: center center; /* Cambia la posizione dell'immagine, puoi regolare i valori per decidere quale porzione mostrare */
 }
-
+.lead{
+    text-align: center;
+}
 .btn-prenota {
     background-color: rgba(0, 0, 0, 0.5) !important; /* Colore di sfondo */
     color: #ffffff !important;           /* Colore del testo */
@@ -253,7 +259,7 @@ footer a:hover {
 /* Stile per gli elementi di intestazione del footer */
 footer h6 {
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-align: left;
 }
 
@@ -272,6 +278,43 @@ footer i {
 div.footer {
     background-color: #929fba;
     padding: 15px 0; /* Ridotto da 30px a 15px per diminuire l'altezza */
+}
+
+
+.footer-slogan {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #f0f0f0;
+    text-align: center !important;
+}
+
+/* Stile per la sezione del logo nel footer */
+.footer .navbar-brand {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    text-align: center !important;
+}
+
+.footer .navbar-brand:hover {
+    color: #f0f0f0;
+}
+
+@media (min-width: 992px) {
+    .text-lg-start {
+        text-align: left !important;
+    }
+}
+@media (max-width: 992px) {
+    .text-lg-start {
+        text-align: center !important;
+    }
+    footer h6 {
+        text-align: center !important;
+    }
+    footer p {
+        text-align: center !important;
+    }
 }
 
 .bg-container {
@@ -459,19 +502,26 @@ header h1 {
     font-size: 3.5rem;
 }
 
-.contact-text{
+.contact-text, .contact-title{
     font-size: 1.25rem;
     color: black;
     text-decoration: none;
     margin-bottom: 10px;
 }
 
-.contact-text :hover{
-    text-decoration: underline;
+.contact-text:hover{
+    text-decoration: underline !important;
 }
 
-ul.regole{
-    background-color: #929fba
+li.regole{
+    background-color: transparent;
+    border-style: hidden;
+}
+ul.posti{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -860,7 +910,7 @@ input[type="tel"] {
 
 input.search-box {
     background-color: var(--primary);
-    color: #fff;
+    color: #000;
     border-radius: .5rem .5rem 0 0;
     padding: 1.4rem 1rem;
 }

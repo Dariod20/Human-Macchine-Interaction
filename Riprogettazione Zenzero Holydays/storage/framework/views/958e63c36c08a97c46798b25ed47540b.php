@@ -8,6 +8,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script> var lang = '<?php echo e(app()->getLocale()); ?>'</script>
 <script src="<?php echo e(url('/')); ?>/js/phoneValidationScript.js"></script>
 <?php $__env->stopSection(); ?>
 
@@ -547,8 +548,11 @@
               </div>
               <div class="mb-3">
                 <label for="numBambini" class="form-label"><?php echo e(trans('messages.numBambini')); ?></label>
-                <select class="form-select shadow-none" id="numBambini" name="numBambini">
-                </select>
+                <select class="form-select shadow-none" id="numBambini" name="numBambini"></select>
+                <div class="form-text" style="max-width: 424px;">
+                  <?php echo e(trans('messages.infoBambini')); ?>
+
+                </div>
               </div>
             </div>
 
@@ -581,7 +585,7 @@
 
               <div class="mb-3">
                 <label for="stato" class="form-label"><?php echo e(trans('messages.stato')); ?></label>
-                <select class="form-control" id="stato" name="stato">
+                <select class="form-select shadow-none" id="stato" name="stato">
                   <option value="" disabled selected><?php echo e(trans('messages.placeholder_stato')); ?></option>
                   <!-- Opzioni generate dinamicamente con JavaScript -->
                 </select>
@@ -599,7 +603,7 @@
                     <input type="tel" class="form-control" id="num-telefono" name="tel" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
                   </div>
                   <div class="options">
-                    <input type="text" class="search-box" placeholder="Search Country Name">
+                    <input type="text" class="search-box" placeholder="<?php echo e(trans('messages.placeholder_prefisso')); ?>" style="border: var(--bs-border-width) solid var(--bs-border-color);">
                     <ol>
                 
                     </ol>

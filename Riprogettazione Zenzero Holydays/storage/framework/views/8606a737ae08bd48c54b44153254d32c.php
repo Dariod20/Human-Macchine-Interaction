@@ -44,7 +44,7 @@
                                 <p><strong>Prezzo Totale:</strong></p>
                                 <p><strong>Email:</strong></p>
                                 <p><strong>Telefono:</strong></p>
-                                <p><strong>Stato Prenotazione:</strong></p>
+                                <p><strong>Stato:</strong></p>
                                 <p><strong>Orario Arrivo:</strong></p>
                             </div>
                             <div class="col-6 text-left">

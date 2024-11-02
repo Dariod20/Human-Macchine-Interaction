@@ -49,7 +49,7 @@ class AdminTariffeController extends Controller
             $dl->addTariffa($date->format('Y-m-d'), $prezzo);
         }
 
-        return Redirect::to(route('tariffeAdmin.index'))->with('success', 'Tariffe aggiunte con successo.');;
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', __('messages.rates_success'));
     }
 
     /**
@@ -99,7 +99,8 @@ class AdminTariffeController extends Controller
     {
         $dl = new DataLayer();
         $dl->deleteTariffa($id);
-        return Redirect::to(route('tariffeAdmin.index'))->with('success', 'Tariffa eliminata con successo.');
+
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', __('messages.ratesElim_success'));
     }
 
     public function confirmDestroy($id) {

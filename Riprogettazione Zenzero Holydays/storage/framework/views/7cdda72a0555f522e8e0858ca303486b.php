@@ -5,7 +5,7 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('active_contatti','active'); ?>
+<?php $__env->startSection('active_contatti', 'active'); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('home')); ?>">Home</a></li>
@@ -21,26 +21,26 @@
             </div>
         </div>
 
-        <section id="descrizione" class="px-lg-4">
+        <section id="contatti" class="px-lg-4">
             <div class="container">
-                <div class="row mb-4">
+                <div class="row">
                 
 
                     <!-- Sezione Contatti -->
                     <div class="col-md-6">
-                        <h2><?php echo e(trans('button.contact')); ?>:</h2>
+                        <h2><?php echo e(trans('messages.contact')); ?>:</h2>
                         <div class="contact-item mb-4">
-                            <p><i class="bi bi-geo-alt-fill"></i> <span class="contact-text"><strong><?php echo e(trans('messages.position')); ?></strong> <a href="https://maps.app.goo.gl/4W9M2on2tefVwz1a7" class="contact-text">Via Mantovana, 58b, 37014 Cavalcaselle, VR, Italia</a></span></p>
+                            <p><i class="bi bi-geo-alt-fill"></i> <span class="contact-title"><strong><?php echo e(trans('messages.position')); ?>:</strong> <a href="https://maps.app.goo.gl/4W9M2on2tefVwz1a7" class="contact-text">Via Mantovana, 58b, 37014 Cavalcaselle, VR, Italia</a></span></p>
                         </div>
                         <div class="contact-item mb-4">
-                            <p><i class="bi bi-telephone-fill"></i> <span class="contact-text"><strong><?php echo e(trans('messages.telefono')); ?>:</strong> <a href="tel:+393334142902" class="contact-text">+ 39 333 414 2902</a></span></p>
+                            <p><i class="bi bi-telephone-fill"></i> <span class="contact-title"><strong><?php echo e(trans('messages.telefono')); ?>:</strong> <a href="tel:+393334142902" class="contact-text">+ 39 333 414 2902</a></span></p>
                                     
                         </div>
                         <div class="contact-item mb-4">
-                            <p><i class="bi bi-envelope-fill"></i> <span class="contact-text"><strong>Email:</strong> <a href="mailto:dina.colpani@gmail.com" class="contact-text">dina.colpani@gmail.com</a></span></p>
+                            <p><i class="bi bi-envelope-fill"></i> <span class="contact-title"><strong>Email:</strong> <a href="mailto:dina.colpani@gmail.com" class="contact-text">dina.colpani@gmail.com</a></span></p>
                         </div>
                         <div class="contact-item mb-4">
-                            <p><i class="bi bi-facebook"></i> <span class="contact-text"><strong>Facebook:</strong> <a href="https://m.facebook.com/people/ZenZero-Holiday/100072790333341/" class="contact-text">Zenzero Holidays</a></span></p>
+                            <p><i class="bi bi-facebook"></i> <span class="contact-title"><strong>Facebook:</strong> <a href="https://m.facebook.com/people/ZenZero-Holiday/100072790333341/" class="contact-text">Zenzero Holidays</a></span></p>
                         </div>
                     </div>
 
@@ -56,25 +56,42 @@
                 </div>
             </div>
         
-    </section>
+        </section>
 
-    <section id="descrizione2" class="px-lg-4">
-        <div class="container">
-            <div class="row mt-4">
-                <!-- Sezione Regolamento -->
-                <div class="col-md-12">
-                        <h2><?php echo e(trans('messages.regole')); ?></h2>
-                        <ul class="list-group regole">
-                            <li class="list-group-item"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola1')); ?></li>
-                            <li class="list-group-item"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola2')); ?></li>
-                            <li class="list-group-item"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola3')); ?></li>
-                            <li class="list-group-item"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola4')); ?></li>
-                            <li class="list-group-item"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola5')); ?></li>
-                        </ul>
+        <section id="indicazioni" class="px-lg-4">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h2><?php echo e(trans('messages.how_to_reach_us')); ?>:</h2>
+                    </div>
                 </div>
-            </div>  
-        </div>      
-    </section>
+                <div class="row text-center">
+                    <!-- Blocco In Auto -->
+                    <div class="col-md-4 mb-4">
+                        <i class="bi bi-car-front-fill" style="font-size: 2em;"></i>
+                        <h4><?php echo e(trans('messages.by_car')); ?></h4>
+                        <span><?php echo e(trans('messages.by_car_description')); ?></span>
+                    </div>
+        
+                    <!-- Blocco In Treno -->
+                    <div class="col-md-4 mb-4">
+                        <i class="bi bi-train-front-fill" style="font-size: 2em;"></i>
+                        <h4><?php echo e(trans('messages.by_train')); ?></h4>
+                        <span><?php echo trans('messages.by_train_description'); ?></span>
+                    </div>
+        
+                    <!-- Blocco In Aereo -->
+                    <div class="col-md-4 mb-4">
+                        <i class="bi bi-airplane-fill" style="font-size: 2em;"></i>
+                        <h4><?php echo e(trans('messages.by_plane')); ?></h4>
+                        <span><?php echo trans('messages.by_plane_description'); ?></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    
 
 
 

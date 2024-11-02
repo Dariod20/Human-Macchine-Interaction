@@ -4,7 +4,7 @@
 @if(isset($tariffa->id))
     Modifica tariffa
 @elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo')
-    Modifica gruppo di tariffe
+{{ trans('messages.edit_rate_group') }}
 @else
     Aggiungi gruppo di tariffe
 @endif
@@ -19,7 +19,7 @@
 @if(isset($tariffa->id))
     <li class="breadcrumb-item active" aria-current="page">Modifica tariffa</li>
 @elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo')
-    <li class="breadcrumb-item active" aria-current="page">Modifica gruppo di tariffe</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ trans('messages.edit_rate_group') }}</li>
 @else
     <li class="breadcrumb-item active" aria-current="page">Aggiungi gruppo di tariffe</li>
 @endif
@@ -27,6 +27,13 @@
 
 @section('corpo')
 <script>
+
+    function decodeHtmlEntities(str) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = str;
+      return txt.value;
+    }
+
     $(document).ready(function(){
         $("form").submit(function(event) {
             var error = false;
@@ -54,10 +61,12 @@
                     $("#giorno_fino").focus();
                 } else if(giorno.trim() !== "" && giorno_fino.trim() !== "" && giorno > giorno_fino) {
                     error = true;
-                    document.getElementById('invalid-giorno').textContent = "{{ trans('errors.giornoErr') }}";
-                    document.getElementById('invalid-giorno_fino').textContent = "{{ trans('errors.giornoFinoErr') }}";
+                    var errorMsg = "{{ trans('errors.giornoErr') }}"; // Usa la sintassi sicura di Laravel
+                    document.getElementById('invalid-giorno').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
+                    var errorMsg = "{{ trans('errors.giornoFinoErr') }}"; // Usa la sintassi sicura di Laravel
+                    document.getElementById('invalid-giorno_fino').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
 
-                    $("#invalid-giorno").text("Il giorno selezionato deve essere uguale o precedente alla data 'Fino al giorno'. Per favore, seleziona una data valida.");
+                    
                     event.preventDefault();
                     $("#giorno").focus();
                 }else{
@@ -173,7 +182,7 @@
                 @if(isset($tariffa->id))
                     <h1>Modifica tariffa:</h1>
                 @elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo')
-                    <h1>Modifica gruppo di tariffe</h1>
+                    <h1>{{ trans('messages.edit_rate_group') }}</h1>
                 @else
                     <h1>Aggiungi gruppo di tariffe:</h1>
                 @endif
@@ -194,7 +203,7 @@
 
                 <div class="mb-4">
                     @if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create'))
-                        <label for="giorno" class="form-label">Dal giorno</label>
+                        <label for="giorno" class="form-label">{{ trans('messages.start_date') }}</label>
                     @else
                         <label for="giorno" class="form-label">Giorno</label>
                     @endif
@@ -207,28 +216,28 @@
                 </div>
                 @if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create'))
                     <div class="mb-4" id="giorno_fino_container">
-                        <label for="giorno_fino" class="form-label">Fino al giorno</label>
+                        <label for="giorno_fino" class="form-label">{{ trans('messages.end_date') }}</label>
                         <input class="form-control" type="date" id="giorno_fino" name="giornoFino" />
                         <span class="invalid-input" id="invalid-giorno_fino"></span>
                     </div>
                 @endif
 
                 <div class="mb-4">
-                    <label for="prezzo" class="form-label">Prezzo</label>
+                    <label for="prezzo" class="form-label">{{ trans('messages.rate') }}</label>
                     @if(isset($tariffa->id))
                         <input class="form-control" type="number" id="prezzo" name="prezzo" value="{{ $tariffa->prezzo }}"/>
                     @else
-                        <input class="form-control" type="number" id="prezzo" name="prezzo"/>
+                        <input class="form-control" type="number" id="prezzo" name="prezzo" placeholder="{{ trans('messages.placeholder_prezzo') }}"/>
                     @endif
                     <span class="invalid-input" id="invalid-prezzo"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> Salva</label>
+                    <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> {{ trans('messages.save_changes') }}</label>
                     <input id="mySubmit" class="d-none" type="submit" value="Save">
                 </div>
                 <div class="form-group mb-3">
-                    <a class="btn btn-danger w-100" href="{{ route('tariffeAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> Annulla</a>
+                    <a class="btn btn-danger w-100" href="{{ route('tariffeAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> {{ trans('messages.annulla') }}</a>
                 </div>
 
             </form>

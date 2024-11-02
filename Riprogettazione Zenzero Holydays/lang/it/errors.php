@@ -20,8 +20,8 @@ return [
     'dateChiuse' => "La casa vacanze è chiusa in queste date, controllare il calendario.",
     'dateDal' => 'dal',
     'dateAl' => 'al',
-    'giornoErr' => "La data deve precedere o coincidere con la data Fino al giorno.",
-    'giornoFinoErr' => "La data deve essere successiva o coincidere con la data Dal giorno.",
+    'giornoErr' => "La data deve precedere o coincidere con la data \'Fino al giorno\'.",
+    'giornoFinoErr' => "La data deve essere successiva o coincidere con la data \'Dal giorno\'.",
 
 
 

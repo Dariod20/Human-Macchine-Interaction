@@ -9,6 +9,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script> var lang = '{{ app()->getLocale() }}'</script>
 <script src="{{ url('/') }}/js/phoneValidationScript.js"></script>
 @endsection
 
@@ -546,8 +547,10 @@
               </div>
               <div class="mb-3">
                 <label for="numBambini" class="form-label">{{ trans('messages.numBambini') }}</label>
-                <select class="form-select shadow-none" id="numBambini" name="numBambini">
-                </select>
+                <select class="form-select shadow-none" id="numBambini" name="numBambini"></select>
+                <div class="form-text" style="max-width: 424px;">
+                  {{ trans('messages.infoBambini') }}
+                </div>
               </div>
             </div>
 
@@ -579,7 +582,7 @@
 
               <div class="mb-3">
                 <label for="stato" class="form-label">{{ trans('messages.stato') }}</label>
-                <select class="form-control" id="stato" name="stato">
+                <select class="form-select shadow-none" id="stato" name="stato">
                   <option value="" disabled selected>{{ trans('messages.placeholder_stato') }}</option>
                   <!-- Opzioni generate dinamicamente con JavaScript -->
                 </select>
@@ -597,7 +600,7 @@
                     <input type="tel" class="form-control" id="num-telefono" name="tel" placeholder="{{ trans('messages.placeholder_telefono') }}">
                   </div>
                   <div class="options">
-                    <input type="text" class="search-box" placeholder="Search Country Name">
+                    <input type="text" class="search-box" placeholder="{{ trans('messages.placeholder_prefisso') }}" style="border: var(--bs-border-width) solid var(--bs-border-color);">
                     <ol>
                 
                     </ol>

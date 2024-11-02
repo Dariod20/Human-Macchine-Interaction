@@ -132,7 +132,7 @@ class AdminBookingController extends Controller
 
         Mail::to($emailCliente)->send(new DemoMail($mailData));
 
-        return redirect()->route('prenotazioniAdmin.index')->with('success', 'Prenotazione eliminata con successo e mail di notifica inviata.');
+        return Redirect::to(route('prenotazioniAdmin.index'))->with('success', __('messages.elimination_success'));
     }
 
     public function confirmDestroy($id) {
