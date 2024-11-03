@@ -41,6 +41,7 @@ Prenotazioni
         });
     });
 </script>
+
 <div class="container-fluid mb-3 pt-3 text-center">
     <h1>
         Lista prenotazioni
@@ -64,8 +65,8 @@ Prenotazioni
 
     <nav aria-label="Page navigation example" id="paginationNav">
         <ul class="pagination justify-content-center">
-            <li class="page-item" id="previousPage"><a class="page-link" href="#">Precedente</a></li>
-            <li class="page-item" id="nextPage"><a class="page-link" href="#">Prossima</a></li>
+            <li class="page-item" id="previousPage"><a class="page-link" href="#"> Precedente </a></li>
+            <li class="page-item" id="nextPage"><a class="page-link" href="#"> Prossima </a></li>
             <li>
                 <select id="rowsPerPage" class="form-control justify-content-end">
                     <option value="5">5 prenotazioni per pagina</option>
