@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
     <head>
         <title> Autenticazione utente </title>
 
@@ -212,6 +212,13 @@
         <?php endif; ?>
 
         <div class="container col-lg-4" id="login-container">
+            <?php if(session('login_feedback')): ?>
+                <div class="alert alert-info mt-4" role="alert">
+                    <i class="fas fa-info-circle"></i> 
+                    <?php echo e(session('login_feedback')); ?>
+
+                </div>
+            <?php endif; ?>
             <div class="row">
                 <h1 id="zenzero-login"> Zenzero Holidays <i class="bi bi-house-door-fill"></i> </h1>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">

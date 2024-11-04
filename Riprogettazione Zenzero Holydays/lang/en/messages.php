@@ -99,7 +99,7 @@ return [
     'cancellata' => 'will be deleted',
     'nonCancellata' => 'will NOT be deleted',
     "lista_prenotazioni" => 'Bookings list',
-    "lista_tariffe" => 'Rates list'
+    "lista_tariffe" => 'Rates list',
 
      'months' => [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -121,11 +121,11 @@ return [
     'by_car' => 'By Car',
     'by_train' => 'By Train',
     'by_plane' => 'By Plane',
-    'by_car_description' => 'From the Peschiera del Garda exit on the A4 motorway: after the toll booth, keep right until the roundabout. 
+    'by_car_description' => 'From the Peschiera del Garda exit on the A4 motorway: after the toll booth, keep right until the roundabout.
         At the roundabout, take the fourth exit towards Cavalcaselle/Verona. At the traffic light in Cavalcaselle, turn right and then immediately left onto via XX Settembre.
         Shortly after, turn right onto via Mantovana and continue for about 400 meters until you reach a small square on the right.',
     'by_train_description' => 'From Peschiera del Garda train station, you can reach us in about 5 minutes using the available bus or taxi services. <br>
-        For the bus, take the ATV line 164 or Arriva line LN026, both heading towards Verona. Get off at the Cavalcaselle stop. 
+        For the bus, take the ATV line 164 or Arriva line LN026, both heading towards Verona. Get off at the Cavalcaselle stop.
         From here, walk for about 5 minutes along via Mantovana until you find a small square on the right.',
     'by_plane_description' => 'From Verona Airport (Valerio Catullo), it’s about a 20-minute taxi ride. <br>
         Alternatively, you can take the ATV bus 199 to Verona Porta Nuova train station. <br>From there, you have two options:

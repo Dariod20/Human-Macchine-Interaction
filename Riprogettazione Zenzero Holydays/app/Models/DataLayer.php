@@ -303,6 +303,16 @@ class DataLayer extends Model
         ];
     }
 
+    public function validUser($email, $password) {
+        $user = User::where('email', $email)->first();
+
+        if($user && Hash::check($password, $user->password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
 

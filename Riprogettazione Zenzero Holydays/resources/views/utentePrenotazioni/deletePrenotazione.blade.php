@@ -77,7 +77,7 @@
         <!-- Card di conferma cancellazione -->
         <div class="row justify-content-center mt-4">
             <div class="col-md-4 card-conferma-eliminazione">
-                <div class="card border-secondary">
+                <div class="card border-secondary card-custom-width">
                     <div class="card-header text-center ">
                     {{ trans('messages.prenotazione') }} <strong>{{ trans('messages.cancellata') }}</strong>
                     </div>
