@@ -23,32 +23,58 @@
     </div>
 @endif
 
-<script>
-    $(document).ready(function(){
-        
-        
 
+<script>
+     $(document).ready(function(){
+        var typingTimer; // Timer per ritardare l'azione
+        var doneTypingInterval = 200; // Tempo di attesa dopo l'ultimo tasto premuto (in millisecondi)
+        var currentPage = 1; 
 
         $("#searchInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
+            clearTimeout(typingTimer); // Cancella il timer precedente
+            typingTimer = setTimeout(doneTyping, doneTypingInterval); // Imposta un nuovo timer
+        });
+
+        
+        function doneTyping() {
+            var value = $("#searchInput").val().toLowerCase();
+
             if (value !== "") {
                 $("#paginationNav").hide();
-            } else {
-                $("#paginationNav").show();
-                currentPage = 1;
-                showPage(currentPage);
-                return;
-            }
-            $("#bookTable tbody tr").each(function() {
-                var found = false;
-                $(this).find("td").slice(0, -1).each(function() {
-                    var text = $(this).text().toLowerCase();
-                    if (text.indexOf(value) > -1) {
-                        found = true;
+                var foundAny = false; // Variabile per tenere traccia se troviamo risultati
+
+                $("#bookTable tbody tr").each(function() {
+                    var found = false;
+                    $(this).find("td").slice(0, 2).each(function() {
+                        var text = $(this).text().toLowerCase();
+                        if (text.indexOf(value) > -1) {
+                            found = true;
+                        }
+                    });
+                    $(this).toggle(found);
+                    if (found) {
+                        foundAny = true; // Se troviamo almeno un risultato, aggiorniamo la variabile
                     }
                 });
-                $(this).toggle(found);
-            });
+                // Mostra o nascondi il messaggio "nessun risultato"
+                if (!foundAny) {
+                    $("#noResultsMessage").show(); // Mostra il messaggio se non ci sono risultati
+                } else {
+                    $("#noResultsMessage").hide(); // Nascondi il messaggio se ci sono risultati
+                }
+            } else {
+                // Se il campo di ricerca è vuoto, mostra la paginazione e ripristina tutte le righe
+                $("#paginationNav").show();
+                $("#bookTable tbody tr").show();
+                $("#noResultsMessage").hide(); // Nascondi il messaggio
+                currentPage = 1;
+                showPage(currentPage);
+            }
+        }
+
+        // Funzione per gestire l'annullamento della digitazione quando il tasto è ancora premuto
+        $("#searchInput").on("keydown", function() {
+            clearTimeout(typingTimer);
         });
     });
 </script>
@@ -77,7 +103,10 @@
                         <div class="row mb-3 pt-3 justify-content-center">
                             <div class="col-md-8">
                                 <div class="input-group">
-                                    <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="{{ trans('pagination.cerca') }}">
+                                    <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="{{ trans('pagination.cercaData') }}">
+                                    <span class="input-group-addon">
+                                        <i class="bi bi-search" aria-hidden="true"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -118,8 +147,8 @@
                                         <tbody>
                                             @foreach($prenotazioni as $prenotazione)
                                                 <tr>
-                                                    <td>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format($dateFormat) }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($prenotazione->partenza)->format($dateFormat) }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y') }}</td>
                                                     <td>€{{ $prenotazione->prezzoTotale }}</td>
                                                     <td>
                                                         <div class="btn-group-vertical" role="group">
@@ -133,6 +162,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    <p class="text-center" id="noResultsMessage" style="display: none;">{{ trans('messages.prenSearch') }}</p>
                                 </div>
                             </div>
                         </div>

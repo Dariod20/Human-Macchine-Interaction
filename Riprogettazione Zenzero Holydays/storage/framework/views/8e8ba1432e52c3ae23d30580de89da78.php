@@ -52,7 +52,15 @@
               <a class="nav-link <?php echo $__env->yieldContent('active_contatti'); ?> me-2" href="<?php echo e(route('contatti')); ?>"><?php echo e(trans('button.contact')); ?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php echo $__env->yieldContent('active_prenota'); ?> me-2" href="<?php echo e(route('calendario')); ?>"><?php echo e(trans('button.book')); ?></a>
+              <a class="nav-link <?php echo $__env->yieldContent('active_prenota'); ?> me-2" href="<?php echo e(route('calendario')); ?>">
+                <?php if(session('logged') && session('role') == 'admin'): ?>
+                    <?php echo e(trans('button.calendarioHome')); ?>
+
+                <?php else: ?>
+                    <?php echo e(trans('button.book')); ?>
+
+                <?php endif; ?>
+              </a>
             </li>
             <?php if((session('logged')) && (session('role') == 'registered_user')): ?>
               <li class="nav-item">
@@ -69,7 +77,15 @@
             </ul>
             <?php if(session('logged')): ?>
             <ul class="navbar-nav">
-            <li class="nav-item" id="welcomeUser"> <?php echo e(trans('messages.welcome')); ?> <?php echo e(session('loggedName')); ?> </li>
+            <li class="nav-item" id="welcomeUser">
+                <?php if(session('logged') && session('role') == 'admin'): ?>
+                    <?php echo e(trans('messages.admin')); ?>
+
+                <?php else: ?>
+                    <?php echo e(trans('messages.welcome')); ?>
+
+                <?php endif; ?>
+             <?php echo e(session('loggedName')); ?> </li>
             </ul>
             <?php endif; ?>
             <ul class="navbar-nav">

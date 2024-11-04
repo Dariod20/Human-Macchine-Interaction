@@ -15,10 +15,6 @@
 
 @section('corpo')
 
-@php
-    $lang = app()->getLocale();
-    $dateFormat = $lang === 'it' ? 'd/m/Y' : 'Y/m/d'; // Imposta il formato della data in base alla lingua
-@endphp
 
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
@@ -63,15 +59,15 @@
                                                 </div>
                                                 <div class="col-6 text-left">
                                                     <!-- Colonna per i dati -->
-                                                    <p>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format($dateFormat) }}</p>
-                                                    <p>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format($dateFormat) }}</p>
+                                                    <p>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y') }}</p>
+                                                    <p>{{ \Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y') }}</p>
                                                     <p>{{ $prenotazione->numAdulti }}</p>
                                                     <p>{{ $prenotazione->numBambini }}</p>
                                                     <p>€{{ $prenotazione->prezzoTotale }}</p>
                                                     <p>{{ $prenotazione->email }}</p>
                                                     <p>{{ $prenotazione->telefono }}</p>
                                                     <p>{{ $prenotazione->stato }}</p>
-                                                    <p>{{ $prenotazione->orarioArrivo }}</p>
+                                                    <p>{{ \Carbon\Carbon::parse($prenotazione->orarioArrivo)->format('H:i') }}</p>
                                                 </div>
                                             </div>
                                         </div>

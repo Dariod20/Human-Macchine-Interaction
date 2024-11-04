@@ -93,7 +93,7 @@ return [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ],
-    'days' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
 
     'login_feedback' => 'To complete the booking, please log in or register if you don’t have an account yet.',
 
@@ -128,6 +128,15 @@ return [
     'how_to_reach_us' => 'How to reach us',
 
     'save_add' => 'Add rates',
+
+    'range_mod' => 'Start and End dates for rate modification',
+    'range_add' => 'Start and End dates for adding rates',
+
+    'prenSearch' => 'No bookings found.',
+    'admin' => 'Admin:',
+    'rateSearch' => 'No rates found.',
+
+
 
 
 ];

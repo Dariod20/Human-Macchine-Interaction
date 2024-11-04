@@ -6,7 +6,7 @@ use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-use App\Mail\DemoMail;
+use App\Mail\CustomMail;
 use Illuminate\Support\Facades\Mail;
 
 class AdminBookingController extends Controller
@@ -118,19 +118,33 @@ class AdminBookingController extends Controller
         $emailCliente = $prenotazione->email;
         
         $dl->deletePrenotazione($id);
+
+        $arrivoMail= Carbon::parse($prenotazione->arrivo)->format('d/m/Y');
+        $partenzaMail=Carbon::parse($prenotazione->partenza)->format('d/m/Y');
+        $orarioArrivoMail=Carbon::parse($prenotazione->orarioArrivo)->format('H:i');
+
+        $subject='Notifica di Cancellazione Prenotazione Zenzero Holidays';
         // Invia la mail al cliente
         $mailData = [
+            'operazione' => 'cancellata',
             'title' => 'Notifica di Cancellazione Prenotazione',
-            'body' => 'La tua prenotazione dal ' . $prenotazione->arrivo . ' al ' . $prenotazione->partenza . ' presso Zenzero Holidays è stata cancellata dall\'admin.',
+            'body' => 'La tua prenotazione dal ' . $arrivoMail . ' al ' . $partenzaMail . ' presso Zenzero Holidays è stata cancellata dall\'admin.',
             'nome' => $prenotazione->nome,
             'cognome' => $prenotazione->cognome,
             'telefono' => $prenotazione->telefono,
             'prezzoTotale' => $prenotazione->prezzoTotale,
-            'arrivo' => $prenotazione->arrivo,
-            'partenza' => $prenotazione->partenza,
+            'arrivo' => $arrivoMail,
+            'partenza' => $partenzaMail,
+            'email' => $prenotazione->email,
+            'stato' => $prenotazione->stato,
+            'numAdulti' => $prenotazione->numAdulti,
+            'numBambini' => $prenotazione->numBambini,
+            'orario' => $orarioArrivoMail,
+            'infoFinali' => 'Nel caso tu abbia già effettuato il pagamento sarai contattato via mail per il rimborso. <br> Per qualsiasi altro dubbio non esitare a contattarci',
+            'NomeSaluto' => 'Christian Girardelli'
         ];
 
-        Mail::to($emailCliente)->send(new DemoMail($mailData));
+        Mail::to($emailCliente)->send(new CustomMail($mailData, $subject));
 
         return Redirect::to(route('prenotazioniAdmin.index'))->with('success', __('messages.elimination_success'));
     }

@@ -15,10 +15,6 @@
 
 <?php $__env->startSection('corpo'); ?>
 
-<?php
-    $lang = app()->getLocale();
-    $dateFormat = $lang === 'it' ? 'd/m/Y' : 'Y/m/d'; // Imposta il formato della data in base alla lingua
-?>
 
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
@@ -63,15 +59,15 @@
                                                 </div>
                                                 <div class="col-6 text-left">
                                                     <!-- Colonna per i dati -->
-                                                    <p><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format($dateFormat)); ?></p>
-                                                    <p><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format($dateFormat)); ?></p>
+                                                    <p><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></p>
+                                                    <p><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></p>
                                                     <p><?php echo e($prenotazione->numAdulti); ?></p>
                                                     <p><?php echo e($prenotazione->numBambini); ?></p>
                                                     <p>€<?php echo e($prenotazione->prezzoTotale); ?></p>
                                                     <p><?php echo e($prenotazione->email); ?></p>
                                                     <p><?php echo e($prenotazione->telefono); ?></p>
                                                     <p><?php echo e($prenotazione->stato); ?></p>
-                                                    <p><?php echo e($prenotazione->orarioArrivo); ?></p>
+                                                    <p><?php echo e(\Carbon\Carbon::parse($prenotazione->orarioArrivo)->format('H:i')); ?></p>
                                                 </div>
                                             </div>
                                         </div>

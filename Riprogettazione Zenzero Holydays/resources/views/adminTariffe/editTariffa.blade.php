@@ -49,6 +49,8 @@
         var lang = '{{ app()->getLocale() }}';
         var  datePicker = $('#daterange');
 
+        var isAddForm = '{{ Route::currentRouteName() }}' === 'tariffeAdmin.create'; // Assicurati di usare il nome della rotta corretto
+
         var startDate = moment().startOf('day'); // Imposta a mezzanotte di oggi
         var endDate = moment().endOf('day'); // Imposta alla fine dell'ora di oggi
                 // Verifica se minDate e maxDate sono disponibili
@@ -64,10 +66,14 @@
             autoApply: true,
             startDate: startDate,
             endDate: endDate,
+            ...(isAddForm ? {} : {
+                    minDate: formattedMinDate,
+                    maxDate: formattedMaxDate,
+                }),
             
             locale: {
                 format: 'DD/MM/YYYY', // Imposta il formato corretto
-                firstDay: lang === 'it' ? 1 : 0, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
+                firstDay: 1, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
                 daysOfWeek: lang === 'it' ? ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
                 monthNames: lang === 'it' ? [
                     "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
@@ -290,7 +296,7 @@
                 <div class="mb-4">
                     @if((Route::currentRouteName() === 'tariffeAdmin.editGruppo') || (Route::currentRouteName() === 'tariffeAdmin.create'))
                         <div>
-                            <label for="daterange" class="form-label">{{ trans('messages.dateRange') }}</label>
+                            <label for="daterange" class="form-label">{{ trans('messages.range_mod') }}</label>
                             <div class="input-group date">
                                 <input class="form-control" type="text" id="daterange" name="daterange" />
                                 <span class="input-group-addon">

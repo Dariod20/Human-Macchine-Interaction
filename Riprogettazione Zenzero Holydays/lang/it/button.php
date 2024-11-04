@@ -20,6 +20,7 @@ return [
     'mesePrec' => 'Mese Precedente',
     'meseCorr' => 'Mese Corrente',
     'meseSucc' => 'Mese Successivo',
+    'calendarioHome' => 'Calendario',
 
 
 

@@ -105,7 +105,7 @@
       minDate: minDate, // Imposta la data minima
       locale: {
         format: 'DD/MM/YYYY', // Imposta il formato corretto
-        firstDay: lang === 'it' ? 1 : 0, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
+        firstDay: 1, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
         daysOfWeek: lang === 'it' ? [ "Dom","Lun", "Mar", "Mer", "Gio", "Ven", "Sab"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
         monthNames: lang === 'it' ? [
           "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 

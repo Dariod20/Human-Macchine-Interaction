@@ -59,7 +59,7 @@
 
         <section id="indicazioni" class="px-lg-4">
             <div class="container">
-                <div class="row text-center">
+                <div class="row text-center mb-4">
                     <div class="col-12">
                         <h2>{{ trans('messages.how_to_reach_us') }}:</h2>
                     </div>

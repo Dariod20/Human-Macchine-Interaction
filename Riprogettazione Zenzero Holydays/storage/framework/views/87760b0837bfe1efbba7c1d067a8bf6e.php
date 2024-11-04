@@ -15,11 +15,6 @@ Dettagli Prenotazione
 
 <?php $__env->startSection('corpo'); ?>
 
-<?php
-    $lang = app()->getLocale();
-    $dateFormat = $lang === 'it' ? 'd/m/Y' : 'Y/m/d'; // Imposta il formato della data in base alla lingua
-?>
-
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
         
@@ -37,7 +32,7 @@ Dettagli Prenotazione
                         <div class="container-fluid px-lg-4 mt-4">
                             <div class="row justify-content-center">
                                 <div class="col-md-10 ">
-                                    <div class="row justify-content-center text-center">
+                                    <div class="row justify-content-between text-center">
 
                                         <div class="col-md-5" style="display: flex; flex-direction: column;align-items: center;">
 
@@ -48,7 +43,7 @@ Dettagli Prenotazione
                                                     <b>Arrivo:</b>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format($dateFormat)); ?>
+                                                    <?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?>
 
                                                 </div>
                                             </div>
@@ -57,7 +52,7 @@ Dettagli Prenotazione
                                                     <b>Partenza:</b>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format($dateFormat)); ?>
+                                                    <?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?>
 
                                                 </div>
                                             </div>
@@ -66,7 +61,7 @@ Dettagli Prenotazione
                                                     <b>Orario Arrivo:</b>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <?php echo e($prenotazione->orarioArrivo); ?>
+                                                    <?php echo e(\Carbon\Carbon::parse($prenotazione->orarioArrivo)->format('H:i')); ?>
 
                                                 </div>
                                             </div>

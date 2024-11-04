@@ -22,6 +22,7 @@ return [
     'mesePrec' => 'Previous Month',
     'meseCorr' => 'Current Month',
     'meseSucc' => 'Next Month',
+    'calendarioHome' => 'Calendar',
 
 
 

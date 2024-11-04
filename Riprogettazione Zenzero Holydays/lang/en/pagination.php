@@ -15,7 +15,10 @@ return [
 
     'previous' => 'Previous',
     'next' => 'Next',
-    'cerca' => 'Search...',
+    'cercaData' => 'Search by date (dd/mm/yyyy)...',
     'booking' => 'bookings per page',
+    'cercaPrezzo' => 'Search by price...',
+    'cercaOspite' => 'Search by guest...',
+
 
 ];

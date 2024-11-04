@@ -52,7 +52,13 @@
               <a class="nav-link @yield('active_contatti') me-2" href="{{ route('contatti') }}">{{ trans('button.contact') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link @yield('active_prenota') me-2" href="{{ route('calendario') }}">{{ trans('button.book') }}</a>
+              <a class="nav-link @yield('active_prenota') me-2" href="{{ route('calendario') }}">
+                @if(session('logged') && session('role') == 'admin')
+                    {{ trans('button.calendarioHome') }}
+                @else
+                    {{ trans('button.book') }}
+                @endif
+              </a>
             </li>
             @if((session('logged')) && (session('role') == 'registered_user'))
               <li class="nav-item">
@@ -69,7 +75,13 @@
             </ul>
             @if(session('logged'))
             <ul class="navbar-nav">
-            <li class="nav-item" id="welcomeUser"> {{ trans('messages.welcome') }} {{ session('loggedName') }} </li>
+            <li class="nav-item" id="welcomeUser">
+                @if(session('logged') && session('role') == 'admin')
+                    {{ trans('messages.admin') }}
+                @else
+                    {{ trans('messages.welcome') }}
+                @endif
+             {{ session('loggedName') }} </li>
             </ul>
             @endif
             <ul class="navbar-nav">

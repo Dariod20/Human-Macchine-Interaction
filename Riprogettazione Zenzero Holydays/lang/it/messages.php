@@ -105,8 +105,8 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
     'contact' => 'Contatti',
 
     'edit_rate_group' => 'Modifica gruppo di tariffe',
-    'start_date' => 'Dal giorno',
-    'end_date' => 'Fino al giorno',
+    'range_mod' => 'Date di inizio e fine modifica',
+    'range_add' => 'Date di inizio e fine aggiunta',
     'rate' => 'Prezzo',
     'save_changes' => 'Salva modifiche',
 
@@ -135,6 +135,13 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
         'how_to_reach_us' => 'Come raggiungerci',
 
     'save_add' => 'Aggiungi tariffe',
+    'prenSearch' => 'Nessuna prenotazione trovata.',
+    'admin' => 'Amministratore:',
+    'rateSearch' => 'Nessuna tariffa trovata.',
+
+    
+
+
 
 
     

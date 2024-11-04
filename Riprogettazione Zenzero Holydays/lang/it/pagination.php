@@ -15,7 +15,10 @@ return [
 
     'previous' => 'Precedente',
     'next' => 'Prossima',
-    'cerca' => 'Cerca...',
+    'cercaData' => 'Cerca per data (gg/mm/aaaa)...',
     'booking' => 'prenotazioni per pagina',
+    'cercaPrezzo' => 'Cerca per prezzo...',
+    'cercaOspite' => 'Cerca per ospite...',
+
 
 ];
