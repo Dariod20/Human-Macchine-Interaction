@@ -137,7 +137,7 @@ div#titolo{
     max-width: 680px;
 }
 
-#titoloHome, #mapHome, #descrizione,#regole, #contatti, #prenotaOra #prenotazioniUtente{
+#titoloHome, #mapHome, #descrizione,#regole, #contatti, #prenotaOra, #prenotazioniUtente, #dettagli-pren{
     background-color: #cececebc;
 }
 
@@ -974,4 +974,27 @@ input.search-box {
 .disabled-button:hover {
     background-color: transparent; /* Rimuove l'effetto hover */
     color: inherit; /* Rimuove eventuali cambi di colore su hover */
+}
+
+section#form-admin{
+    background-color: var(--main-color);
+}
+
+.form-admin{
+    display: flex;
+    flex-direction: column;
+    border: 8px solid var(--main-color);
+    border-radius: 15px;
+    background-color: var(--secondary-color) ;
+}
+.form-admin form{
+    background-color: white;
+    padding: 3em;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.form-admin #inner{
+    background-color: white;
+    padding: 3em;
+    border-radius: 15px 15px 15px 15px;
 }

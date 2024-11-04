@@ -61,7 +61,7 @@ if (!function_exists('build_calendar')){
     $nextYear = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
     
 
-    $calendar .= "<center><h2>$monthName $year</h2>";
+    $calendar .= "<center style=\"background-color: white;\"><h2>$monthName $year</h2>";
     $calendar .= "<div class='btn-group'>"; 
     // Controlla se il mese corrente è uguale al mese passato
     if ($month == $currentMonth && $year == $currentYear) {
@@ -165,6 +165,8 @@ if (!function_exists('build_calendar')){
      $calendar .= "</tr>";
 
      $calendar .= "</table>";
+
+     $calendar .= "<br>";
 
      echo $calendar;
 

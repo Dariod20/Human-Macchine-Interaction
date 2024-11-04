@@ -130,8 +130,10 @@ class AdminTariffeController extends Controller
 
     public function editGruppo()
     {
-    
-        return view('adminTariffe.editTariffa');
+        $dl = new DataLayer();
+        $dateRange = $dl->getDateRangeForTariffe(); // Supponendo un repository o data layer
+
+        return view('adminTariffe.editTariffa')->with(['minDate' => $dateRange['minDate'],'maxDate' => $dateRange['maxDate']]);
     
     }
 

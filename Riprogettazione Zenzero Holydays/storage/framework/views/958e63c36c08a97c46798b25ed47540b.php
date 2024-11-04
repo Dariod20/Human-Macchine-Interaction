@@ -89,12 +89,12 @@
     // Imposto i valori formattati nel campo input
     $('#arrivo').val(arrivo); 
     $('#partenza').val(partenza); 
-    updatePrice(arrivo, partenza)
+    updatePrice(arrivo, partenza);
 
-    var lang = '<?php echo e(app()->getLocale()); ?>'
+    var lang = '<?php echo e(app()->getLocale()); ?>';
     var minDate = moment().startOf('day'); // Imposta a mezzanotte di oggi
 
-    var  datePicker = $('#daterange')
+    var  datePicker = $('#daterange');
     
     // Configura il daterangepicker
     datePicker.daterangepicker({
@@ -372,16 +372,14 @@
                     type: 'GET',
                     url: '<?php echo e(route("ajaxCheckTariffePrenotazione")); ?>',
                     data: {
-                      arrivo: arrivo.trim(),
-                      partenza: partenza.trim(),
+                      giorno: arrivo.trim(),
+                      giorno_fino: partenza.trim(),
                       context: "<?php echo e(isset($arrivo) ? 'conferma' : 'altro'); ?>"
                     },
                     success: function (response) {
                       if (!response.available) {
                         error = true;
-                        var message = (response.context === 'conferma') ?
-                          "<?php echo e(trans('errors.dateChiuse')); ?>" :
-                          response.message;
+                        var message ="<?php echo e(trans('errors.dateChiuse')); ?>";
                         $("#invalid-arrivo").text(message);
                         $("#daterange").focus();
                       } else {

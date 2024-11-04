@@ -20,9 +20,14 @@ return [
     'dateChiuse' => "The holiday home is closed on these dates, please check the calendar.",
     'dateDal' => 'from',
     'dateAl' => 'to',
-    'giornoErr' => "The date must be before or the same as the 'Until' date.",
-    'giornoFinoErr' => "The date must be after or the same as the 'From' date.",
+    'giornoErr' => "The start date must precede or coincide with the end date of the range.",
+    'giornoFinoErr' => "The end date must be later than or coincide with the start date of the range.",
 
+    'giorno' => "The start date of the range is required.",
+    'giornoFine' => "The end date of the range is required.",
+    'giornoTariffa' => "The date of the rate to be modified is required.",
+    'prezzo' => "Rate is required.",
+    'prezzoErr' => "Rate cannot be negative.",
 
 
 

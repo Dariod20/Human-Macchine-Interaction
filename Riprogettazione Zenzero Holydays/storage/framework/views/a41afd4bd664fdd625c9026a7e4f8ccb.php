@@ -1,6 +1,6 @@
  <!-- title - active_home - active_MyLibrary - breadcrumb - body -->
 
-<?php $__env->startSection('title'); ?>
+<?php $__env->startSection('titolo'); ?>
 <?php if(isset($tariffa->id)): ?>
     Modifica tariffa
 <?php elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo'): ?>
@@ -9,6 +9,14 @@
 <?php else: ?>
     Aggiungi gruppo di tariffe
 <?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script> var lang = '<?php echo e(app()->getLocale()); ?>'</script>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('active_tariffe', 'active'); ?>
@@ -36,6 +44,67 @@
     }
 
     $(document).ready(function(){
+
+
+        
+        var lang = '<?php echo e(app()->getLocale()); ?>';
+        var  datePicker = $('#daterange');
+
+        var startDate = moment().startOf('day'); // Imposta a mezzanotte di oggi
+        var endDate = moment().endOf('day'); // Imposta alla fine dell'ora di oggi
+                // Verifica se minDate e maxDate sono disponibili
+        var minDate = '<?php echo e(isset($minDate) ? $minDate : ''); ?>';
+        var maxDate = '<?php echo e(isset($maxDate) ? $maxDate : ''); ?>';
+
+        let formattedMinDate = minDate.split('-').reverse().join('/');
+        let formattedMaxDate = maxDate.split('-').reverse().join('/');
+
+        // Configura il daterangepicker
+        datePicker.daterangepicker({
+            opens: 'right',
+            autoApply: true,
+            startDate: startDate,
+            endDate: endDate,
+            
+            locale: {
+                format: 'DD/MM/YYYY', // Imposta il formato corretto
+                firstDay: lang === 'it' ? 1 : 0, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
+                daysOfWeek: lang === 'it' ? ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                monthNames: lang === 'it' ? [
+                    "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
+                    "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+                ] : [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ]
+            }
+
+        }, function (start, end, label) {
+            $('#giorno').val(start.format('YYYY-MM-DD'));
+            $('#giornoFino').val(end.format('YYYY-MM-DD'));
+        
+        });
+
+        // Nascondi il datepicker all'inizio
+        datePicker.data('daterangepicker').hide();
+
+        // Gestisci l'evento focus per nascondere il datepicker
+        datePicker.on('focus', function () {
+            // Nascondi il datepicker quando il campo è in focus
+            $(this).data('daterangepicker').hide();
+        });
+
+        // Gestisci l'evento click per aprire il datepicker
+        $('#dateRange, #calendarIcon').on('click', function () {
+            // Solo se non ci sono errori, apri il datepicker
+
+            $(this).data('daterangepicker').show();
+
+        });
+
+
+
+
         $("form").submit(function(event) {
             var error = false;
             var giorno = $("input[name='giorno']").val();
@@ -45,22 +114,28 @@
             var isAddGruppo = $("input[name='isAddGruppo']").val() === "true"; // Nuovo campo
 
                  
-            if (giorno.trim() === "") {
-                error = true;
-                $("#invalid-giorno").text("Il giorno è obbligatorio.");
-                event.preventDefault();
-                $("#giorno").focus();
-            } else {
-                $("#invalid-giorno").text("");
-            }
+            
 
             if (isEditGruppo || isAddGruppo){
                 if (giorno_fino.trim() === "") {
                     error = true;
-                    $("#invalid-giorno_fino").text("Il giorno è obbligatorio.");
+                    $("#invalid-giorno_fino").text("<?php echo e(trans('errors.giornoFine')); ?>");
                     event.preventDefault();
-                    $("#giorno_fino").focus();
-                } else if(giorno.trim() !== "" && giorno_fino.trim() !== "" && giorno > giorno_fino) {
+                    $("#daterange").focus();
+                } else {
+                    $("#invalid-giorno_fino").text("");
+                }
+
+                if (giorno.trim() === "") {
+                    error = true;
+                    $("#invalid-giorno").text("<?php echo e(trans('errors.giorno')); ?>");
+                    event.preventDefault();
+                    $("#daterange").focus();
+                } else {
+                    $("#invalid-giorno").text("");
+                }
+
+                if(giorno.trim() !== "" && giorno_fino.trim() !== "" && giorno > giorno_fino) {
                     error = true;
                     var errorMsg = "<?php echo e(trans('errors.giornoErr')); ?>"; // Usa la sintassi sicura di Laravel
                     document.getElementById('invalid-giorno').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
@@ -69,10 +144,20 @@
 
                     
                     event.preventDefault();
-                    $("#giorno").focus();
+                    $("#daterange").focus();
                 }else{
                     $("#invalid-giorno_fino").text("");
                 }
+            } else {
+                if (giorno.trim() === "") {
+                    error = true;
+                    event.preventDefault();
+                    $("#invalid-giorno").text("<?php echo e(trans('errors.giornoTariffa')); ?>");
+                    $("#giorno").focus();
+                }else {
+                    $("#invalid-giorno").text("");
+                }
+
             }
             
 
@@ -175,17 +260,18 @@
 
     </script>
 
-    
-    <div class="container-fluid px-lg-4 mt-4">
+    <section id="form-admin">
+    <div class="container-fluid px-lg-4">
         
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-5">
+            <div class="form-admin">
                 <?php if(isset($tariffa->id)): ?>
-                    <h1>Modifica tariffa:</h1>
+                    <h1 class="text-center mt-3 mb-3">Modifica tariffa:</h1>
                 <?php elseif(Route::currentRouteName() === 'tariffeAdmin.editGruppo'): ?>
-                    <h1><?php echo e(trans('messages.edit_rate_group')); ?></h1>
+                    <h1 class="text-center mt-3 mb-3"><?php echo e(trans('messages.edit_rate_group')); ?></h1>
                 <?php else: ?>
-                    <h1>Aggiungi gruppo di tariffe:</h1>
+                    <h1 class="text-center mt-3 mb-3">Aggiungi gruppo di tariffe:</h1>
                 <?php endif; ?>
                 <?php if(isset($tariffa->id)): ?>
                     <form class="form-horizontal" name="tariffeAdmin" method="post" action="<?php echo e(route('tariffeAdmin.update', ['tariffeAdmin' => $tariffa->id])); ?>">
@@ -203,25 +289,30 @@
 
 
                 <div class="mb-4">
-                    <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create')): ?>
-                        <label for="giorno" class="form-label"><?php echo e(trans('messages.start_date')); ?></label>
+                    <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo') || (Route::currentRouteName() === 'tariffeAdmin.create')): ?>
+                        <div>
+                            <label for="daterange" class="form-label"><?php echo e(trans('messages.dateRange')); ?></label>
+                            <div class="input-group date">
+                                <input class="form-control" type="text" id="daterange" name="daterange" />
+                                <span class="input-group-addon">
+                                    <i class="bi bi-calendar-date" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <span class="invalid-input" id="invalid-arrivo"></span>
+                        </div>
+                        <!-- Campi nascosti per inviare giorno e giornoFino -->
+                        <input type="hidden" id="giorno" name="giorno">
+                        <input type="hidden" id="giornoFino" name="giornoFino">
                     <?php else: ?>
                         <label for="giorno" class="form-label">Giorno</label>
                     <?php endif; ?>
                     <?php if(isset($tariffa->id)): ?>
                         <input class="form-control" type="date" id="giorno" name="giorno" value="<?php echo e($tariffa->giorno); ?>"/>
-                    <?php else: ?>
-                        <input class="form-control" type="date" id="giorno" name="giorno"/>
                     <?php endif; ?>
                     <span class="invalid-input" id="invalid-giorno"></span>
+                    <span class="invalid-input" id="invalid-giorno_fino"></span>
                 </div>
-                <?php if((Route::currentRouteName() === 'tariffeAdmin.editGruppo')||(Route::currentRouteName() === 'tariffeAdmin.create')): ?>
-                    <div class="mb-4" id="giorno_fino_container">
-                        <label for="giorno_fino" class="form-label"><?php echo e(trans('messages.end_date')); ?></label>
-                        <input class="form-control" type="date" id="giorno_fino" name="giornoFino" />
-                        <span class="invalid-input" id="invalid-giorno_fino"></span>
-                    </div>
-                <?php endif; ?>
+                
 
                 <div class="mb-4">
                     <label for="prezzo" class="form-label"><?php echo e(trans('messages.rate')); ?></label>
@@ -233,8 +324,12 @@
                     <span class="invalid-input" id="invalid-prezzo"></span>
                 </div>
 
-                <div class="form-group mb-3">
+                <div class="form-group mb-3"> 
+                <?php if(isset($tariffa->id) || isset($minDate) || isset($maxDate)): ?>
                     <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> <?php echo e(trans('messages.save_changes')); ?></label>
+                <?php else: ?>
+                    <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> <?php echo e(trans('messages.save_add')); ?></label>
+                <?php endif; ?>
                     <input id="mySubmit" class="d-none" type="submit" value="Save">
                 </div>
                 <div class="form-group mb-3">
@@ -243,8 +338,10 @@
 
             </form>
             </div>
+            </div>
         </div>
     </div>
+    </section>
 
 
 

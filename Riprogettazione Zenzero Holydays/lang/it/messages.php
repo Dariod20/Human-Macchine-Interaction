@@ -134,7 +134,8 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
         </li>',
         'how_to_reach_us' => 'Come raggiungerci',
 
-    
+    'save_add' => 'Aggiungi tariffe',
+
 
     
 

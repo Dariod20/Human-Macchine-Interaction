@@ -20,8 +20,15 @@ return [
     'dateChiuse' => "La casa vacanze è chiusa in queste date, controllare il calendario.",
     'dateDal' => 'dal',
     'dateAl' => 'al',
-    'giornoErr' => "La data deve precedere o coincidere con la data \'Fino al giorno\'.",
-    'giornoFinoErr' => "La data deve essere successiva o coincidere con la data \'Dal giorno\'.",
+    'giornoErr' => "La data di inizio deve precedere o coincidere con la datadi fine intervallo.",
+    'giornoFinoErr' => "La data di fine deve essere successiva o coincidere con la data di inizio intervallo.",
+
+    'giorno' => "La data di inizio intervallo è obbligatoria.",
+    'giornoFine' => "La data di fine intervallo è obbligatoria.",
+    'giornoTariffa' => "Il giorno della tariffa da modificare è obbligatorio.",
+    'prezzo' => "Il prezzo è obbligatorio.",
+    'prezzoErr' => "Il prezzo non può essere negativo.",
+
 
 
 

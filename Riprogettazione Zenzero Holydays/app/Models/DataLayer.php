@@ -289,6 +289,18 @@ class DataLayer extends Model
         }
 
     }
+
+    public function getDateRangeForTariffe()
+{
+    $oldestTariffa= Tariffa::orderBy('giorno', 'asc')->first();
+    $latestTariffa= Tariffa::orderBy('giorno', 'desc')->first();
+
+    // Restituisci le date più vecchia e più futura
+    return [
+        'minDate' => $oldestTariffa ? $oldestTariffa->giorno : null,
+        'maxDate' => $latestTariffa ? $latestTariffa->giorno : null,
+    ];
+}
     
 
 }
