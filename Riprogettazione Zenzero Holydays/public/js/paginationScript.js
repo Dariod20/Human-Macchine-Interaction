@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
-    // Pagination feature
+    // Variabili di paginazione
     var currentPage = 1;
-    var rowsPerPage = parseInt($("#rowsPerPage").val()); // Numero di righe per pagina
+    var rowsPerPage = 5; // Valore predefinito per le righe per pagina
     var $tableRows = $(".table tbody tr");
     var totalPages = Math.ceil($tableRows.length / rowsPerPage);
 
@@ -12,14 +12,15 @@ $(document).ready(function(){
 
         $tableRows.hide().slice(start, end).show();
 
-        // Rimuovi i numeri di pagina esistenti
+        // Disabilita il pulsante "Precedente" se siamo alla prima pagina
+        $("#previousPage").toggleClass("disabled", currentPage === 1);
+        $("#nextPage").toggleClass("disabled", currentPage === totalPages);
+
         $(".page-item.pageNumber").remove();
 
-        // Calcola quali numeri di pagina visualizzare
         var startPage = Math.max(1, currentPage - 1);
         var endPage = Math.min(startPage + 2, totalPages);
 
-        // Aggiungere i numeri di pagina calcolati al markup HTML
         for (var i = startPage; i <= endPage; i++) {
             var $li = $("<li>", { class: "page-item pageNumber" });
             var $link = $("<a>", { class: "page-link", href: "#", text: i });
@@ -45,10 +46,13 @@ $(document).ready(function(){
         }
     }
 
-    // Aggiorna il numero di righe per pagina quando viene selezionato un nuovo valore
-    $("#rowsPerPage").on("change", function() {
-        rowsPerPage = parseInt($(this).val());
+    // Gestione del cambiamento del numero di righe per pagina tramite il dropdown
+    $(".dropdown-menu .dropdown-item").on("click", function(event) {
+        event.preventDefault();
+        rowsPerPage = parseInt($(this).data("value"));
+        $("#dropdownRowsPerPage").text(rowsPerPage + " prenotazioni per pagina");
         totalPages = Math.ceil($tableRows.length / rowsPerPage);
+        currentPage = 1; // Resetta alla prima pagina
         showPage(currentPage);
     });
 
@@ -63,5 +67,6 @@ $(document).ready(function(){
         showPage(currentPage);
     });
 });
+
 
 

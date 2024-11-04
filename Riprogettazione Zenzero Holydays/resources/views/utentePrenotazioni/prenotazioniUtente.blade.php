@@ -64,25 +64,33 @@
         </div>
     </div>
 
+    <div class="col-md-4 d-flex justify-content-end align-items-center">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cambia visualizzazione &nbsp&nbsp
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                    <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.booking') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav aria-label="Page navigation example" id="paginationNav">
         <ul class="pagination justify-content-center">
-            <li class="page-item" id="previousPage"><a class="page-link" href="#">{{ trans('pagination.previous') }}</a></li>
-            <li class="page-item" id="nextPage"><a class="page-link" href="#">{{ trans('pagination.next') }}</a></li>
-            <li>
-                <select id="rowsPerPage" class="form-control justify-content-end">
-                    <option value="5">5 {{ trans('pagination.booking') }}</option>
-                    <option value="10">10 {{ trans('pagination.booking') }}</option>
-                    <option value="15">15 {{ trans('pagination.booking') }}</option>
-                    <option value="20">20 {{ trans('pagination.booking') }}</option>
-                </select>
-            </li>
+            <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
+            <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
         </ul>
     </nav>
 
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table id="bookTable" class="table table-striped table-hover">
+                <table id="bookTable" class="table table-striped">
                     <colgroup>
                         <col style="width: 25%;">
                         <col style="width: 25%;">
@@ -119,7 +127,7 @@
         </div>
     </div>
 
-    
+
 
 </div>
 @endsection

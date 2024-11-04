@@ -52,36 +52,36 @@ Prenotazioni
     <div class="row mb-3 pt-3">
         <div class="col-md-8">
             <div class="input-group">
-                <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="Cerca prenotazione...">
+                <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="{{ trans('pagination.cerca') }}">
             </div>
         </div>
         <div class="col-md-4 d-flex justify-content-end align-items-center">
-            <a class="btn btn-success" href="{{ route('prenotazioniAdmin.create') }}">
-                <i class="bi bi-database-add"></i>
-                Crea nuova prenotazione
-            </a>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cambia visualizzazione &nbsp&nbsp
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                    <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.booking') }}</a>
+                </div>
+            </div>
         </div>
     </div>
 
     <nav aria-label="Page navigation example" id="paginationNav">
         <ul class="pagination justify-content-center">
-            <li class="page-item" id="previousPage"><a class="page-link" href="#"> Precedente </a></li>
-            <li class="page-item" id="nextPage"><a class="page-link" href="#"> Prossima </a></li>
-            <li>
-                <select id="rowsPerPage" class="form-control justify-content-end">
-                    <option value="5">5 prenotazioni per pagina</option>
-                    <option value="10">10 prenotazioni per pagina</option>
-                    <option value="15">15 prenotazioni per pagina</option>
-                    <option value="20">20 prenotazioni per pagina</option>
-                </select>
-            </li>
+            <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
+            <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
         </ul>
     </nav>
 
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table id="bookTable" class="table table-striped table-hover">
+                <table id="bookTable" class="table table-striped">
                     <colgroup>
                         <col style="width: 25%;">
                         <col style="width: 25%;">
@@ -90,9 +90,9 @@ Prenotazioni
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>Arrivo</th>
-                            <th>Partenza</th>
-                            <th>Ospite</th>
+                            <th> {{ trans('messages.arrivo') }} </th>
+                            <th> {{ trans('messages.partenza') }} </th>
+                            <th> {{ trans('messages.prezzo') }} </th>
                             <th></th>
                         </tr>
                     </thead>
