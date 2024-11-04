@@ -9,7 +9,7 @@
 
 <?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('home')); ?>">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page"><?php echo e(trans('button.book')); ?></li>
+<li class="breadcrumb-item active" aria-current="page"><?php echo e(trans(key: 'button.book')); ?></li>
 <?php $__env->stopSection(); ?>
  
 <?php

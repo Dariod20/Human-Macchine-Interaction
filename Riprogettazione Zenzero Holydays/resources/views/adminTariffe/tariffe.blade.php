@@ -68,7 +68,6 @@
                 return;
             }
 
-            // Get selected column for filtering
             var column = $("#searchInput").attr("data-column");
             var anyVisible = false; // Variabile per tracciare se ci sono risultati
 
@@ -110,17 +109,17 @@
 
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
-        
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="form-admin">
 
 
-                    <div class="container-fluid mb-3 pt-3 text-center">
-                        <h1>
-                            Lista tariffe
-                        </h1>
-                    </div>
+<div class="container-fluid mb-3 pt-3 text-center">
+    <h1>
+        {{ trans('messages.lista_tariffe') }}
+    </h1>
+</div>
 
 
                     <div id="inner">
@@ -157,21 +156,37 @@
                                 </div>
                             </div>
 
-                            <nav aria-label="Page navigation example" id="paginationNav">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" id="previousPage"><a class="page-link" href="#">Precedente</a></li>
-                                    <!-- Numeri di pagina -->
-                                    <li class="page-item" id="nextPage"><a class="page-link" href="#">Next</a></li>
-                                    <li>
-                                        <select id="rowsPerPage" class="form-control justify-content-end">
-                                            <option value="5">5 tariffe per pagina</option>
-                                            <option value="10">10 tariffe per pagina</option>
-                                            <option value="15">15 tariffe per pagina</option>
-                                            <option value="20">20 tariffe per pagina</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                            </nav>
+<nav aria-label="page navigation example" id="paginationNav" class="d-flex justify-content-between align-items-center">
+    <!-- Primo div: Centro -->
+    <div class="justify-content-center d-flex flex-grow-1" id="navTariffe">
+        <ul class="pagination">
+            <li class="page-item" id="previousPage">
+                <a class="page-link" href="#">{{ trans('pagination.previous') }}</a>
+            </li>
+            <li class="page-item" id="nextPage">
+                <a class="page-link" href="#">{{ trans('pagination.next') }}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Secondo div: Lato destro -->
+    <div class="col-md-4 d-flex justify-content-end align-items-center" id="visualizzaTariffe">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ trans('button.visualizzazione') }} &nbsp;&nbsp;
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
+                <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
+                <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>
+                <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.booking') }}</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
 
                             <div class="row">
                                 <div class="col-md-12">

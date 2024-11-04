@@ -45,7 +45,7 @@
     $(document).ready(function(){
 
 
-        
+
         var lang = '{{ app()->getLocale() }}';
         var  datePicker = $('#daterange');
 
@@ -70,7 +70,7 @@
                     minDate: formattedMinDate,
                     maxDate: formattedMaxDate,
                 }),
-            
+
             locale: {
                 format: 'DD/MM/YYYY', // Imposta il formato corretto
                 firstDay: 1, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
@@ -87,7 +87,7 @@
         }, function (start, end, label) {
             $('#giorno').val(start.format('YYYY-MM-DD'));
             $('#giornoFino').val(end.format('YYYY-MM-DD'));
-        
+
         });
 
         // Nascondi il datepicker all'inizio
@@ -118,8 +118,15 @@
             var isEditGruppo = $("input[name='isEditGruppo']").val() === "true"; // Nuovo campo
             var isAddGruppo = $("input[name='isAddGruppo']").val() === "true"; // Nuovo campo
 
-                 
-            
+
+            if (giorno.trim() === "") {
+                error = true;
+                $("#invalid-giorno").text("Il giorno è obbligatorio.");
+                event.preventDefault();
+                $("#giorno").focus();
+            } else {
+                $("#invalid-giorno").text("");
+            }
 
             if (isEditGruppo || isAddGruppo){
                 if (giorno_fino.trim() === "") {
@@ -147,7 +154,7 @@
                     var errorMsg = "{{ trans('errors.giornoFinoErr') }}"; // Usa la sintassi sicura di Laravel
                     document.getElementById('invalid-giorno_fino').textContent = decodeHtmlEntities(errorMsg); // Decodifica l'entità HTML in JavaScript
 
-                    
+
                     event.preventDefault();
                     $("#daterange").focus();
                 }else{
@@ -164,7 +171,7 @@
                 }
 
             }
-            
+
 
             if (prezzo.trim() === "") {
                 error = true;
@@ -182,7 +189,7 @@
             }
             if(!error)
             {
-                
+
                 var metodoHttp = $('input[name="_method"]').val();
                  // la pagina è state caricata per creare una nuova tariffa
                 if (metodoHttp === undefined && !isEditGruppo ){
@@ -210,12 +217,12 @@
                             $("form")[0].submit();
                         }
                     }
-                }); 
+                });
                 }
 
                 if (isEditGruppo) {
                     event.preventDefault(); // Blocca l'invio del modulo
-                    
+
                     $.ajax({
                         type: 'GET',
                         url: '{{ route("tariffeAdmin.ajaxCheckTariffePrenotazioni") }}',
@@ -228,12 +235,12 @@
                                 type: 'GET',
                                 url: '{{ route("ajaxCheckTariffePrenotazione") }}',
                                 data: {
-                                    giorno: giorno.trim(),
-                                    giorno_fino: giorno_fino.trim(),
-                                    context: 'altro' 
+                                    arrivo: giorno.trim(),
+                                    partenza: giorno_fino.trim(),
+                                    context: 'altro'
                                 },
                                 success: function (response) {
-                                    
+
                                     if (!response.available) {
                                         error = true;
                                         $("#invalid-giorno").text(response.message);
@@ -247,27 +254,27 @@
                         }
                     }
                 });
-                    
+
                 }
-                
-                
+
+
             }
 
 
 
 
 
-                
-            
+
+
         });
     });
-    
+
 
     </script>
 
-    <section id="form-admin">
-    <div class="container-fluid px-lg-4">
-        
+
+    <div class="container-fluid px-lg-4 mt-4">
+
         <div class="row justify-content-center">
             <div class="col-md-5">
             <div class="form-admin">
@@ -317,7 +324,7 @@
                     <span class="invalid-input" id="invalid-giorno"></span>
                     <span class="invalid-input" id="invalid-giorno_fino"></span>
                 </div>
-                
+
 
                 <div class="mb-4">
                     <label for="prezzo" class="form-label">{{ trans('messages.rate') }}</label>
@@ -329,7 +336,7 @@
                     <span class="invalid-input" id="invalid-prezzo"></span>
                 </div>
 
-                <div class="form-group mb-3"> 
+                <div class="form-group mb-3">
                 @if(isset($tariffa->id) || isset($minDate) || isset($maxDate))
                     <label for="mySubmit" class="btn btn-primary w-100"><i class="bi bi-floppy2-fill"></i> {{ trans('messages.save_changes') }}</label>
                 @else
@@ -338,7 +345,7 @@
                     <input id="mySubmit" class="d-none" type="submit" value="Save">
                 </div>
                 <div class="form-group mb-3">
-                    <a class="btn btn-danger w-100" href="{{ route('tariffeAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> {{ trans('messages.annulla') }}</a>
+                    <a class="btn btn-secondary w-100" href="{{ route('tariffeAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> Annulla</a>
                 </div>
 
             </form>
@@ -350,9 +357,8 @@
 
 
 
-    
-       
-    
+
+
+
 @endsection
 
-   

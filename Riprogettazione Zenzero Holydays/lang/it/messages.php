@@ -4,9 +4,9 @@ return [
 
     'carosello' => 'Il punto di riferimento per le tue vacanze sul lago di Garda',
     'titoloHome' => 'Casa vacanze Zenzero Holidays!',
-    'testoHome' => 'Zenzero Holidays, la casa vacanze perfetta per le tue vacanze sul lago di Garda! 
+    'testoHome' => 'Zenzero Holidays, la casa vacanze perfetta per le tue vacanze sul lago di Garda!
              Situata in punto strategico a pochi minuti da Gardaland e le principali mete turistiche del basso lago,
-    ideale per le tue vacanze in famiglia o tra amici.',    
+    ideale per le tue vacanze in famiglia o tra amici.',
     'card1' => 'Scopri la gallery e le informazioni principali della nostra accogliente casa vacanze a conduzione familiare.',
     'card2' => 'Zenzero Holidays è vicinissima a Gardaland e a molti dei più bei paesi del lago di Garda e d\'Italia, vieni a scoprirli.',
     'position' => 'Dove siamo',
@@ -15,15 +15,15 @@ return [
     'titoloCasa' => 'Benvenuti alla Casa Vacanze Zenzero Holidays',
     'titolo2Casa' => 'L\'appartamento',
     'testoCasa' => 'La nostra casa vacanze è il luogo perfetto per trascorrere le vostre vacanze sul lago di Garda.
-                    Situata in una piccola frazione confinante con Peschiera del Garda, la Casa Vacanze Zenzero Holidays vi accoglie 
+                    Situata in una piccola frazione confinante con Peschiera del Garda, la Casa Vacanze Zenzero Holidays vi accoglie
                     con il calore e l\'ospitalità tipici di una struttura a conduzione familiare.
-                    Strategicamente posizionata a pochi minuti dal rinomato parco divertimenti Gardaland e nelle vicinanze delle 
+                    Strategicamente posizionata a pochi minuti dal rinomato parco divertimenti Gardaland e nelle vicinanze delle
                     incantevoli località di Peschiera, Lazise e Sirmione, la nostra casa vacanze offre un punto di partenza ideale per esplorare le meraviglie del lago di Garda.',
-    'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno. 
-L\'ampio soggiorno, dotato di aria condizionata, offre un letto singolo e la possibilità di aggiungere un ulteriore letto su richiesta. La camera da letto è arredata con un letto matrimoniale e un letto a castello, per un totale di <strong>sei posti letto</strong>. <br> <br>
-La cucina è completamente attrezzata con forno e microonde, mentre i due bagni, di cui uno con doccia e l\'altro con vasca e lavatrice, vi forniranno tutto il necessario per un soggiorno confortevole e indimenticabile. 
-Inoltre, potrete rilassarvi sul balcone, arredato con un tavolino e sedie. Nella piazzetta proprio sotto la struttura troverete un bar per la colazione e un negozio di parrucchiere.<br> <br>
-A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, bar, pub, ristorante, pizzeria, farmacia, erboristeria, chiesa, banca e vari negozi, tra cui abbigliamento, merceria e articoli regalo.',
+    'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno.
+                    L\'ampio soggiorno è dotato di aria condizionata e la cucina è completamente attrezzata con forno e microonde. Con due bagni, di cui uno con doccia e uno con vasca e lavatrice, e una camera da letto con aria condizionata,
+                    troverete tutto ciò di cui avete bisogno per un soggiorno indimenticabile. È inoltre presente un balcone con tavolino e sedie.
+                    Nella piazzetta proprio sotto la struttura puoi trovare un bar dove fare colazione e un negozio di parrucchiere. In centro paese (300 metri) troverai market, panificio, bar, pub, ristorante, pizzeria, farmacia,
+                    erboristeria, chiesa, banca e negozi vari, abbigliamento, merceria, articoli regalo.',
      'galleria' => 'Sfoglia la gallery',
      'distanza' => 'Distanza',
      'pesca' => 'Pesca sul Lago di Garda ',
@@ -52,7 +52,7 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
      'tel' => 'Telefono',
      'stato' => 'Stato',
      'orario' => 'Orario Arrivo',
-     
+
     'conferma' => 'Conferma prenotazione',
     'nome' => 'Nome',
     'cognome' => 'Cognome',
@@ -66,9 +66,9 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
     'rates_success' => 'Tariffe aggiunte con successo!',
     'ratesElim_success' => 'Tariffe eliminate con successo!',
 
-    
 
-    
+
+
 
     'placeholder_nome' => 'Inserisci il tuo nome',
     'placeholder_cognome' => 'Inserisci il tuo cognome',
@@ -116,11 +116,11 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
     'by_car' => 'In Auto',
     'by_train' => 'In Treno',
     'by_plane' => 'In Aereo',
-    'by_car_description' => 'Dal casello di Peschiera del Garda sull’autostrada A4: all’uscita, mantenete la destra fino alla rotonda. 
+    'by_car_description' => 'Dal casello di Peschiera del Garda sull’autostrada A4: all’uscita, mantenete la destra fino alla rotonda.
         Alla rotonda, prendete la quarta uscita in direzione Cavalcaselle/Verona. Al semaforo di Cavalcaselle, svoltate a destra e subito dopo girate a sinistra in via XX Settembre.
         Poco dopo svoltate a destra in via Mantovana e proseguite per circa 400 metri finché non troverete una piazzetta sulla destra.',
     'by_train_description' => 'Dalla stazione di Peschiera del Garda è possibile raggiungerci in circa 5 minuti utilizzando gli autobus disponibili o il servizio taxi. <br>
-        Per il bus, prendi l\'ATV linea 164 o l\'Arriva linea LN026, entrambi diretti verso Verona. Scendi alla fermata di Cavalcaselle. 
+        Per il bus, prendi l\'ATV linea 164 o l\'Arriva linea LN026, entrambi diretti verso Verona. Scendi alla fermata di Cavalcaselle.
         Da qui, prosegui a piedi per circa 5 minuti lungo via Mantovana fino a raggiungere una piazzetta sulla destra.',
     'by_plane_description' => 'Dall’aeroporto di Verona (Valerio Catullo), circa 20 minuti in taxi. <br>
         In alternativa, potete prendere il bus ATV 199 per la stazione di Verona Porta Nuova. <br>Da qui, avete due opzioni:
@@ -138,13 +138,27 @@ A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, ba
     'prenSearch' => 'Nessuna prenotazione trovata.',
     'admin' => 'Amministratore:',
     'rateSearch' => 'Nessuna tariffa trovata.',
+    'infoPassword' => 'La password deve essere lunga minimo 8 caratteri e contenere almeno una maiuscola, una cifra e un carattere tra ! - * [ ] $ & /',
+    'registration_success' => 'La registrazione è stata completata correttamente. Accedi con le tue credenziali.',
 
-    
+    'confermaCancellazione' => 'Vuoi cancellare la tua prenotazione dal ',
+    'al' => ' al ',
+    'dettagli' => 'Dettagli della prenotazione',
+    'prenotazione' => 'La prenotazione',
+    'cancellata' => 'sarà cancellata',
+    'nonCancellata' => 'NON sarà cancellata',
+    "lista_prenotazioni" => 'Lista prenotazioni',
+    "lista_tariffe" => 'Lista tariffe',
 
 
 
 
-    
+
+
+
+
+
+
 
 
 

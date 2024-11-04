@@ -22,12 +22,20 @@ return [
     'dateAl' => 'to',
     'giornoErr' => "The start date must precede or coincide with the end date of the range.",
     'giornoFinoErr' => "The end date must be later than or coincide with the start date of the range.",
-
+    'password' => 'Password is required.',
+    'passwordSbagliata' => 'Wrong Password: try again.',
+    'emailInesistente' => 'Email not found: try again.',
+    'formatoEmail' => "Wrong email format.",
+    'formatoPassword' => "Wrong password format.",
+    'confermaPassword' => 'Confirm of the password is required.',
+    'stessaPassword' => "Passwords must match.",
+    'emailEsistente' => "This email is already in use. Choose another one.",
     'giorno' => "The start date of the range is required.",
     'giornoFine' => "The end date of the range is required.",
     'giornoTariffa' => "The date of the rate to be modified is required.",
     'prezzo' => "Rate is required.",
     'prezzoErr' => "Rate cannot be negative.",
+
 
 
 

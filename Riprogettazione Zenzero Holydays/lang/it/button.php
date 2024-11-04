@@ -13,6 +13,7 @@ return [
     'annulla' => 'Annulla',
     'login' => 'Accedi',
     'logout' => 'Esci',
+    'registrati' => 'Registrati',
     'indietro' => 'Indietro',
     'avanti' => 'Avanti',
     'confermaPren' => 'Conferma Prenotazione ',
@@ -22,7 +23,9 @@ return [
     'meseSucc' => 'Mese Successivo',
     'calendarioHome' => 'Calendario',
 
-
+    'nome' => 'Nome',
+    'conferma' => 'Conferma Password',
+    'visualizzazione' => 'Cambia visualizzazione'
 
 
 

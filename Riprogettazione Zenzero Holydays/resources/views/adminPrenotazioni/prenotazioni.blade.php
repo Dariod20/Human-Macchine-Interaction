@@ -19,8 +19,8 @@ Prenotazioni
 <script>
     $(document).ready(function() {
     var typingTimer;
-    var doneTypingInterval = 200; 
-    var currentPage = 1; 
+    var doneTypingInterval = 200;
+    var currentPage = 1;
 
     // Set up search options
     var defaultColumn = 1; // Default per ospite
@@ -32,7 +32,7 @@ Prenotazioni
         e.preventDefault();
         var column = $(this).attr("data-column");
         $("#searchInput").attr("data-column", column);
-        
+
         // Set placeholder based on selected column
         if (column === '0') {
             // "Data"
@@ -41,7 +41,7 @@ Prenotazioni
             // "Ospite"
             $("#searchInput").attr("placeholder", "{{ __('pagination.cercaOspite') }}"); // Placeholder per la ricerca di ospite
         }
-        
+
         $("#searchInput").trigger("keyup"); // Trigger search when a column is selected
     });
 
@@ -62,9 +62,9 @@ Prenotazioni
 
     // Nascondi la paginazione se il campo di ricerca contiene testo
     if (value !== "") {
-        $("#paginationNav").hide(); 
+        $("#paginationNav").hide();
     } else {
-        $("#paginationNav").show(); 
+        $("#paginationNav").show();
         $("#bookTable tbody tr").show(); // Mostra tutte le righe
         currentPage = 1; // Torna alla prima pagina
         showPage(currentPage);
@@ -74,7 +74,7 @@ Prenotazioni
     }
 
     // Colonna selezionata per il filtro
-    var column = $("#searchInput").attr("data-column");    
+    var column = $("#searchInput").attr("data-column");
     var anyVisible = false; // Variabile per tracciare se ci sono risultati
 
 
@@ -84,13 +84,13 @@ Prenotazioni
         // Filtra in base alla colonna selezionata
         if (column !== undefined) {
             if (column === '0') { // Colonne "Arrivo" e "Partenza"
-                var arrivoText = $(this).find("td:eq(0)").text().toLowerCase(); 
-                var partenzaText = $(this).find("td:eq(1)").text().toLowerCase(); 
+                var arrivoText = $(this).find("td:eq(0)").text().toLowerCase();
+                var partenzaText = $(this).find("td:eq(1)").text().toLowerCase();
                 if (arrivoText.indexOf(value) > -1 || partenzaText.indexOf(value) > -1) {
                     found = true;
                 }
             } else if (column === '1') { // Colonna "Ospite"
-                var ospiteText = $(this).find("td:eq(2)").text().toLowerCase(); 
+                var ospiteText = $(this).find("td:eq(2)").text().toLowerCase();
                 if (ospiteText.indexOf(value) > -1) {
                     found = true;
                 }
@@ -111,6 +111,7 @@ Prenotazioni
 });
 </script>
 
+
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
@@ -125,14 +126,14 @@ Prenotazioni
 
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
-        
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="form-admin">
 
                     <div class="container-fluid mb-3 pt-3 text-center">
                         <h1>
-                            Lista prenotazioni
+                            {{ trans('messages.lista_prenotazioni') }}
                         </h1>
                     </div>
 
@@ -154,64 +155,63 @@ Prenotazioni
                                 </div>
                             </div>
 
-                            <nav aria-label="Page navigation example" id="paginationNav">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" id="previousPage"><a class="page-link" href="#">Precedente</a></li>
-                                    <li class="page-item" id="nextPage"><a class="page-link" href="#">Prossima</a></li>
-                                    <li>
-                                        <select id="rowsPerPage" class="form-control justify-content-end">
-                                            <option value="5">5 prenotazioni per pagina</option>
-                                            <option value="10">10 prenotazioni per pagina</option>
-                                            <option value="15">15 prenotazioni per pagina</option>
-                                            <option value="20">20 prenotazioni per pagina</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                            </nav>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table id="bookTable" class="table table-striped">
-                                            <colgroup>
-                                                <col style="width: 25%;">
-                                                <col style="width: 25%;">
-                                                <col style="width: 25%;">
-                                                <col style="width: 25%;">
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>Arrivo</th>
-                                                    <th>Partenza</th>
-                                                    <th>Ospite</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($prenotazioni as $prenotazione)
-                                                    <tr>
-                                                        <td>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y') }}</td>
-                                                        <td>{{ \Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y') }}</td>
-                                                        <td>{{ $prenotazione->nome }} {{ $prenotazione->cognome }}</td>
-                                                        <td>
-                                                            <div class="btn-group-vertical" role="group">
-                                                                <a class="btn btn-secondary mb-1" href="{{ route('prenotazioniAdmin.show', ['prenotazioniAdmin' => $prenotazione->id]) }}">Dettagli</a>
-                        <!--                                         <a class="btn btn-primary mb-1" href="{{ route('prenotazioniAdmin.edit', ['prenotazioniAdmin' => $prenotazione->id]) }}"><i class="bi bi-pencil-square"></i> Modifica</a>
-                        -->                                     <a class="btn btn-danger" href="{{ route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id]) }}"><i class="bi bi-trash"></i> Elimina</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <p class="text-center" id="noResultsMessage" style="display: none;">{{ trans('messages.prenSearch') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            
+                            <div class="col-md-4 d-flex justify-content-end align-items-center">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ trans('button.visualizzazione') }} &nbsp&nbsp
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                    <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>
+                    <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.booking') }}</a>
                 </div>
+            </div>
+        </div>
+
+    <nav aria-label="Page navigation example" id="paginationNav">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
+            <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
+        </ul>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="bookTable" class="table table-striped">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Arrivo</th>
+                            <th>Partenza</th>
+                            <th>Ospite</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($prenotazioni as $prenotazione)
+                            <tr>
+                                <td>{{ $prenotazione->arrivo }}</td>
+                                <td>{{ $prenotazione->partenza }}</td>
+                                <td>{{ $prenotazione->nome }} {{ $prenotazione->cognome }}</td>
+                                <td>
+                                    <div class="btn-group-vertical" role="group">
+                                        <a class="btn btn-secondary mb-1" href="{{ route('prenotazioniAdmin.show', ['prenotazioniAdmin' => $prenotazione->id]) }}">Dettagli</a>
+                                        <a class="btn btn-primary mb-1" href="{{ route('prenotazioniAdmin.edit', ['prenotazioniAdmin' => $prenotazione->id]) }}"><i class="bi bi-pencil-square"></i> Modifica</a>
+                                        <a class="btn btn-danger" href="{{ route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id]) }}"><i class="bi bi-trash"></i> Elimina</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
