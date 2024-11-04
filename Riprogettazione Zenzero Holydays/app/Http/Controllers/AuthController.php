@@ -27,7 +27,11 @@ class AuthController extends Controller
             session(['role' => $dl->getUserRole($request->input('email'))]);
             session(['user_email' => $request->input('email')]);
             
-            return Redirect::to(route('home'));
+            // Controlla se è stato impostato un URL di ritorno
+            $redirectUrl = session('return_url', route('home')); // Se non esiste, reindirizza alla home
+            session()->forget('return_url'); // Rimuove l'URL di ritorno dalla sessione
+            
+            return Redirect::to($redirectUrl);
         } else 
         {
             return view('errors.404')->with('message','Wrong authentication credentials!');

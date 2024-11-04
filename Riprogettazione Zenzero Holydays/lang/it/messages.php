@@ -19,11 +19,11 @@ return [
                     con il calore e l\'ospitalità tipici di una struttura a conduzione familiare.
                     Strategicamente posizionata a pochi minuti dal rinomato parco divertimenti Gardaland e nelle vicinanze delle 
                     incantevoli località di Peschiera, Lazise e Sirmione, la nostra casa vacanze offre un punto di partenza ideale per esplorare le meraviglie del lago di Garda.',
-    'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno.
-                    L\'ampio soggiorno è dotato di aria condizionata e la cucina è completamente attrezzata con forno e microonde. Con due bagni, di cui uno con doccia e uno con vasca e lavatrice, e una camera da letto con aria condizionata, 
-                    troverete tutto ciò di cui avete bisogno per un soggiorno indimenticabile. È inoltre presente un balcone con tavolino e sedie. 
-                    Nella piazzetta proprio sotto la struttura puoi trovare un bar dove fare colazione e un negozio di parrucchiere. In centro paese (300 metri) troverai market, panificio, bar, pub, ristorante, pizzeria, farmacia, 
-                    erboristeria, chiesa, banca e negozi vari, abbigliamento, merceria, articoli regalo.',
+    'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno. 
+L\'ampio soggiorno, dotato di aria condizionata, offre un letto singolo e la possibilità di aggiungere un ulteriore letto su richiesta. La camera da letto è arredata con un letto matrimoniale e un letto a castello, per un totale di <strong>sei posti letto</strong>. <br> <br>
+La cucina è completamente attrezzata con forno e microonde, mentre i due bagni, di cui uno con doccia e l\'altro con vasca e lavatrice, vi forniranno tutto il necessario per un soggiorno confortevole e indimenticabile. 
+Inoltre, potrete rilassarvi sul balcone, arredato con un tavolino e sedie. Nella piazzetta proprio sotto la struttura troverete un bar per la colazione e un negozio di parrucchiere.<br> <br>
+A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, bar, pub, ristorante, pizzeria, farmacia, erboristeria, chiesa, banca e vari negozi, tra cui abbigliamento, merceria e articoli regalo.',
      'galleria' => 'Sfoglia la gallery',
      'distanza' => 'Distanza',
      'pesca' => 'Pesca sul Lago di Garda ',
@@ -34,7 +34,7 @@ return [
      'terme' => 'Terme',
 
      'telefono' => 'Telefono',
-     'regole' => 'Regolamento della casa:',
+     'regole' => 'Regolamento della casa',
      'regola1' => 'Check-in: dalle 15:00 alle 20:00',
      'regola2' => 'Check-out: entro le 10:00',
      'regola3' => 'Non è permesso fumare all\'interno della casa',
@@ -62,11 +62,23 @@ return [
     'reservation_success' => 'La prenotazione è stata confermata con successo! Sarai contattato a breve via email per il pagamento.
     Ricorda che la prenotazione può essere cancellata gratuitamente solo fino a due giorni prima della data di arrivo. Trascorso questo periodo, sarà rimborsato solo il 75% del costo.',
     'cancellation_success' => 'La prenotazione è stata cancellata con successo! Sarai contattato a breve via email per il rimborso.',
+    'elimination_success' => 'Prenotazione eliminata con successo e mail di notifica inviata.',
+    'rates_success' => 'Tariffe aggiunte con successo!',
+    'ratesElim_success' => 'Tariffe eliminate con successo!',
+
+    
+
+    
 
     'placeholder_nome' => 'Inserisci il tuo nome',
     'placeholder_cognome' => 'Inserisci il tuo cognome',
     'placeholder_email' => 'Inserisci la tua email',
     'placeholder_telefono' => 'Inserisci il tuo numero di telefono',
+    'placeholder_stato' => 'Seleziona uno stato',
+    'placeholder_prefisso' => 'Cerca il nome di uno stato',
+    'placeholder_prezzo' => 'Importo per notte',
+
+
 
     'datiPrenotazione' => 'Dati della prenotazione',
     'numOspiti' => 'Numero di ospiti',
@@ -81,11 +93,53 @@ return [
     'dateRange' => 'Date di arrivo e partenza',
     'selezionaOrario' => 'Seleziona un orario di arrivo',
 
+    'months' => [
+        'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
+        'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'
+    ],
+    'days' => ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'],
+
+    'login_feedback' => 'Per completare la prenotazione devi accedere o registrarti, se non hai un account.',
+
+    'infoBambini' => 'Fino a 12 anni.',
+    'contact' => 'Contatti',
+
+    'edit_rate_group' => 'Modifica gruppo di tariffe',
+    'range_mod' => 'Date di inizio e fine modifica',
+    'range_add' => 'Date di inizio e fine aggiunta',
+    'rate' => 'Prezzo',
+    'save_changes' => 'Salva modifiche',
 
 
 
 
+    'by_car' => 'In Auto',
+    'by_train' => 'In Treno',
+    'by_plane' => 'In Aereo',
+    'by_car_description' => 'Dal casello di Peschiera del Garda sull’autostrada A4: all’uscita, mantenete la destra fino alla rotonda. 
+        Alla rotonda, prendete la quarta uscita in direzione Cavalcaselle/Verona. Al semaforo di Cavalcaselle, svoltate a destra e subito dopo girate a sinistra in via XX Settembre.
+        Poco dopo svoltate a destra in via Mantovana e proseguite per circa 400 metri finché non troverete una piazzetta sulla destra.',
+    'by_train_description' => 'Dalla stazione di Peschiera del Garda è possibile raggiungerci in circa 5 minuti utilizzando gli autobus disponibili o il servizio taxi. <br>
+        Per il bus, prendi l\'ATV linea 164 o l\'Arriva linea LN026, entrambi diretti verso Verona. Scendi alla fermata di Cavalcaselle. 
+        Da qui, prosegui a piedi per circa 5 minuti lungo via Mantovana fino a raggiungere una piazzetta sulla destra.',
+    'by_plane_description' => 'Dall’aeroporto di Verona (Valerio Catullo), circa 20 minuti in taxi. <br>
+        In alternativa, potete prendere il bus ATV 199 per la stazione di Verona Porta Nuova. <br>Da qui, avete due opzioni:
+        <li>
+        Bus: prendete il bus ATV 164 in direzione Garda o il bus Arriva LN026 in direzione Brescia e scendete alla fermata di Cavalcaselle.
+        Da qui proseguite a piedi per circa 10 minuti seguendo le indicazioni per chi arriva in macchina a partire dal semaforo di Cavalcaselle.
+        </li>
+        <li>
+        Treno: prendete un treno diretto a Milano e scendete alla stazione di Peschiera del Garda.
+        Da lì, seguite le indicazioni per chi arriva in treno.
+        </li>',
+        'how_to_reach_us' => 'Come raggiungerci',
 
+    'save_add' => 'Aggiungi tariffe',
+    'prenSearch' => 'Nessuna prenotazione trovata.',
+    'admin' => 'Amministratore:',
+    'rateSearch' => 'Nessuna tariffa trovata.',
+
+    
 
 
 

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('titolo'); ?>
 <?php echo e(trans('messages.conferma')); ?>
 
@@ -10,6 +8,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script> var lang = '<?php echo e(app()->getLocale()); ?>'</script>
 <script src="<?php echo e(url('/')); ?>/js/phoneValidationScript.js"></script>
 <?php $__env->stopSection(); ?>
 
@@ -90,12 +89,12 @@
     // Imposto i valori formattati nel campo input
     $('#arrivo').val(arrivo); 
     $('#partenza').val(partenza); 
-    updatePrice(arrivo, partenza)
+    updatePrice(arrivo, partenza);
 
-    var lang = '<?php echo e(app()->getLocale()); ?>'
+    var lang = '<?php echo e(app()->getLocale()); ?>';
     var minDate = moment().startOf('day'); // Imposta a mezzanotte di oggi
 
-    var  datePicker = $('#daterange')
+    var  datePicker = $('#daterange');
     
     // Configura il daterangepicker
     datePicker.daterangepicker({
@@ -106,7 +105,7 @@
       minDate: minDate, // Imposta la data minima
       locale: {
         format: 'DD/MM/YYYY', // Imposta il formato corretto
-        firstDay: lang === 'it' ? 1 : 0, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
+        firstDay: 1, // Setta il lunedì come primo giorno per 'it', domenica per 'en'
         daysOfWeek: lang === 'it' ? [ "Dom","Lun", "Mar", "Mer", "Gio", "Ven", "Sab"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
         monthNames: lang === 'it' ? [
           "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 
@@ -271,11 +270,12 @@
     function validateStep3() {
         var firstName = document.getElementById('nome').value;
         var lastName = document.getElementById('cognome').value;
-        var telefono = document.getElementById('telefono').value;
+        var telefono = document.getElementById('num-telefono').value;
         var email = document.getElementById('email').value;
         var stato = document.getElementById('stato').value;
         var regexName = /^[a-zA-Z\s]+$/;
         var regexPhone = /^[0-9]+$/;
+        var regexPhoneLength = /^.{7,15}$/;
         var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         var error = false;
 
@@ -302,13 +302,17 @@
         } else {
             document.getElementById('invalid-lastName').textContent = "";
         }
-
+        
         if (telefono.trim() === "") {
             document.getElementById('invalid-telefono').textContent = "<?php echo e(trans('errors.tel')); ?>";
             error = true;
             $("input[name='telefono']").focus();
         } else if (!regexPhone.test(telefono)) {
             document.getElementById('invalid-telefono').textContent = "<?php echo e(trans('errors.telErr')); ?>";
+            error = true;
+            $("input[name='telefono']").focus();
+        } else if (!regexPhoneLength.test(telefono)) {
+            document.getElementById('invalid-telefono').textContent = "<?php echo e(trans('errors.telErrLength')); ?>";
             error = true;
             $("input[name='telefono']").focus();
         } else {
@@ -368,16 +372,14 @@
                     type: 'GET',
                     url: '<?php echo e(route("ajaxCheckTariffePrenotazione")); ?>',
                     data: {
-                      arrivo: arrivo.trim(),
-                      partenza: partenza.trim(),
+                      giorno: arrivo.trim(),
+                      giorno_fino: partenza.trim(),
                       context: "<?php echo e(isset($arrivo) ? 'conferma' : 'altro'); ?>"
                     },
                     success: function (response) {
                       if (!response.available) {
                         error = true;
-                        var message = (response.context === 'conferma') ?
-                          "<?php echo e(trans('errors.dateChiuse')); ?>" :
-                          response.message;
+                        var message ="<?php echo e(trans('errors.dateChiuse')); ?>";
                         $("#invalid-arrivo").text(message);
                         $("#daterange").focus();
                       } else {
@@ -412,7 +414,7 @@
         const cognome = document.getElementById('cognome').value;
         const email = document.getElementById('email').value;
         const stato = document.getElementById('stato').value;
-        const telefono = document.getElementById('num-telefono').value;
+        const telefono = document.getElementById('telefono').value;
         const prezzo=document.getElementById('prezzoTotaleNumero').innerText;
 
         document.getElementById('riepilogo-soggiorno').innerHTML = `
@@ -520,7 +522,7 @@
                 </div>
                 <span class="invalid-input" id="invalid-orarioArrivo"></span>
               </div>
-              <div class="form-group" style="background-color: var(--main-color); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <div class="form-price">
                 <label><?php echo e(trans('messages.prezzo')); ?>:</label>
                 <div id="prezzoTotale" class="prezzo-output">€<span id="prezzoTotaleNumero">0.00</span></div>
               </div>
@@ -544,8 +546,11 @@
               </div>
               <div class="mb-3">
                 <label for="numBambini" class="form-label"><?php echo e(trans('messages.numBambini')); ?></label>
-                <select class="form-select shadow-none" id="numBambini" name="numBambini">
-                </select>
+                <select class="form-select shadow-none" id="numBambini" name="numBambini"></select>
+                <div class="form-text" style="max-width: 424px;">
+                  <?php echo e(trans('messages.infoBambini')); ?>
+
+                </div>
               </div>
             </div>
 
@@ -578,7 +583,7 @@
 
               <div class="mb-3">
                 <label for="stato" class="form-label"><?php echo e(trans('messages.stato')); ?></label>
-                <select class="form-control" id="stato" name="stato">
+                <select class="form-select shadow-none" id="stato" name="stato">
                   <option value="" disabled selected><?php echo e(trans('messages.placeholder_stato')); ?></option>
                   <!-- Opzioni generate dinamicamente con JavaScript -->
                 </select>
@@ -593,10 +598,10 @@
                       <span class="iconify" data-icon="flag:gb-4x3"></span>
                       <strong>+1</strong>
                     </div>
-                    <input type="tel" class="form-control" id="telefono" name="tel" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
+                    <input type="tel" class="form-control" id="num-telefono" name="tel" placeholder="<?php echo e(trans('messages.placeholder_telefono')); ?>">
                   </div>
                   <div class="options">
-                    <input type="text" class="search-box" placeholder="Search Country Name">
+                    <input type="text" class="search-box" placeholder="<?php echo e(trans('messages.placeholder_prefisso')); ?>" style="border: var(--bs-border-width) solid var(--bs-border-color);">
                     <ol>
                 
                     </ol>
@@ -607,7 +612,7 @@
 
                 </div>
                 <span class="invalid-input" id="invalid-telefono"></span>
-                <input type="hidden" id="num-telefono" name="num-telefono">
+                <input type="hidden" id="telefono" name="telefono">
               </div>
 
             

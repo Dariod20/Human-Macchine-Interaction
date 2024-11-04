@@ -6,7 +6,8 @@ use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-
+use App\Mail\CustomMail;
+use Illuminate\Support\Facades\Mail;
 
 class AdminBookingController extends Controller
 {
@@ -23,15 +24,15 @@ class AdminBookingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    /* public function create()
     {
         return view('adminPrenotazioni.editPrenotazione');
-    }
+    } */
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
         $nome = $request->input('nome');
         $cognome= $request->input('cognome');
@@ -56,7 +57,7 @@ class AdminBookingController extends Controller
         //torno sulla vista della lista dei libri
         return Redirect::to(route('prenotazioniAdmin.index'));
     }
-
+ */
     /**
      * Display the specified resource.
      */
@@ -73,7 +74,7 @@ class AdminBookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    /* public function edit(string $id)
     {
         $dl = new DataLayer();
         $prenotazione = $dl->findPrenotazioneById($id);
@@ -81,11 +82,11 @@ class AdminBookingController extends Controller
         if ($prenotazione !== null) {
             return view('adminPrenotazioni.editPrenotazione')->with('prenotazione', $prenotazione);
         }
-    }
+    } */
 
     /**
      * Update the specified resource in storage.
-     */
+     *//* 
     public function update(Request $request, string $id)
     {
         //Recupero dati inseriti nei campi della form per aggiunta nuovo libro
@@ -105,7 +106,7 @@ class AdminBookingController extends Controller
         $costoTotale= $dl->calcoloCostoTotale($arrivo,$partenza);
         $dl->editPrenotazione($id, $arrivo,$partenza,$numAdulti,$numBambini,$costoTotale,$nome,$cognome,$email,$telefono,$stato,$orarioArrivo);
         return Redirect::to(route('prenotazioniAdmin.index'));
-    }
+    } */
 
     /**
      * Remove the specified resource from storage.
@@ -113,8 +114,39 @@ class AdminBookingController extends Controller
     public function destroy(string $id)
     {
         $dl = new DataLayer();
+        $prenotazione = $dl->findPrenotazioneById($id);
+        $emailCliente = $prenotazione->email;
+        
         $dl->deletePrenotazione($id);
-        return Redirect::to(route('prenotazioniAdmin.index'));
+
+        $arrivoMail= Carbon::parse($prenotazione->arrivo)->format('d/m/Y');
+        $partenzaMail=Carbon::parse($prenotazione->partenza)->format('d/m/Y');
+        $orarioArrivoMail=Carbon::parse($prenotazione->orarioArrivo)->format('H:i');
+
+        $subject='Notifica di Cancellazione Prenotazione Zenzero Holidays';
+        // Invia la mail al cliente
+        $mailData = [
+            'operazione' => 'cancellata',
+            'title' => 'Notifica di Cancellazione Prenotazione',
+            'body' => 'La tua prenotazione dal ' . $arrivoMail . ' al ' . $partenzaMail . ' presso Zenzero Holidays è stata cancellata dall\'admin.',
+            'nome' => $prenotazione->nome,
+            'cognome' => $prenotazione->cognome,
+            'telefono' => $prenotazione->telefono,
+            'prezzoTotale' => $prenotazione->prezzoTotale,
+            'arrivo' => $arrivoMail,
+            'partenza' => $partenzaMail,
+            'email' => $prenotazione->email,
+            'stato' => $prenotazione->stato,
+            'numAdulti' => $prenotazione->numAdulti,
+            'numBambini' => $prenotazione->numBambini,
+            'orario' => $orarioArrivoMail,
+            'infoFinali' => 'Nel caso tu abbia già effettuato il pagamento sarai contattato via mail per il rimborso. <br> Per qualsiasi altro dubbio non esitare a contattarci',
+            'NomeSaluto' => 'Christian Girardelli'
+        ];
+
+        Mail::to($emailCliente)->send(new CustomMail($mailData, $subject));
+
+        return Redirect::to(route('prenotazioniAdmin.index'))->with('success', __('messages.elimination_success'));
     }
 
     public function confirmDestroy($id) {
@@ -146,14 +178,15 @@ class AdminBookingController extends Controller
     
     public function ajaxCheckTariffePrenotazione(Request $request)
     {
-        $arrivo = Carbon::parse($request->input('arrivo'));
-        $partenza = Carbon::parse($request->input('partenza'));
+        $giorno = Carbon::parse($request->input('giorno'));
+        $giornoFino = Carbon::parse($request->input('giorno_fino'));
         $context = $request->input('context'); // Ottieni il parametro context
 
     
         $dl = new DataLayer();
-        $result = $dl->checkTariffeDisponibili($arrivo, $partenza);
-    
+        $result = $dl->checkTariffeDisponibili($giorno, $giornoFino);
+
+
         if (!$result['allTariffeExist']) {
             return response()->json([
                 'available' => false,
@@ -180,12 +213,7 @@ class AdminBookingController extends Controller
 
     
 
-    public function confermaPrenotazione($arrivo)
-    {
-        $arrivo= Carbon::parse($arrivo)->format('d-m-Y');
-        $arrivoDopo = Carbon::parse($arrivo)->addDay()->format('d-m-Y');
-        return view('utentePrenotazioni.confirmPrenotazione')->with(['arrivo'=> $arrivo, 'arrivoDopo'=> $arrivoDopo]);
-    }
+    
 
 
 }

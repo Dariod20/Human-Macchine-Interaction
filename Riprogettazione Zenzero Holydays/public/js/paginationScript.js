@@ -1,36 +1,44 @@
-$(document).ready(function(){
+// paginationScript.js
 
-    // Pagination feature
-    var currentPage = 1;
-    var rowsPerPage = parseInt($("#rowsPerPage").val()); // Numero di righe per pagina
-    var $tableRows = $(".table tbody tr");
-    var totalPages = Math.ceil($tableRows.length / rowsPerPage);
+// Variabili globali per la paginazione
+var currentPage = 1;
+var rowsPerPage;
+var $tableRows;
+var totalPages;
 
-    function showPage(page) {
-        var start = (page - 1) * rowsPerPage;
-        var end = start + rowsPerPage;
+// Funzione di paginazione resa globale
+function showPage(page) {
+    var start = (page - 1) * rowsPerPage;
+    var end = start + rowsPerPage;
 
-        $tableRows.hide().slice(start, end).show();
+    $tableRows.hide().slice(start, end).show();
 
-        // Rimuovi i numeri di pagina esistenti
-        $(".page-item.pageNumber").remove();
+    // Rimuovi i numeri di pagina esistenti
+    $(".page-item.pageNumber").remove();
 
-        // Calcola quali numeri di pagina visualizzare
-        var startPage = Math.max(1, currentPage - 1);
-        var endPage = Math.min(startPage + 2, totalPages);
+    // Calcola quali numeri di pagina visualizzare
+    var startPage = Math.max(1, currentPage - 1);
+    var endPage = Math.min(startPage + 2, totalPages);
 
-        // Aggiungere i numeri di pagina calcolati al markup HTML
-        for (var i = startPage; i <= endPage; i++) {
-            var $li = $("<li>", { class: "page-item pageNumber" });
-            var $link = $("<a>", { class: "page-link", href: "#", text: i });
-            if (i === currentPage) {
-                $li.addClass("active");
-            }
-            $li.append($link);
-            $li.insertBefore("#nextPage");
+    // Aggiungere i numeri di pagina calcolati al markup HTML
+    for (var i = startPage; i <= endPage; i++) {
+        var $li = $("<li>", { class: "page-item pageNumber" });
+        var $link = $("<a>", { class: "page-link", href: "#", text: i });
+        if (i === currentPage) {
+            $li.addClass("active");
         }
+        $li.append($link);
+        $li.insertBefore("#nextPage");
     }
+}
 
+$(document).ready(function() {
+    // Inizializza variabili di paginazione
+    rowsPerPage = parseInt($("#rowsPerPage").val());
+    $tableRows = $(".table tbody tr");
+    totalPages = Math.ceil($tableRows.length / rowsPerPage);
+
+    // Funzioni per navigare tra le pagine
     function goToPreviousPage() {
         if (currentPage > 1) {
             currentPage--;
@@ -45,7 +53,7 @@ $(document).ready(function(){
         }
     }
 
-    // Aggiorna il numero di righe per pagina quando viene selezionato un nuovo valore
+    // Evento per cambiare righe per pagina
     $("#rowsPerPage").on("change", function() {
         rowsPerPage = parseInt($(this).val());
         totalPages = Math.ceil($tableRows.length / rowsPerPage);

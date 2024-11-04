@@ -137,7 +137,7 @@ Zenzero Holidays
                         <!--alt dà descrizione foto per motivi di accessibilità, visualizzata in caso di errori di caricamentto img e ottimizzazione motori di ricerca-->
                         <div class="card-body">
                             <p class="card-text lead"><?php echo e(trans('messages.card1')); ?></p>
-                            <a href="<?php echo e(route('casaVacanze')); ?>" class="btn btn-custom">Zenzero Holidays</a>
+                            <a href="<?php echo e(route('casaVacanze')); ?>" class="btn btn-custom"><?php echo e(trans('button.casa')); ?></a>
                         </div>
                     </div>
                 </div>

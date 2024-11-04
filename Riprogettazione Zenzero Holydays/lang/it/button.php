@@ -17,6 +17,11 @@ return [
     'avanti' => 'Avanti',
     'confermaPren' => 'Conferma Prenotazione ',
     'calendario' => 'Torna al calendario',
+    'mesePrec' => 'Mese Precedente',
+    'meseCorr' => 'Mese Corrente',
+    'meseSucc' => 'Mese Successivo',
+    'calendarioHome' => 'Calendario',
+
 
 
 

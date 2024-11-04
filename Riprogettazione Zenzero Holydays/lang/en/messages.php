@@ -32,7 +32,7 @@ return [
     'terme' => 'Thermal baths',
 
     'telefono' => 'Phone',
-    'regole' => 'House rules:',
+    'regole' => 'House rules',
     'regola1' => 'Check-in: from 3.00 PM to 8:00 PM',
     'regola2' => 'Check-out: by 10.00 AM',
     'regola3' => 'No smoking inside the house',
@@ -60,12 +60,21 @@ return [
      'reservation_success' => 'The reservation has been successfully confirmed! You will be contacted shortly via email for payment. 
      Please note that cancellations are free of charge only up to two days before the arrival date. After this period, only 75% of the cost will be refunded.',
      'cancellation_success' => 'The reservation has been successfully canceled! You will be contacted shortly via email regarding your refund.',
+     'elimination_success' => 'Booking successfully canceled and notification email sent.',
+     'rates_success' => 'Rates added successfully',
+     'ratesElim_success' => 'Rates deleted successfully',
+
 
 
     'placeholder_nome' => 'Enter your first name',
     'placeholder_cognome' => 'Enter your last name',
     'placeholder_email' => 'Enter your email',
     'placeholder_telefono' => 'Enter your phone number',
+    'placeholder_stato' => 'Select country',
+    'placeholder_prefisso' => 'Search country name',
+    'placeholder_prezzo' => 'Amount per night',
+
+
 
     'datiPrenotazione' => 'Booking details',
     'numOspiti' => 'Guests details',
@@ -79,6 +88,53 @@ return [
 
     'dateRange' => 'Check-in and check-out dates',
      'selezionaOrario' => 'Select an arrival time',
+
+     'months' => [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
+
+    'login_feedback' => 'To complete the booking, please log in or register if you don’t have an account yet.',
+
+    'infoBambini' => 'Up to 12 years old.',
+    'contact' => 'Contacts',
+
+    'edit_rate_group' => 'Edit Rate Group',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'rate' => 'Rate',
+    'save_changes' => 'Save Changes',
+
+    'by_car' => 'By Car',
+    'by_train' => 'By Train',
+    'by_plane' => 'By Plane',
+    'by_car_description' => 'From the Peschiera del Garda exit on the A4 motorway: after the toll booth, keep right until the roundabout. 
+        At the roundabout, take the fourth exit towards Cavalcaselle/Verona. At the traffic light in Cavalcaselle, turn right and then immediately left onto via XX Settembre.
+        Shortly after, turn right onto via Mantovana and continue for about 400 meters until you reach a small square on the right.',
+    'by_train_description' => 'From Peschiera del Garda train station, you can reach us in about 5 minutes using the available bus or taxi services. <br>
+        For the bus, take the ATV line 164 or Arriva line LN026, both heading towards Verona. Get off at the Cavalcaselle stop. 
+        From here, walk for about 5 minutes along via Mantovana until you find a small square on the right.',
+    'by_plane_description' => 'From Verona Airport (Valerio Catullo), it’s about a 20-minute taxi ride. <br>
+        Alternatively, you can take the ATV bus 199 to Verona Porta Nuova train station. <br>From there, you have two options:
+        <li>
+        Bus: take the ATV bus 164 towards Garda or the Arriva bus LN026 towards Brescia and get off at the Cavalcaselle stop.
+        From there, walk for about 10 minutes following the \'By Car\' directions from the Cavalcaselle traffic light.
+        </li>
+        <li>
+        Train: take a train towards Milan and get off at Peschiera del Garda station.
+        From there, follow the instructions for arriving by train.
+        </li>',
+    'how_to_reach_us' => 'How to reach us',
+
+    'save_add' => 'Add rates',
+
+    'range_mod' => 'Start and End dates for rate modification',
+    'range_add' => 'Start and End dates for adding rates',
+
+    'prenSearch' => 'No bookings found.',
+    'admin' => 'Admin:',
+    'rateSearch' => 'No rates found.',
 
 
 
