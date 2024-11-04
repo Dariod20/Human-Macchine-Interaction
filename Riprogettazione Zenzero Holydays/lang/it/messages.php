@@ -89,8 +89,9 @@ return [
     'dettagli' => 'Dettagli della prenotazione',
     'prenotazione' => 'La prenotazione',
     'cancellata' => 'sarà cancellata',
-    'nonCancellata' => 'NON sarà cancellata'
-
+    'nonCancellata' => 'NON sarà cancellata',
+    "lista_prenotazioni" => 'Lista prenotazioni',
+    "lista_tariffe" => 'Lista tariffe',
 
 
 

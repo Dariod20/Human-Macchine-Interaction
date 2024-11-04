@@ -88,7 +88,9 @@ return [
     'dettagli' => 'Reservation details',
     'prenotazione' => 'The reservation',
     'cancellata' => 'will be deleted',
-    'nonCancellata' => 'will NOT be deleted'
+    'nonCancellata' => 'will NOT be deleted',
+    "lista_prenotazioni" => 'Bookings list',
+    "lista_tariffe" => 'Rates list'
 
 
 

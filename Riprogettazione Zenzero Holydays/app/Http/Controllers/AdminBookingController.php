@@ -77,7 +77,7 @@ class AdminBookingController extends Controller
     {
         $dl = new DataLayer();
         $prenotazione = $dl->findPrenotazioneById($id);
-        
+
         if ($prenotazione !== null) {
             return view('adminPrenotazioni.editPrenotazione')->with('prenotazione', $prenotazione);
         }
@@ -123,45 +123,45 @@ class AdminBookingController extends Controller
         return view('adminPrenotazioni.deletePrenotazione')->with('prenotazione', $prenotazione);
     }
 
-    
+
     public function ajaxCheckPrenotazione(Request $request)
     {
         $arrivo = Carbon::parse($request->input('arrivo'));
         $partenza = Carbon::parse($request->input('partenza'));
-    
+
         // Controllo che le date di arrivo e partenza non coincidano
         if ($arrivo->eq($partenza)) {
             return response()->json(['found' => true, 'occupiedDates' => [['arrivo' => $arrivo->toDateString(), 'partenza' => $partenza->toDateString()]], 'error' => 'La data di arrivo e partenza non possono coincidere.']);
         }
-    
+
         $dl = new DataLayer();
         $occupiedDates = $dl->checkPrenotazioniSovrapposte($arrivo, $partenza, $request->input('prenotazioneId'));
-    
+
         if (!empty($occupiedDates)) {
             return response()->json(['found' => true, 'occupiedDates' => $occupiedDates]);
         } else {
             return response()->json(['found' => false]);
         }
     }
-    
+
     public function ajaxCheckTariffePrenotazione(Request $request)
     {
         $arrivo = Carbon::parse($request->input('arrivo'));
         $partenza = Carbon::parse($request->input('partenza'));
         $context = $request->input('context'); // Ottieni il parametro context
 
-    
+
         $dl = new DataLayer();
         $result = $dl->checkTariffeDisponibili($arrivo, $partenza);
-    
+
         if (!$result['allTariffeExist']) {
             return response()->json([
                 'available' => false,
                 'message' => 'Tariffe mancanti per i seguenti giorni: ' . implode(', ', $result['missingDates']),
-                'context' => $context                
+                'context' => $context
             ]);
         }
-    
+
         return response()->json(['available' => true]);
     }
 
@@ -178,7 +178,7 @@ class AdminBookingController extends Controller
         return response()->json(['prezzoTotale' => $prezzoTotale]);
     }
 
-    
+
 
     public function confermaPrenotazione($arrivo)
     {

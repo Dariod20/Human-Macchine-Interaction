@@ -44,7 +44,7 @@ Prenotazioni
 
 <div class="container-fluid mb-3 pt-3 text-center">
     <h1>
-        Lista prenotazioni
+        {{ trans('messages.lista_prenotazioni') }}
     </h1>
 </div>
 
@@ -59,7 +59,7 @@ Prenotazioni
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cambia visualizzazione &nbsp&nbsp
+                {{ trans('button.visualizzazione') }} &nbsp&nbsp
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
                     <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>

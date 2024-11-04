@@ -20,6 +20,7 @@ return [
     'calendario' => 'Torna al calendario',
     'nome' => 'Nome',
     'conferma' => 'Conferma Password',
+    'visualizzazione' => 'Cambia visualizzazione'
 
 
 

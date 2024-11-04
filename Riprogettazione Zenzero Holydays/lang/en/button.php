@@ -21,6 +21,7 @@ return [
     'calendario' => 'Back to Calendar',
     'nome' => 'Name',
     'conferma' => 'Confirm Password',
+    'visualizzazione' => 'Change visualization'
 
 
 

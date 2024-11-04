@@ -42,7 +42,8 @@ Prenotazioni
 
 <div class="container-fluid mb-3 pt-3 text-center">
     <h1>
-        Lista prenotazioni
+        <?php echo e(trans('messages.lista_prenotazioni')); ?>
+
     </h1>
 </div>
 
@@ -57,7 +58,7 @@ Prenotazioni
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cambia visualizzazione &nbsp&nbsp
+                <?php echo e(trans('button.visualizzazione')); ?> &nbsp&nbsp
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
                     <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.booking')); ?></a>
@@ -88,9 +89,9 @@ Prenotazioni
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>Arrivo</th>
-                            <th>Partenza</th>
-                            <th>Ospite</th>
+                            <th> <?php echo e(trans('messages.arrivo')); ?> </th>
+                            <th> <?php echo e(trans('messages.partenza')); ?> </th>
+                            <th> <?php echo e(trans('messages.prezzo')); ?> </th>
                             <th></th>
                         </tr>
                     </thead>
