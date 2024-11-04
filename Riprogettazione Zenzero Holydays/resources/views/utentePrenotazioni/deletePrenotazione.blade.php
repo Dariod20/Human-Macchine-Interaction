@@ -13,17 +13,30 @@
 @endsection
 
 @section('corpo')
-    <div class="container-fluid px-lg-4 mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-9 text-center">
-                <h2>
-                {{ trans('messages.confermaCancellazione') }} {{ $prenotazione->arrivo }} {{ trans('messages.al') }} {{ $prenotazione->partenza }}?
-                </h2>
-            </div>
-        </div>
 
-        <!-- Card con i dettagli della prenotazione, strutturata in due colonne -->
-        <div class="row justify-content-center mt-4">
+<section id="form-admin">
+    <div class="container-fluid px-lg-4">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-admin">
+
+                    <div class="container-fluid mt-4" style="padding: inherit;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 text-center">
+                                <h2>
+                                {{ trans('messages.confermaCancellazione') }} {{ \Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y') }} {{ trans('messages.al') }} {{ \Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y') }}?
+                                </h2>
+                                <p class="confirm">
+                                    Confermi?
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="inner">
+
+ <!-- Card con i dettagli della prenotazione, strutturata in due colonne -->
+ <div class="row justify-content-center mt-4">
             <div class="col-md-8"> <!-- Puoi adattare la larghezza se necessario -->
                 <div class="card border-secondary">
                     <div class="card-header text-center">
@@ -45,15 +58,15 @@
                             </div>
                             <div class="col-6 text-left">
                                 <!-- Colonna per i dati -->
-                                <p>{{ $prenotazione->arrivo }}</p>
-                                <p>{{ $prenotazione->partenza }}</p>
+                                <p>{{ \Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y') }}</p>
+                                <p>{{ \Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y') }}</p>
                                 <p>{{ $prenotazione->numAdulti }}</p>
                                 <p>{{ $prenotazione->numBambini }}</p>
                                 <p>€{{ $prenotazione->prezzoTotale }}</p>
                                 <p>{{ $prenotazione->email }}</p>
                                 <p>{{ $prenotazione->telefono }}</p>
                                 <p>{{ $prenotazione->stato }}</p>
-                                <p>{{ $prenotazione->orarioArrivo }}</p>
+                                <p>{{ \Carbon\Carbon::parse($prenotazione->orarioArrivo)->format('H:i') }}</p>
                             </div>
                         </div>
                     </div>

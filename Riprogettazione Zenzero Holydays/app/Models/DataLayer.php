@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 
 class DataLayer extends Model
@@ -154,22 +155,29 @@ class DataLayer extends Model
 
    public function checkTariffeDisponibili($arrivo, $partenza)
     {
-        $interval = $arrivo->diffInDays($partenza);
+
+
         $allTariffeExist = true;
         $missingDates = [];
-        $prezzo=0;
+        $prezzo = 0;
 
-        for ($i = 0; $i < $interval; $i++) {
-            $giorno = $arrivo->format('Y-m-d');
+        // Clona l'oggetto arrivo per evitare modifiche alla data originale
+        $currentDate = $arrivo->copy();
+
+        while ($currentDate->lte($partenza)) {
+            $giorno = $currentDate->format('Y-m-d');
             $tariffa = Tariffa::where('giorno', $giorno)->first();
+
             if (!$tariffa) {
                 $allTariffeExist = false;
                 $missingDates[] = $giorno;
             }
-            $arrivo->addDay();
+
+            $currentDate->addDay();
         }
-        if($allTariffeExist){
-            $prezzo= $this->calcoloCostoTotale($arrivo, $partenza);
+
+        if ($allTariffeExist) {
+            $prezzo = $this->calcoloCostoTotale($arrivo, $partenza);
         }
 
         return [
@@ -281,6 +289,18 @@ class DataLayer extends Model
             $tariffa->save();
         }
 
+    }
+
+    public function getDateRangeForTariffe()
+    {
+        $oldestTariffa= Tariffa::orderBy('giorno', 'asc')->first();
+        $latestTariffa= Tariffa::orderBy('giorno', 'desc')->first();
+
+        // Restituisci le date più vecchia e più futura
+        return [
+            'minDate' => $oldestTariffa ? $oldestTariffa->giorno : null,
+            'maxDate' => $latestTariffa ? $latestTariffa->giorno : null,
+        ];
     }
 
 

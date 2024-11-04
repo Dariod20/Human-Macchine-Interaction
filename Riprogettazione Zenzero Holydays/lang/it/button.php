@@ -18,6 +18,11 @@ return [
     'avanti' => 'Avanti',
     'confermaPren' => 'Conferma Prenotazione ',
     'calendario' => 'Torna al calendario',
+    'mesePrec' => 'Mese Precedente',
+    'meseCorr' => 'Mese Corrente',
+    'meseSucc' => 'Mese Successivo',
+    'calendarioHome' => 'Calendario',
+
     'nome' => 'Nome',
     'conferma' => 'Conferma Password',
     'visualizzazione' => 'Cambia visualizzazione'

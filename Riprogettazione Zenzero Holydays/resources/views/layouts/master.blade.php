@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <title>@yield('titolo')</title>
 
@@ -52,7 +52,13 @@
               <a class="nav-link @yield('active_contatti') me-2" href="{{ route('contatti') }}">{{ trans('button.contact') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link @yield('active_prenota') me-2" href="{{ route('calendario') }}">{{ trans('button.book') }}</a>
+              <a class="nav-link @yield('active_prenota') me-2" href="{{ route('calendario') }}">
+                @if(session('logged') && session('role') == 'admin')
+                    {{ trans('button.calendarioHome') }}
+                @else
+                    {{ trans('button.book') }}
+                @endif
+              </a>
             </li>
             @if((session('logged')) && (session('role') == 'registered_user'))
               <li class="nav-item">
@@ -69,7 +75,13 @@
             </ul>
             @if(session('logged'))
             <ul class="navbar-nav">
-            <li class="nav-item" id="welcomeUser"> {{ trans('messages.welcome') }} {{ session('loggedName') }} </li>
+            <li class="nav-item" id="welcomeUser">
+                @if(session('logged') && session('role') == 'admin')
+                    {{ trans('messages.admin') }}
+                @else
+                    {{ trans('messages.welcome') }}
+                @endif
+             {{ session('loggedName') }} </li>
             </ul>
             @endif
             <ul class="navbar-nav">
@@ -104,48 +116,55 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start text-white">
+    <footer class="text-lg-start text-white">
       <!-- Grid container -->
-      <div class="container p-4 pb-0 footer">
+      <div class="container p-4 footer">
         <!-- Section: Links -->
         <section>
           <!--Grid row-->
           <div class="row">
+            <!-- Grid column for logo and slogan -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 text-center">
+              <a class="navbar-brand fw-bold fs-3 h-font" href="{{ route('home') }}">Zenzero Holidays</a>
+              <p class="footer-slogan mt-2">{{ trans('messages.carosello') }}</p>
+            </div>
+        
+            <hr class="w-100 clearfix d-md-none" />
+
             <!-- Grid column -->
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h6 class="text-uppercase mb-4 font-weight-bold">Menù:</h6>
-              <p><a class="text-white" href="{{ route('home') }}">Home</a></p>
-              <p><a class="text-white" href="{{ route('casaVacanze') }}">{{ trans('button.casa') }}</a></p>
-              <p><a class="text-white" href="{{ route('luoghiDiInteresse') }}">{{ trans('button.luoghi') }}</a></p>
-              <p><a class="text-white" href="{{ route('contatti') }}">{{ trans('button.contact') }}</a></p>
+              <h6 class="text-uppercase font-weight-bold">{{ trans('messages.position') }}</h6>
+              <hr
+                class="mt-0 d-inline-block mx-auto"
+                style="width: 100px; background-color: #cececebc; height: 2px"
+                />
+              <p><a href="https://maps.app.goo.gl/4W9M2on2tefVwz1a7" class="text-white"><i class="bi bi-geo-alt-fill"></i>Via Mantovana, 58b, 37014 Cavalcaselle, VR, Italia</a></p>
             </div>
 
             <hr class="w-100 clearfix d-md-none" />
 
             <!-- Grid column -->
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h6 class="text-uppercase mb-4 font-weight-bold">{{ trans('messages.position') }}:</h6>
-              <p><a href="https://maps.app.goo.gl/4W9M2on2tefVwz1a7" class="text-white">Via Mantovana, 58b, 37014 Cavalcaselle, VR, Italia</a></p>
-            </div>
-
-            <hr class="w-100 clearfix d-md-none" />
-
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h6 class="text-uppercase mb-4 font-weight-bold">{{ trans('button.contact') }}:</h6>
-              <p><a href="mailto:dina.colpani@gmail.com" class="text-white">dina.colpani@gmail.com</a></p>
-              <p><a href="tel:+393334142902" class="text-white">+ 39 333 414 2902</a></p>
-              <p><a href="tel:+393515869002" class="text-white">+ 39 351 586 9002</a></p>
+              <h6 class="text-uppercase font-weight-bold">{{ trans('messages.contact') }}</h6>
+              <hr
+                class="mt-0 d-inline-block mx-auto"
+                style="width: 77px; background-color: #cececebc; height: 2px"
+                />
+              <p><a href="mailto:dina.colpani@gmail.com" class="text-white"><i class="bi bi-envelope-fill"></i>dina.colpani@gmail.com</a></p>
+              <p><a href="tel:+393334142902" class="text-white"><i class="bi bi-telephone-fill"></i>+39 333 414 2902</a></p>
             </div>
 
             <hr class="w-100 clearfix d-md-none" />
 
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h6 class="text-uppercase mb-4 font-weight-bold">Social:</h6>
+              <h6 class="text-uppercase font-weight-bold">Social</h6>
+              <hr
+                class="mt-0 d-inline-block mx-auto"
+                style="width: 57px; background-color: #cececebc; height: 2px"
+                />
               <!-- Facebook -->
-              <p><a href="https://m.facebook.com/people/ZenZero-Holiday/100072790333341/">
-              <i class="bi bi-facebook">Facebook</i>
+              <p><a href="https://m.facebook.com/people/ZenZero-Holiday/100072790333341/" class="text-white"><i class="bi bi-facebook"></i>Facebook</a></p>
         </a></p>
             </div>
 

@@ -49,7 +49,7 @@ class AdminTariffeController extends Controller
             $dl->addTariffa($date->format('Y-m-d'), $prezzo);
         }
 
-        return Redirect::to(route('tariffeAdmin.index'));
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', __('messages.rates_success'));
     }
 
     /**
@@ -89,7 +89,7 @@ class AdminTariffeController extends Controller
 
         $dl = new DataLayer();
         $dl->editTariffa($id, $giorno, $prezzo);
-        return Redirect::to(route('tariffeAdmin.index'));
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', 'Tariffe modificate con successo.');
     }
 
     /**
@@ -99,7 +99,8 @@ class AdminTariffeController extends Controller
     {
         $dl = new DataLayer();
         $dl->deleteTariffa($id);
-        return Redirect::to(route('tariffeAdmin.index'));
+
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', __('messages.ratesElim_success'));
     }
 
     public function confirmDestroy($id) {
@@ -120,7 +121,7 @@ class AdminTariffeController extends Controller
         
         $tariffeTrovate= $dl->findTariffaByGiorno($giorno, $giornoFino);
           
-        if (!empty($tariffeTrovate)) {
+        if ($tariffeTrovate->isNotEmpty()) {
             return response()->json(['found' => true, 'tariffe' => $tariffeTrovate]);
         }
 
@@ -129,8 +130,10 @@ class AdminTariffeController extends Controller
 
     public function editGruppo()
     {
-    
-        return view('adminTariffe.editTariffa');
+        $dl = new DataLayer();
+        $dateRange = $dl->getDateRangeForTariffe(); // Supponendo un repository o data layer
+
+        return view('adminTariffe.editTariffa')->with(['minDate' => $dateRange['minDate'],'maxDate' => $dateRange['maxDate']]);
     
     }
 

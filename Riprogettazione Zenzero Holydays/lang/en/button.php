@@ -21,7 +21,13 @@ return [
     'calendario' => 'Back to Calendar',
     'nome' => 'Name',
     'conferma' => 'Confirm Password',
-    'visualizzazione' => 'Change visualization'
+    'mesePrec' => 'Previous Month',
+    'meseCorr' => 'Current Month',
+    'meseSucc' => 'Next Month',
+    'calendarioHome' => 'Calendar',
+
+
+
 
 
 
