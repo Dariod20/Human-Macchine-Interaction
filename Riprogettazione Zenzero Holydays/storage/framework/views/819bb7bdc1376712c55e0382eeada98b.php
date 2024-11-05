@@ -11,18 +11,30 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('corpo'); ?>
-<section id="conferma-cancellazione" class="px-lg-4">
-    <div class="container-fluid px-lg-4 mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-9 text-center">
-                <h2>
-                <?php echo e(trans('messages.confermaCancellazione')); ?> <?php echo e($prenotazione->arrivo); ?> <?php echo e(trans('messages.al')); ?> <?php echo e($prenotazione->partenza); ?>?
-                </h2>
-            </div>
-        </div>
 
-        <!-- Card con i dettagli della prenotazione, strutturata in due colonne -->
-        <div class="row justify-content-center mt-4">
+<section id="form-admin">
+    <div class="container-fluid px-lg-4">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-admin">
+
+                    <div class="container-fluid mt-4" style="padding: inherit;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 text-center">
+                                <h2>
+                                <?php echo e(trans('messages.confermaCancellazione')); ?> <?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?> <?php echo e(trans('messages.al')); ?> <?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?>?
+                                </h2>
+                                <p class="confirm">
+                                    Confermi?
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="inner">
+
+ <!-- Card con i dettagli della prenotazione, strutturata in due colonne -->
+ <div class="row justify-content-center mt-4">
             <div class="col-md-8"> <!-- Puoi adattare la larghezza se necessario -->
                 <div class="card border-secondary">
                     <div class="card-header text-center">
@@ -45,15 +57,15 @@
                             </div>
                             <div class="col-6 text-left">
                                 <!-- Colonna per i dati -->
-                                <p><?php echo e($prenotazione->arrivo); ?></p>
-                                <p><?php echo e($prenotazione->partenza); ?></p>
+                                <p><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></p>
+                                <p><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></p>
                                 <p><?php echo e($prenotazione->numAdulti); ?></p>
                                 <p><?php echo e($prenotazione->numBambini); ?></p>
                                 <p>€<?php echo e($prenotazione->prezzoTotale); ?></p>
                                 <p><?php echo e($prenotazione->email); ?></p>
                                 <p><?php echo e($prenotazione->telefono); ?></p>
                                 <p><?php echo e($prenotazione->stato); ?></p>
-                                <p><?php echo e($prenotazione->orarioArrivo); ?></p>
+                                <p><?php echo e(\Carbon\Carbon::parse($prenotazione->orarioArrivo)->format('H:i')); ?></p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +76,7 @@
         <!-- Card di conferma cancellazione -->
         <div class="row justify-content-center mt-4">
             <div class="col-md-4 card-conferma-eliminazione">
-                <div class="card border-secondary">
+                <div class="card border-secondary card-custom-width">
                     <div class="card-header text-center ">
                     <?php echo e(trans('messages.prenotazione')); ?> <strong><?php echo e(trans('messages.cancellata')); ?></strong>
                     </div>
@@ -93,7 +105,6 @@
             </div>
         </div>
     </div>
-</section>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/utentePrenotazioni/deletePrenotazione.blade.php ENDPATH**/ ?>

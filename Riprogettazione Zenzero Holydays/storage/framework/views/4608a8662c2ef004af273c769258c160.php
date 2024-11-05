@@ -23,11 +23,10 @@
 
         <section id="descrizione" class="px-lg-4">
             <div class="container">
-                <h1 class="text-center mb-3"><?php echo e(trans('button.luoghi')); ?></h1>
                 <div class="row">
                     <div class="col-md-6">
                         <h2><?php echo e(trans('messages.parchi')); ?></h2>
-                        <ul>
+                        <ul class="posti">
                             <li>Gardaland - <?php echo e(trans('messages.distanza')); ?>: 3 km</li>
                             <li>Caneva Aquapark - <?php echo e(trans('messages.distanza')); ?>: 5 km</li>
                             <li>Movieland - <?php echo e(trans('messages.distanza')); ?>: 5 km</li>
@@ -40,7 +39,7 @@
                     </div>
                     <div class="col-md-6">
                         <h2><?php echo e(trans('messages.citta')); ?></h2>
-                        <ul>
+                        <ul class="posti">
                             <li>Peschiera del Garda - <?php echo e(trans('messages.distanza')); ?>: 2 km</li>
                             <li>Lazise - <?php echo e(trans('messages.distanza')); ?>: 6 km</li>
                             <li>Sirmione - <?php echo e(trans('messages.distanza')); ?>: 8 km</li>
@@ -59,7 +58,7 @@
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <h2><?php echo e(trans('messages.terme')); ?></h2>
-                        <ul>
+                        <ul class="posti">
                             <li>Terme di Sirmione - <?php echo e(trans('messages.distanza')); ?>: 7 km</li>
                             <li>Parco termale del Garda - <?php echo e(trans('messages.distanza')); ?>: 4 km</li>
                             <li>Aquardens - <?php echo e(trans('messages.distanza')); ?>: 19 km</li>
@@ -69,7 +68,7 @@
                     </div>
                     <div class="col-md-6">
                         <h2>Sport</h2>
-                        <ul>
+                        <ul class="posti">
                             <li><?php echo e(trans('messages.pesca')); ?> - <?php echo e(trans('messages.distanza')); ?>: 1 km</li>
                             <li>Golf Club Paradiso - <?php echo e(trans('messages.distanza')); ?>: 4 km</li>
                             <li>Sup Experience Garda Lake - <?php echo e(trans('messages.distanza')); ?>: 2 km</li>

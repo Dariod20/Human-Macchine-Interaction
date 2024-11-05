@@ -12,6 +12,10 @@
 
         $tableRows.hide().slice(start, end).show();
 
+        // Disabilita il pulsante "Precedente" se siamo alla prima pagina
+        $("#previousPage").toggleClass("disabled", currentPage === 1);
+        $("#nextPage").toggleClass("disabled", currentPage === totalPages);
+
         // Rimuovi i numeri di pagina esistenti
         $(".page-item.pageNumber").remove();
 
@@ -52,15 +56,17 @@ $(document).ready(function() {
         }
     }
 
-    // Aggiorna il numero di righe per pagina quando viene selezionato un nuovo valore
-    $("#rowsPerPage").on("change", function() {
-        rowsPerPage = parseInt($(this).val());
+    // Gestione del cambiamento del numero di righe per pagina tramite il dropdown
+    $(".dropdown-menu .dropdown-item").on("click", function(event) {
+        event.preventDefault();
+        rowsPerPage = parseInt($(this).data("value"));
+        $("#dropdownRowsPerPage").text(rowsPerPage + " prenotazioni per pagina");
         totalPages = Math.ceil($tableRows.length / rowsPerPage);
         currentPage = 1; // Resetta alla prima pagina
         showPage(currentPage);
     });
 
-    showPage(currentPage);
+    //showPage(currentPage);
 
     $("#previousPage").on("click", goToPreviousPage);
     $("#nextPage").on("click", goToNextPage);

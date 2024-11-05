@@ -35,38 +35,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'david.black@gmail.com',
             'password' => 'David300!'
         ]);
-        // User::factory(10)->create();
-
-        /* User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]); */
-
-         // Popolare la tabella delle prenotazioni
-         /* Prenotazione::factory()->count(10)->create()->each(function ($prenotazione) {
-             // Per ogni prenotazione creata, popolare la tabella delle tariffe
-             // Ottenere le date di arrivo e partenza dalla prenotazione
-             $arrivo = Carbon::parse($prenotazione->arrivo);
-             $partenza = Carbon::parse($prenotazione->partenza);
-
-             // Calcolare i giorni di pernottamento
-             $days = $partenza->diffInDays($arrivo);
-
-             // Creare una tariffa per ogni giorno di pernottamento
-             for ($i = 0; $i < $days; $i++) {
-                 // Aggiungere $i giorni alla data di arrivo per ottenere la data della tariffa
-                 $giorno = $arrivo->copy()->addDays($i);
-
-                 // Creare la tariffa associata alla prenotazione corrente
-                 Tariffa::factory()->count(1)->create([
-                     'giorno' => $giorno,
-                     'prenotazione_id' => $prenotazione->id,
-                 ]);
-             }
-         });
-
-         Tariffa::factory()->count(10)->create();
- */
 
         $startDate = Carbon::create(2024, 9, 2);
         $endDate = Carbon::create(2024, 12, 31);
@@ -138,22 +106,6 @@ class DatabaseSeeder extends Seeder
                 $tariffa->update(['prenotazione_id' => $prenotazione->id]);
             }
         });
-
-
-/*
-        Prenotazione::factory()->count(1)->create([
-            'arrivo' => '2024-05-08',
-            'partenza' => '2024-05-10',
-        ]);
-        Prenotazione::factory()->count(1)->create([
-            'arrivo' => '2024-05-10',
-            'partenza' => '2024-05-11',
-        ]);
-        Prenotazione::factory()->count(1)->create([
-            'arrivo' => '2024-05-11',
-            'partenza' => '2024-05-14',
-        ]);
-          */
 
     }
 

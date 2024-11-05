@@ -97,6 +97,7 @@ return [
         'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
         'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'
     ],
+    
     'days' => ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'],
 
     'login_feedback' => 'Per completare la prenotazione devi accedere o registrarti, se non hai un account.',
