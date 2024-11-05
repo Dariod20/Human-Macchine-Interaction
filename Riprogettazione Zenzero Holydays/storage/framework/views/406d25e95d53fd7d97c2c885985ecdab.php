@@ -140,7 +140,7 @@ Prenotazioni
 
                     <div id="inner">
                         <div class="container-fluid px-lg-4 mt-4">
-                            <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-start">
                                 <div class="col-md-8 d-flex align-items-center">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -153,22 +153,23 @@ Prenotazioni
                                         <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button">
                                     </div>
                                 </div>
+
+                                <div class="col-md-4 d-flex justify-content-end align-items-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo e(trans('button.visualizzazione')); ?> &nbsp&nbsp
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                                            <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.booking')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="10">10 <?php echo e(trans('pagination.booking')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="15">15 <?php echo e(trans('pagination.booking')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="20">20 <?php echo e(trans('pagination.booking')); ?></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="col-md-4 d-flex justify-content-end align-items-center">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo e(trans('button.visualizzazione')); ?> &nbsp&nbsp
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
-                    <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.booking')); ?></a>
-                    <a class="dropdown-item" href="#" data-value="10">10 <?php echo e(trans('pagination.booking')); ?></a>
-                    <a class="dropdown-item" href="#" data-value="15">15 <?php echo e(trans('pagination.booking')); ?></a>
-                    <a class="dropdown-item" href="#" data-value="20">20 <?php echo e(trans('pagination.booking')); ?></a>
-                </div>
-            </div>
-        </div>
 
     <nav aria-label="Page navigation example" id="paginationNav">
         <ul class="pagination justify-content-center">
@@ -189,22 +190,21 @@ Prenotazioni
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>Arrivo</th>
-                            <th>Partenza</th>
-                            <th>Ospite</th>
-                            <th></th>
+                        <th><?php echo e(trans('messages.arrivo')); ?></th>
+                        <th><?php echo e(trans('messages.partenza')); ?></th>
+                        <th><?php echo e(trans('messages.prezzo')); ?></th>
+                        <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $prenotazioni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prenotazione): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td><?php echo e($prenotazione->arrivo); ?></td>
-                                <td><?php echo e($prenotazione->partenza); ?></td>
+                                <td><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></td>
+                                <td><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></td>
                                 <td><?php echo e($prenotazione->nome); ?> <?php echo e($prenotazione->cognome); ?></td>
                                 <td>
                                     <div class="btn-group-vertical" role="group">
                                         <a class="btn btn-secondary mb-1" href="<?php echo e(route('prenotazioniAdmin.show', ['prenotazioniAdmin' => $prenotazione->id])); ?>">Dettagli</a>
-                                        <a class="btn btn-primary mb-1" href="<?php echo e(route('prenotazioniAdmin.edit', ['prenotazioniAdmin' => $prenotazione->id])); ?>"><i class="bi bi-pencil-square"></i> Modifica</a>
                                         <a class="btn btn-danger" href="<?php echo e(route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id])); ?>"><i class="bi bi-trash"></i> Elimina</a>
                                     </div>
                                 </td>
