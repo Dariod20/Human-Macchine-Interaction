@@ -62,6 +62,8 @@ class AdminTariffeController extends Controller
 
         if ($tariffa !== null) {
             return view('adminTariffe.detailsTariffa')->with('tariffa',$tariffa);
+        } else {
+            return view('errors.404')->with('message', __('errors.tariffa_inesistente'));
         }
     }
 

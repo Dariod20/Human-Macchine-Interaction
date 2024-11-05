@@ -131,10 +131,12 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-8 d-flex justify-content-center align-items-center">
                                     <a class="btn btn-primary me-2" href="<?php echo e(route('tariffeAdmin.editGruppo')); ?>" style="font-size: large;">
-                                        <i class="bi bi-pencil-square"></i> Modifica gruppo di tariffe
+                                        <i class="bi bi-pencil-square"></i> <?php echo e(trans('button.edit_rate_group')); ?>
+
                                     </a>
                                     <a class="btn btn-success" href="<?php echo e(route('tariffeAdmin.create')); ?>" style="font-size: large;">
-                                        <i class="bi bi-database-add"></i> Aggiungi gruppo di tariffe
+                                        <i class="bi bi-database-add"></i> <?php echo e(trans('button.add_rate_group')); ?>
+
                                     </a>
                                 </div>
                             </div>
@@ -144,10 +146,10 @@
                                 <div class="col-md-8 d-flex align-items-start">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cerca per</button>
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo e(trans('button.cerca_per')); ?> &nbsp;</button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item searchOptions" href="#" data-column="0">Giorno</a></li>
-                                                <li><a class="dropdown-item searchOptions" href="#" data-column="1">Prezzo</a></li>
+                                                <li><a class="dropdown-item searchOptions" href="#" data-column="0"><?php echo e(trans('button.giorno')); ?></a></li>
+                                                <li><a class="dropdown-item searchOptions" href="#" data-column="1"><?php echo e(trans('button.prezzo')); ?></a></li>
                                             </ul>
                                         </div>
                                         <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" >
@@ -162,12 +164,51 @@
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <?php echo e(trans('button.visualizzazione')); ?> &nbsp;&nbsp;
                                         </button>
-                                        <div class="dropdown-menu" id="menuPaginazione" aria-labelledby="dropdownRowsPerPage">
-                                            <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.booking')); ?></a>
-                                            <a class="dropdown-item" href="#" data-value="10">10 <?php echo e(trans('pagination.booking')); ?></a>
-                                            <a class="dropdown-item" href="#" data-value="15">15 <?php echo e(trans('pagination.booking')); ?></a>
-                                            <a class="dropdown-item" href="#" data-value="20">20 <?php echo e(trans('pagination.booking')); ?></a>
+                                        <div class="dropdown-menu" id="menuPaginazioneTariffe" aria-labelledby="dropdownRowsPerPage">
+                                            <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.rate')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="10">10 <?php echo e(trans('pagination.rate')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="15">15 <?php echo e(trans('pagination.rate')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="20">20 <?php echo e(trans('pagination.rate')); ?></a>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table id="bookTable" class="table table-striped">
+                                            <colgroup>
+                                                <col style="width: 40%;">
+                                                <col style="width: 40%;">
+                                                <col style="width: 20%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th><?php echo e(trans('button.giorno')); ?></th>
+                                                    <th><?php echo e(trans('button.prezzo')); ?></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $__currentLoopData = $tariffe; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tariffa): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td><?php echo e(\Carbon\Carbon::parse($tariffa->giorno)->format('d/m/Y')); ?></td>
+                                                        <td>€<?php echo e($tariffa->prezzo); ?></td>
+                                                        <td>
+                                                            <div class="btn-group-vertical" role="group">
+                                                                <a class="btn btn-secondary mb-1" href="<?php echo e(route('tariffeAdmin.show', ['tariffeAdmin' => $tariffa->id])); ?>"><?php echo e(trans('button.dettagli')); ?></a>
+                                                                <?php if($tariffa->prenotazione_id == null): ?>
+                                                                    <a class="btn btn-primary mb-1" href="<?php echo e(route('tariffeAdmin.edit', ['tariffeAdmin' => $tariffa->id])); ?>"><i class="bi bi-pencil-square"></i> <?php echo e(trans('button.modifica')); ?> </a>
+                                                                    <a class="btn btn-danger" href="<?php echo e(route('tariffeAdmin.destroy.confirm', ['id' => $tariffa->id])); ?>"><i class="bi bi-trash"></i><?php echo e(trans('button.elimina')); ?></a>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-center" id="noResultsMessage" style="display: none;"><?php echo e(trans('messages.rateSearch')); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -182,49 +223,9 @@
                                             <a class="page-link" href="#"><?php echo e(trans('pagination.next')); ?></a>
                                         </li>
                                     </ul>
-                                </div>                                
+                                </div>
                             </nav>
 
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table id="bookTable" class="table table-striped">
-                                            <colgroup>
-                                                <col style="width: 40%;">
-                                                <col style="width: 40%;">
-                                                <col style="width: 20%;">
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>Giorno</th>
-                                                    <th>Prezzo</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $__currentLoopData = $tariffe; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tariffa): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <tr>
-                                                        <td><?php echo e(\Carbon\Carbon::parse($tariffa->giorno)->format('d/m/Y')); ?></td>
-                                                        <td>€<?php echo e($tariffa->prezzo); ?></td>
-                                                        <td>
-                                                            <div class="btn-group-vertical" role="group">
-                                                                <a class="btn btn-secondary mb-1" href="<?php echo e(route('tariffeAdmin.show', ['tariffeAdmin' => $tariffa->id])); ?>">Dettagli</a>
-                                                                <?php if($tariffa->prenotazione_id == null): ?>
-                                                                    <a class="btn btn-primary mb-1" href="<?php echo e(route('tariffeAdmin.edit', ['tariffeAdmin' => $tariffa->id])); ?>"><i class="bi bi-pencil-square"></i> Modifica</a>
-                                                                    <a class="btn btn-danger" href="<?php echo e(route('tariffeAdmin.destroy.confirm', ['id' => $tariffa->id])); ?>"><i class="bi bi-trash"></i> Elimina</a>
-                                                                <?php endif; ?>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </tbody>
-                                        </table>
-                                        <p class="text-center" id="noResultsMessage" style="display: none;"><?php echo e(trans('messages.rateSearch')); ?></p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

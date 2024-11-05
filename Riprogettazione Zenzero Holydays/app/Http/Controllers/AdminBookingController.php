@@ -68,6 +68,8 @@ class AdminBookingController extends Controller
 
         if ($prenotazione !== null) {
             return view('adminPrenotazioni.detailsPrenotazione')->with('prenotazione',$prenotazione);
+        } else {
+            return view('errors.404')->with('message', __('errors.prenotazione_inesistente'));
         }
     }
 

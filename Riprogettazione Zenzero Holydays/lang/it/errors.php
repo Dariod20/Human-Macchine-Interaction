@@ -39,4 +39,9 @@ return [
     'stessaPassword' => "Le due password devono combaciare.",
     'emailEsistente' => "Questa email è già in uso. Scegline un'altra.",
 
+    'accesso_errato' => 'Accesso alla pagina non consentito o pagina inesistente!',
+    'prenotazione_inesistente' => 'La prenotazione non esiste.',
+    'tariffa_inesistente' => 'La tariffa non esiste.',
+    'torna_home' => 'Torna alla Home',
+
 ];

@@ -144,10 +144,10 @@ Prenotazioni
                                 <div class="col-md-8 d-flex align-items-center">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cerca per</button>
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ trans('button.cerca_per') }} &nbsp;</button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item searchOptions" href="#" data-column="0">Data</a></li>
-                                                <li><a class="dropdown-item searchOptions" href="#" data-column="1">Ospite</a></li>
+                                                <li><a class="dropdown-item searchOptions" href="#" data-column="0">{{ trans('button.data') }}</a></li>
+                                                <li><a class="dropdown-item searchOptions" href="#" data-column="1">{{ trans('button.ospite') }}</a></li>
                                             </ul>
                                         </div>
                                         <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button">
@@ -172,14 +172,6 @@ Prenotazioni
                                     </div>
                                 </div>
                             </div>
-
-
-                            <nav aria-label="Page navigation example" id="paginationNav">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
-                                    <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
-                                </ul>
-                            </nav>
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -219,6 +211,14 @@ Prenotazioni
                                     </div>
                                 </div>
                             </div>
+
+                            <nav aria-label="Page navigation example" id="paginationNav">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
+                                    <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
+                                </ul>
+                            </nav>
+
                         </div>
                     </div>
                 </div>

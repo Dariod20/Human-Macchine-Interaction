@@ -19,6 +19,7 @@ return [
     'booking' => 'prenotazioni per pagina',
     'cercaPrezzo' => 'Cerca per prezzo...',
     'cercaOspite' => 'Cerca per ospite...',
+    'rate' => 'tariffe per pagina',
 
 
 ];

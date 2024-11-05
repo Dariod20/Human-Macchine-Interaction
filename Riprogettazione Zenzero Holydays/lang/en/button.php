@@ -26,10 +26,15 @@ return [
     'meseSucc' => 'Next Month',
     'calendarioHome' => 'Calendar',
 
+    'visualizzazione' => 'Change visualization',
 
-
-
-
+    'edit_rate_group' => 'Edit rate group',
+    'add_rate_group' => 'Add rate group',
+    'cerca_per' => "Search by",
+    'giorno' => 'Day',
+    'prezzo' => 'Price',
+    'ospite' => 'Guest',
+    'data' => 'Date',
 
 
 ];

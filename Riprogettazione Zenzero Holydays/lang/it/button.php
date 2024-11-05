@@ -25,8 +25,15 @@ return [
 
     'nome' => 'Nome',
     'conferma' => 'Conferma Password',
-    'visualizzazione' => 'Cambia visualizzazione'
+    'visualizzazione' => 'Cambia visualizzazione',
 
+    'edit_rate_group' => 'Modifica gruppo di tariffe',
+    'add_rate_group' => 'Aggiungi gruppo di tariffe',
+    'cerca_per' => "Cerca per",
+    'giorno' => 'Giorno',
+    'prezzo' => 'Prezzo',
+    'ospite' => 'Ospite',
+    'data' => 'Data',
 
 
 ];

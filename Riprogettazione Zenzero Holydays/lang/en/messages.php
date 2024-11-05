@@ -152,5 +152,4 @@ return [
     'rateSearch' => 'No rates found.',
 
 
-
 ];

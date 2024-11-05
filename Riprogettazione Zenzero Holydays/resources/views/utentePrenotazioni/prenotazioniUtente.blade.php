@@ -121,13 +121,6 @@
                                 </div>
                             </div>
 
-                            <nav aria-label="Page navigation example" id="paginationNav">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
-                                    <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
-                                </ul>
-                            </nav>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
@@ -167,6 +160,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <nav aria-label="Page navigation example" id="paginationNav">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" id="previousPage"><a class="page-link" href="#"> {{ trans('pagination.previous') }} </a></li>
+                                    <li class="page-item" id="nextPage"><a class="page-link" href="#"> {{ trans('pagination.next') }} </a></li>
+                                </ul>
+                            </nav>
 
                         </div>
                     </div>

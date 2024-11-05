@@ -36,7 +36,10 @@ return [
     'prezzo' => "Rate is required.",
     'prezzoErr' => "Rate cannot be negative.",
 
-
+    'accesso_errato' => 'Access to the page not allowed or page non-existent!',
+    'prenotazione_inesistente' => 'The reservation does not exist.',
+    'tariffa_inesistente' => 'The rate does not exist.',
+    'torna_home' => 'Back to the Home',
 
 
 ];

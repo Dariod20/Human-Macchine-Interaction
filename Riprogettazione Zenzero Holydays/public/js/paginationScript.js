@@ -66,6 +66,15 @@ $(document).ready(function() {
         showPage(currentPage);
     });
 
+    $("#menuPaginazioneTariffe .dropdown-item").on("click", function(event) {
+        event.preventDefault();
+        rowsPerPage = parseInt($(this).data("value"));
+        $("#dropdownRowsPerPage").text(rowsPerPage + " tariffe per pagina");
+        totalPages = Math.ceil($tableRows.length / rowsPerPage);
+        currentPage = 1; // Resetta alla prima pagina
+        showPage(currentPage);
+    });
+
     showPage(currentPage);
 
     $("#previousPage").on("click", goToPreviousPage);
