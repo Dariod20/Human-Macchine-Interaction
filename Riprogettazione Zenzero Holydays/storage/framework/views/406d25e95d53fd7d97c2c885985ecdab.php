@@ -56,55 +56,55 @@ Prenotazioni
 
     // Function to execute search after typing delay
     function doneTyping() {
-    var value = $("#searchInput").val().toLowerCase();
+        var value = $("#searchInput").val().toLowerCase();
 
-    // Nascondi la paginazione se il campo di ricerca contiene testo
-    if (value !== "") {
-        $("#paginationNav").hide();
-    } else {
-        $("#paginationNav").show();
-        $("#bookTable tbody tr").show(); // Mostra tutte le righe
-        currentPage = 1; // Torna alla prima pagina
-        showPage(currentPage);
+        // Nascondi la paginazione se il campo di ricerca contiene testo
+        if (value !== "") {
+            $("#paginationNav").hide();
+        } else {
+            $("#paginationNav").show();
+            $("#bookTable tbody tr").show(); // Mostra tutte le righe
+            currentPage = 1; // Torna alla prima pagina
+            showPage(currentPage);
 
-        $("#noResultsMessage").hide(); // Nascondi il messaggio
-        return;
-    }
-
-    // Colonna selezionata per il filtro
-    var column = $("#searchInput").attr("data-column");
-    var anyVisible = false; // Variabile per tracciare se ci sono risultati
-
-
-    $("#bookTable tbody tr").each(function() {
-        var found = false;
-
-        // Filtra in base alla colonna selezionata
-        if (column !== undefined) {
-            if (column === '0') { // Colonne "Arrivo" e "Partenza"
-                var arrivoText = $(this).find("td:eq(0)").text().toLowerCase();
-                var partenzaText = $(this).find("td:eq(1)").text().toLowerCase();
-                if (arrivoText.indexOf(value) > -1 || partenzaText.indexOf(value) > -1) {
-                    found = true;
-                }
-            } else if (column === '1') { // Colonna "Ospite"
-                var ospiteText = $(this).find("td:eq(2)").text().toLowerCase();
-                if (ospiteText.indexOf(value) > -1) {
-                    found = true;
-                }
-            }
+            $("#noResultsMessage").hide(); // Nascondi il messaggio
+            return;
         }
 
-        $(this).toggle(found); // Mostra o nasconde la riga in base al risultato della ricerca
-        if (found) anyVisible = true; // Imposta a true se viene trovato un risultato
+        // Colonna selezionata per il filtro
+        var column = $("#searchInput").attr("data-column");
+        var anyVisible = false; // Variabile per tracciare se ci sono risultati
 
-    });
-    if (anyVisible) {
-        $("#noResultsMessage").hide();
-    } else {
-        $("#noResultsMessage").show();
+
+        $("#bookTable tbody tr").each(function() {
+            var found = false;
+
+            // Filtra in base alla colonna selezionata
+            if (column !== undefined) {
+                if (column === '0') { // Colonne "Arrivo" e "Partenza"
+                    var arrivoText = $(this).find("td:eq(0)").text().toLowerCase();
+                    var partenzaText = $(this).find("td:eq(1)").text().toLowerCase();
+                    if (arrivoText.indexOf(value) > -1 || partenzaText.indexOf(value) > -1) {
+                        found = true;
+                    }
+                } else if (column === '1') { // Colonna "Ospite"
+                    var ospiteText = $(this).find("td:eq(2)").text().toLowerCase();
+                    if (ospiteText.indexOf(value) > -1) {
+                        found = true;
+                    }
+                }
+            }
+
+            $(this).toggle(found); // Mostra o nasconde la riga in base al risultato della ricerca
+            if (found) anyVisible = true; // Imposta a true se viene trovato un risultato
+
+        });
+        if (anyVisible) {
+            $("#noResultsMessage").hide();
+        } else {
+            $("#noResultsMessage").show();
+        }
     }
-}
 
 });
 </script>
@@ -151,6 +151,9 @@ Prenotazioni
                                             </ul>
                                         </div>
                                         <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button">
+                                        <span class="input-group-addon">
+                                            <i class="bi bi-search" aria-hidden="true"></i>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -160,7 +163,7 @@ Prenotazioni
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <?php echo e(trans('button.visualizzazione')); ?> &nbsp&nbsp
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                                        <div class="dropdown-menu" id="menuPaginazione" aria-labelledby="dropdownRowsPerPage">
                                             <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.booking')); ?></a>
                                             <a class="dropdown-item" href="#" data-value="10">10 <?php echo e(trans('pagination.booking')); ?></a>
                                             <a class="dropdown-item" href="#" data-value="15">15 <?php echo e(trans('pagination.booking')); ?></a>
@@ -171,47 +174,54 @@ Prenotazioni
                             </div>
 
 
-    <nav aria-label="Page navigation example" id="paginationNav">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" id="previousPage"><a class="page-link" href="#"> <?php echo e(trans('pagination.previous')); ?> </a></li>
-            <li class="page-item" id="nextPage"><a class="page-link" href="#"> <?php echo e(trans('pagination.next')); ?> </a></li>
-        </ul>
-    </nav>
+                            <nav aria-label="Page navigation example" id="paginationNav">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" id="previousPage"><a class="page-link" href="#"> <?php echo e(trans('pagination.previous')); ?> </a></li>
+                                    <li class="page-item" id="nextPage"><a class="page-link" href="#"> <?php echo e(trans('pagination.next')); ?> </a></li>
+                                </ul>
+                            </nav>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="table-responsive">
-                <table id="bookTable" class="table table-striped">
-                    <colgroup>
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                        <th><?php echo e(trans('messages.arrivo')); ?></th>
-                        <th><?php echo e(trans('messages.partenza')); ?></th>
-                        <th><?php echo e(trans('messages.prezzo')); ?></th>
-                        <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $__currentLoopData = $prenotazioni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prenotazione): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></td>
-                                <td><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></td>
-                                <td><?php echo e($prenotazione->nome); ?> <?php echo e($prenotazione->cognome); ?></td>
-                                <td>
-                                    <div class="btn-group-vertical" role="group">
-                                        <a class="btn btn-secondary mb-1" href="<?php echo e(route('prenotazioniAdmin.show', ['prenotazioniAdmin' => $prenotazione->id])); ?>">Dettagli</a>
-                                        <a class="btn btn-danger" href="<?php echo e(route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id])); ?>"><i class="bi bi-trash"></i> Elimina</a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table id="bookTable" class="table table-striped">
+                                            <colgroup>
+                                                <col style="width: 25%;">
+                                                <col style="width: 25%;">
+                                                <col style="width: 25%;">
+                                                <col style="width: 25%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                <th><?php echo e(trans('messages.arrivo')); ?></th>
+                                                <th><?php echo e(trans('messages.partenza')); ?></th>
+                                                <th><?php echo e(trans('messages.prezzo')); ?></th>
+                                                <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $__currentLoopData = $prenotazioni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prenotazione): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></td>
+                                                        <td><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></td>
+                                                        <td><?php echo e($prenotazione->nome); ?> <?php echo e($prenotazione->cognome); ?></td>
+                                                        <td>
+                                                            <div class="btn-group-vertical" role="group">
+                                                                <a class="btn btn-secondary mb-1" href="<?php echo e(route('prenotazioniAdmin.show', ['prenotazioniAdmin' => $prenotazione->id])); ?>">Dettagli</a>
+                                                                <a class="btn btn-danger" href="<?php echo e(route('prenotazioniAdmin.destroy.confirm', ['id' => $prenotazione->id])); ?>"><i class="bi bi-trash"></i> Elimina</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-center" id="noResultsMessage" style="display: none;"><?php echo e(trans('messages.prenSearch')); ?></p>
                                     </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

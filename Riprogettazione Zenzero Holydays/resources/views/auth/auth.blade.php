@@ -167,6 +167,7 @@
                         $("input[name='confirm-password']").focus();
                     // Verifica che la password sia state editata due volte correttamente
                     } else if(confirmPassword.trim() !== password.trim()) {
+                        error = true;
                         $("#invalid-confirmPassword").text("{{ trans('errors.stessaPassword') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='confirm-password']").focus();
@@ -213,7 +214,7 @@
         <div class="container col-lg-4" id="login-container">
             @if (session('login_feedback'))
                 <div class="alert alert-info mt-4" role="alert">
-                    <i class="fas fa-info-circle"></i> 
+                    <i class="fas fa-info-circle"></i>
                     {{ session('login_feedback') }}
                 </div>
             @endif

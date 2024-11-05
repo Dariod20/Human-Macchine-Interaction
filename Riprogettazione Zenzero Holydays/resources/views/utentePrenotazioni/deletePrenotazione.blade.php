@@ -1,4 +1,4 @@
-@extends('layouts.delete')
+@extends('layouts.master')
 
 @section('titolo')
     Elimina la tua prenotazione
@@ -27,7 +27,7 @@
                                 <h2>
                                 {{ trans('messages.confermaCancellazione') }} {{ \Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y') }} {{ trans('messages.al') }} {{ \Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y') }}?
                                 </h2>
-                            
+
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@
                                 <div class="col-md-4 mt-md-0 card-conferma-eliminazione">
                                     <div class="card border-secondary card-custom-width">
                                         <div class="card-header text-center ">
-                                            Conferma   
+                                            Conferma
                                         </div>
                                         <div class="card-body text-center">
                                             <p>
@@ -97,7 +97,7 @@
                                 <div class="col-md-4 mt-md-0 card-conferma-eliminazione">
                                     <div class="card border-secondary card-custom-width">
                                         <div class="card-header text-center">
-                                            Annulla      
+                                            Annulla
                                         </div>
                                         <div class="card-body text-center">
                                             <p>
@@ -114,5 +114,5 @@
             </div>
         </div>
     </div>
-</section>    
+</section>
 @endsection

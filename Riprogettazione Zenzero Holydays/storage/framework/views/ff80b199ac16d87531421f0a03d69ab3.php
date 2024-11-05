@@ -29,9 +29,6 @@
                                 <h2>
                                     Stai per cancellare la prenotazione di "<?php echo e($prenotazione->nome); ?> <?php echo e($prenotazione->cognome); ?>"
                                 </h2>
-                                <p class="confirm">
-                                    Sei sicuro di voler proseguire? Questa azione è irreversibile.
-                                </p>
                             </div>
                         </div>
 
@@ -77,16 +74,16 @@
 
                             <!-- Card di conferma cancellazione -->
                             <div class="row justify-content-center mt-4">
-                                <div class="col-md-4 mt-4 mt-md-0">
+                                <div class="col-md-4 mt-md-0 card-conferma-eliminazione">
                                     <div class="card border-secondary card-custom-width">
                                         <div class="card-header text-center ">
                                             Conferma
                                         </div>
                                         <div class="card-body text-center">
                                             <p>
-                                                La prenotazione <strong>sarà cancellata</strong>
+                                                <?php echo e(trans('messages.prenotazione')); ?> <strong><?php echo e(trans('messages.cancellata')); ?></strong>
                                             </p>
-                                            <form name="prenotazione" method="post" action="<?php echo e(route('prenotazioniAdmin.destroy', ['prenotazioniAdmin' => $prenotazione->id])); ?>" style="padding: unset;">
+                                            <form name="prenotazione" method="post" action="<?php echo e(route('prenotazioniAdmin.destroy', ['prenotazioniAdmin' => $prenotazione->id])); ?>" style="padding: 0.80em;">
                                                 <?php echo method_field('DELETE'); ?>
                                                 <?php echo csrf_field(); ?>
                                                 <label for="mySubmit" class="btn btn-danger w-100"><i class="bi bi-trash"></i> <?php echo e(trans('button.elimina')); ?></label>
@@ -97,14 +94,14 @@
                                 </div>
 
                                 <!-- Card per annullare la cancellazione -->
-                                <div class="col-md-4 mt-4 mt-md-0">
+                                <div class="col-md-4 mt-md-0 card-conferma-eliminazione">
                                     <div class="card border-secondary card-custom-width">
                                         <div class="card-header text-center">
                                             Annulla
                                         </div>
                                         <div class="card-body text-center">
                                             <p>
-                                                La prenotazione <strong>non sarà cancellata</strong>
+                                                <?php echo e(trans('messages.prenotazione')); ?> <strong><?php echo e(trans('messages.nonCancellata')); ?></strong>
                                             </p>
                                             <a class="btn btn-secondary w-100" href="<?php echo e(route('prenotazioniAdmin.index')); ?>"><i class="bi bi-box-arrow-left"></i> <?php echo e(trans('button.annulla')); ?></a>
                                         </div>
@@ -123,4 +120,4 @@
     
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/adminPrenotazioni/deletePrenotazione.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/adminPrenotazioni/deletePrenotazione.blade.php ENDPATH**/ ?>

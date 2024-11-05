@@ -167,6 +167,7 @@
                         $("input[name='confirm-password']").focus();
                     // Verifica che la password sia state editata due volte correttamente
                     } else if(confirmPassword.trim() !== password.trim()) {
+                        error = true;
                         $("#invalid-confirmPassword").text("<?php echo e(trans('errors.stessaPassword')); ?>");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='confirm-password']").focus();
@@ -214,7 +215,7 @@
         <div class="container col-lg-4" id="login-container">
             <?php if(session('login_feedback')): ?>
                 <div class="alert alert-info mt-4" role="alert">
-                    <i class="fas fa-info-circle"></i> 
+                    <i class="fas fa-info-circle"></i>
                     <?php echo e(session('login_feedback')); ?>
 
                 </div>
@@ -235,12 +236,12 @@
                             <?php echo csrf_field(); ?>
                             <div class="form-group">
                                 <label for="email" class="login-label">Email</label>
-                                <input type="text" name="email" placeholder="Email" class="form-control"/>
+                                <input type="text" name="email" placeholder="<?php echo e(trans('messages.placeholder_email')); ?>" class="form-control"/>
                                 <span class="invalid-input" id="invalid-email"></span>
                             </div>
                             <div class="form-group">
                             <label for="password" class="login-label">Password</label>
-                                <input type="password" name="password" placeholder="Password" class="form-control  pwd"/>
+                                <input type="password" name="password" placeholder="<?php echo e(trans('messages.placeholder_password')); ?>" class="form-control  pwd"/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
                                 <span class="invalid-input" id="invalid-password"></span>
                             </div>
@@ -257,19 +258,19 @@
                             <?php echo csrf_field(); ?>
                             <div class="form-group">
                             <label for="email" class="login-label"><?php echo e(trans('button.nome')); ?></label>
-                                <input type="text" name="name" placeholder="<?php echo e(trans('button.nome')); ?>" class="form-control" value=""/>
+                                <input type="text" name="name" placeholder="<?php echo e(trans('messages.placeholder_nome')); ?>" class="form-control" value=""/>
                                 <span class="invalid-input" id="invalid-name"></span>
                             </div>
 
                             <div class="form-group">
                             <label for="email" class="login-label">Email</label>
-                                <input type="text" name="registration-email" placeholder="Email" class="form-control" value=""/>
+                                <input type="text" name="registration-email" placeholder="<?php echo e(trans('messages.placeholder_email')); ?>" class="form-control" value=""/>
                                 <span class="invalid-input" id="invalid-registrationEmail"></span>
                             </div>
 
                             <div class="form-group" id="password-space">
                             <label for="password" class="login-label">Password</label>
-                                <input type="password" name="registration-password" placeholder="Password" class="form-control pwd" value=""/>
+                                <input type="password" name="registration-password" placeholder="<?php echo e(trans('messages.placeholder_password')); ?>" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
                                 <p id="info-pwd"><i class="bi-info-circle-fill"></i> <?php echo e(trans('messages.infoPassword')); ?> </p>
                                 <p class="invalid-input" id="invalid-registrationPassword"></p>
@@ -277,7 +278,7 @@
 
                             <div class="form-group">
                             <label for="conform-password" class="login-label"><?php echo e(trans('button.conferma')); ?></label>
-                                <input type="password" name="confirm-password" placeholder="<?php echo e(trans('button.conferma')); ?>" class="form-control pwd" value=""/>
+                                <input type="password" name="confirm-password" placeholder="<?php echo e(trans('messages.placeholder_passwordConf')); ?>" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
                                 <span class="invalid-input" id="invalid-confirmPassword"></span>
                             </div>
