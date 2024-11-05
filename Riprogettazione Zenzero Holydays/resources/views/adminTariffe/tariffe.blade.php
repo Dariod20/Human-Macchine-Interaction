@@ -115,11 +115,11 @@
                 <div class="form-admin">
 
 
-<div class="container-fluid mb-3 pt-3 text-center">
-    <h1>
-        {{ trans('messages.lista_tariffe') }}
-    </h1>
-</div>
+                    <div class="container-fluid mb-3 pt-3 text-center">
+                        <h1>
+                            {{ trans('messages.lista_tariffe') }}
+                        </h1>
+                    </div>
 
 
                     <div id="inner">
@@ -139,7 +139,7 @@
 
 
                             <div class="row pt-3 mb-3 justify-content-center">
-                                <div class="col-md-8 d-flex align-items-center">
+                                <div class="col-md-8 d-flex align-items-start">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cerca per</button>
@@ -154,37 +154,34 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="col-md-4 d-flex justify-content-end align-items-center" id="visualizzaTariffe">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ trans('button.visualizzazione') }} &nbsp;&nbsp;
+                                        </button>
+                                        <div class="dropdown-menu" id="menuPaginazione" aria-labelledby="dropdownRowsPerPage">
+                                            <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
+                                            <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
+                                            <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>
+                                            <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.booking') }}</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-<nav aria-label="page navigation example" id="paginationNav" class="d-flex justify-content-between align-items-center">
-    <!-- Primo div: Centro -->
-    <div class="justify-content-center d-flex flex-grow-1" id="navTariffe">
-        <ul class="pagination">
-            <li class="page-item" id="previousPage">
-                <a class="page-link" href="#">{{ trans('pagination.previous') }}</a>
-            </li>
-            <li class="page-item" id="nextPage">
-                <a class="page-link" href="#">{{ trans('pagination.next') }}</a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Secondo div: Lato destro -->
-    <div class="col-md-4 d-flex justify-content-end align-items-center" id="visualizzaTariffe">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ trans('button.visualizzazione') }} &nbsp;&nbsp;
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
-                <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
-                <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
-                <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>
-                <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.booking') }}</a>
-            </div>
-        </div>
-    </div>
-</nav>
+                            <nav aria-label="page navigation example" id="paginationNav">
+                                <div class="justify-content-center d-flex flex-grow-1">
+                                    <ul class="pagination">
+                                        <li class="page-item" id="previousPage">
+                                            <a class="page-link" href="#">{{ trans('pagination.previous') }}</a>
+                                        </li>
+                                        <li class="page-item" id="nextPage">
+                                            <a class="page-link" href="#">{{ trans('pagination.next') }}</a>
+                                        </li>
+                                    </ul>
+                                </div>                                
+                            </nav>
 
 
 

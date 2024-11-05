@@ -1,4 +1,4 @@
-@extends('layouts.delete') 
+@extends('layouts.master') 
 
 @section('titolo')
     Elimina Tariffa
@@ -33,9 +33,7 @@
                                 <h2>
                                     Stai per cancellare la tariffa per il giorno {{ \Carbon\Carbon::parse($tariffa->giorno)->format($dateFormat) }} dalla lista.
                                 </h2>
-                                <p class="confirm">
-                                    Confermi?
-                                </p>
+                                
                             </div>
                         </div>
 

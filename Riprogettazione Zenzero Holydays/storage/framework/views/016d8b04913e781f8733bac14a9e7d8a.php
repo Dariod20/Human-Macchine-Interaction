@@ -33,9 +33,7 @@
                                 <h2>
                                     Stai per cancellare la tariffa per il giorno <?php echo e(\Carbon\Carbon::parse($tariffa->giorno)->format($dateFormat)); ?> dalla lista.
                                 </h2>
-                                <p class="confirm">
-                                    Confermi?
-                                </p>
+                                
                             </div>
                         </div>
 
@@ -95,4 +93,4 @@
     
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\mia\ProgrammazioneWeb\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/adminTariffe/deleteTariffa.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\mia\ProgrammazioneWeb\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/adminTariffe/deleteTariffa.blade.php ENDPATH**/ ?>

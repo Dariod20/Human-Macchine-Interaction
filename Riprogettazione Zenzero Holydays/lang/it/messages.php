@@ -19,11 +19,11 @@ return [
                     con il calore e l\'ospitalità tipici di una struttura a conduzione familiare.
                     Strategicamente posizionata a pochi minuti dal rinomato parco divertimenti Gardaland e nelle vicinanze delle
                     incantevoli località di Peschiera, Lazise e Sirmione, la nostra casa vacanze offre un punto di partenza ideale per esplorare le meraviglie del lago di Garda.',
-    'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno.
-                    L\'ampio soggiorno è dotato di aria condizionata e la cucina è completamente attrezzata con forno e microonde. Con due bagni, di cui uno con doccia e uno con vasca e lavatrice, e una camera da letto con aria condizionata,
-                    troverete tutto ciò di cui avete bisogno per un soggiorno indimenticabile. È inoltre presente un balcone con tavolino e sedie.
-                    Nella piazzetta proprio sotto la struttura puoi trovare un bar dove fare colazione e un negozio di parrucchiere. In centro paese (300 metri) troverai market, panificio, bar, pub, ristorante, pizzeria, farmacia,
-                    erboristeria, chiesa, banca e negozi vari, abbigliamento, merceria, articoli regalo.',
+    'descrizioneCasa' => 'Con un ingresso condiviso con solo un\'altra abitazione e la disponibilità di parcheggio coperto e privato su richiesta, vi assicuriamo tranquillità e privacy durante il vostro soggiorno. 
+        L\'ampio soggiorno, dotato di aria condizionata, offre un letto singolo e la possibilità di aggiungere un ulteriore letto su richiesta. La camera da letto è arredata con un letto matrimoniale e un letto a castello, per un totale di <strong>sei posti letto</strong>. <br> <br>
+        La cucina è completamente attrezzata con forno e microonde, mentre i due bagni, di cui uno con doccia e l\'altro con vasca e lavatrice, vi forniranno tutto il necessario per un soggiorno confortevole e indimenticabile. 
+        Inoltre, potrete rilassarvi sul balcone, arredato con un tavolino e sedie. Nella piazzetta proprio sotto la struttura troverete un bar per la colazione e un negozio di parrucchiere.<br> <br>
+        A soli 300 metri dal centro del paese, avrete accesso a un market, panificio, bar, pub, ristorante, pizzeria, farmacia, erboristeria, chiesa, banca e vari negozi, tra cui abbigliamento, merceria e articoli regalo.',
      'galleria' => 'Sfoglia la gallery',
      'distanza' => 'Distanza',
      'pesca' => 'Pesca sul Lago di Garda ',
@@ -77,6 +77,9 @@ return [
     'placeholder_stato' => 'Seleziona uno stato',
     'placeholder_prefisso' => 'Cerca il nome di uno stato',
     'placeholder_prezzo' => 'Importo per notte',
+    'placeholder_password'=> 'Inserisci la tua password',
+    'placeholder_passwordConf'=> 'Conferma la tua password',
+
 
 
 

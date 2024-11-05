@@ -63,6 +63,9 @@ return [
      'elimination_success' => 'Booking successfully canceled and notification email sent.',
      'rates_success' => 'Rates added successfully',
      'ratesElim_success' => 'Rates deleted successfully',
+     'placeholder_password'=> 'Enter your password',
+     'placeholder_passwordConf'=> 'Confirm your password',
+
 
 
 

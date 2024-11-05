@@ -2,9 +2,9 @@
 
     // Variabili di paginazione
     var currentPage = 1;
-    var rowsPerPage = 5; // Valore predefinito per le righe per pagina
-    var $tableRows = $(".table tbody tr");
-    var totalPages = Math.ceil($tableRows.length / rowsPerPage);
+    var rowsPerPage; // Valore predefinito per le righe per pagina
+    var $tableRows;
+    var totalPages;
 
     function showPage(page) {
         var start = (page - 1) * rowsPerPage;
@@ -37,7 +37,7 @@
 
 $(document).ready(function() {
     // Inizializza variabili di paginazione
-    rowsPerPage = parseInt($("#rowsPerPage").val());
+    rowsPerPage = 5;
     $tableRows = $(".table tbody tr");
     totalPages = Math.ceil($tableRows.length / rowsPerPage);
 
@@ -57,7 +57,7 @@ $(document).ready(function() {
     }
 
     // Gestione del cambiamento del numero di righe per pagina tramite il dropdown
-    $(".dropdown-menu .dropdown-item").on("click", function(event) {
+    $("#menuPaginazione .dropdown-item").on("click", function(event) {
         event.preventDefault();
         rowsPerPage = parseInt($(this).data("value"));
         $("#dropdownRowsPerPage").text(rowsPerPage + " prenotazioni per pagina");
@@ -66,7 +66,7 @@ $(document).ready(function() {
         showPage(currentPage);
     });
 
-    //showPage(currentPage);
+    showPage(currentPage);
 
     $("#previousPage").on("click", goToPreviousPage);
     $("#nextPage").on("click", goToNextPage);

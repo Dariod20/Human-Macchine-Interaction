@@ -111,7 +111,7 @@
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {{ trans('button.visualizzazione') }} &nbsp&nbsp
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownRowsPerPage">
+                                        <div class="dropdown-menu" id="menuPaginazione" aria-labelledby="dropdownRowsPerPage">
                                             <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.booking') }}</a>
                                             <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.booking') }}</a>
                                             <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.booking') }}</a>

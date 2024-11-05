@@ -184,7 +184,7 @@ class AdminBookingController extends Controller
 
 
         $dl = new DataLayer();
-        $result = $dl->checkTariffeDisponibili($arrivo, $partenza);
+        $result = $dl->checkTariffeDisponibili($giorno, $giornoFino);
 
         if (!$result['allTariffeExist']) {
             return response()->json([

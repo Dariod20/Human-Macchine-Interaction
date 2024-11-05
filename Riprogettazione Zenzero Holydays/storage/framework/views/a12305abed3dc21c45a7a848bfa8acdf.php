@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('titolo'); ?>
 <?php echo e(trans('button.prenotazioni')); ?>
 
@@ -30,14 +28,14 @@
      $(document).ready(function(){
         var typingTimer; // Timer per ritardare l'azione
         var doneTypingInterval = 200; // Tempo di attesa dopo l'ultimo tasto premuto (in millisecondi)
-        var currentPage = 1; 
+        var currentPage = 1;
 
         $("#searchInput").on("keyup", function() {
             clearTimeout(typingTimer); // Cancella il timer precedente
             typingTimer = setTimeout(doneTyping, doneTypingInterval); // Imposta un nuovo timer
         });
 
-        
+
         function doneTyping() {
             var value = $("#searchInput").val().toLowerCase();
 
@@ -81,103 +79,98 @@
     });
 </script>
 
-<?php
-    $lang = app()->getLocale();
-    $dateFormat = $lang === 'it' ? 'd/m/Y' : 'Y/m/d'; // Imposta il formato della data in base alla lingua
-?>
-
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
-        
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="form-admin">
 
+                    <div class="container-fluid mb-3 pt-3 text-center">
+                        <h1>
+                            <?php echo e(trans('messages.prenIt')); ?><?php echo e(session('loggedName')); ?><?php echo e(trans('messages.prenEn')); ?>
 
-                <div class="container-fluid mb-3 pt-3 text-center">
-                    <h1>
-                        <?php echo e(trans('messages.prenIt')); ?><?php echo e(session('loggedName')); ?><?php echo e(trans('messages.prenEn')); ?>
-
-                    </h1>
-                </div>
-
-                <div id="inner">
-                    <div class="container-fluid px-lg-4">
-                        <div class="row mb-3 pt-3 justify-content-center">
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="<?php echo e(trans('pagination.cercaData')); ?>">
-                                    <span class="input-group-addon">
-                                        <i class="bi bi-search" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <nav aria-label="Page navigation example" id="paginationNav">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" id="previousPage"><a class="page-link" href="#"><?php echo e(trans('pagination.previous')); ?></a></li>
-                                <li class="page-item" id="nextPage"><a class="page-link" href="#"><?php echo e(trans('pagination.next')); ?></a></li>
-                                <li>
-                                    <select id="rowsPerPage" class="form-control justify-content-end">
-                                        <option value="5">5 <?php echo e(trans('pagination.booking')); ?></option>
-                                        <option value="10">10 <?php echo e(trans('pagination.booking')); ?></option>
-                                        <option value="15">15 <?php echo e(trans('pagination.booking')); ?></option>
-                                        <option value="20">20 <?php echo e(trans('pagination.booking')); ?></option>
-                                    </select>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table id="bookTable" class="table table-striped">
-                                        <colgroup>
-                                            <col style="width: 25%;">
-                                            <col style="width: 25%;">
-                                            <col style="width: 25%;">
-                                            <col style="width: 25%;">
-                                        </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th><?php echo e(trans('messages.arrivo')); ?></th>
-                                                <th><?php echo e(trans('messages.partenza')); ?></th>
-                                                <th><?php echo e(trans('messages.prezzo')); ?></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $__currentLoopData = $prenotazioni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prenotazione): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <tr>
-                                                    <td><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></td>
-                                                    <td><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></td>
-                                                    <td>€<?php echo e($prenotazione->prezzoTotale); ?></td>
-                                                    <td>
-                                                        <div class="btn-group-vertical" role="group">
-                                                            <a class="btn btn-secondary mb-1" href="<?php echo e(route('prenotazioniUtente.show', ['prenotazioniUtente' => $prenotazione->id])); ?>"><?php echo e(trans('button.dettagli')); ?></a>
-                                                            <?php if(Carbon\Carbon::parse($prenotazione->arrivo)->isFuture() || Carbon\Carbon::parse($prenotazione->arrivo)->isToday()): ?>
-                                                                <a class="btn btn-danger" href="<?php echo e(route('prenotazioniUtente.destroy.confirm', ['id' => $prenotazione->id])); ?>"><i class="bi bi-trash"></i> <?php echo e(trans('button.elimina')); ?></a>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </tbody>
-                                    </table>
-                                    <p class="text-center" id="noResultsMessage" style="display: none;"><?php echo e(trans('messages.prenSearch')); ?></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-
+                        </h1>
                     </div>
-                </div>
 
+                    <div id="inner">
+                        <div class="container-fluid px-lg-4">
 
+                            <div class="row mb-3 pt-3 justify-content-start">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" placeholder="<?php echo e(trans('pagination.cercaData')); ?>">
+                                        <span class="input-group-addon">
+                                            <i class="bi bi-search" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
 
+                                <div class="col-md-4 d-flex justify-content-end align-items-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo e(trans('button.visualizzazione')); ?> &nbsp&nbsp
+                                        </button>
+                                        <div class="dropdown-menu" id="menuPaginazione" aria-labelledby="dropdownRowsPerPage">
+                                            <a class="dropdown-item" href="#" data-value="5">5 <?php echo e(trans('pagination.booking')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="10">10 <?php echo e(trans('pagination.booking')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="15">15 <?php echo e(trans('pagination.booking')); ?></a>
+                                            <a class="dropdown-item" href="#" data-value="20">20 <?php echo e(trans('pagination.booking')); ?></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <nav aria-label="Page navigation example" id="paginationNav">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" id="previousPage"><a class="page-link" href="#"> <?php echo e(trans('pagination.previous')); ?> </a></li>
+                                    <li class="page-item" id="nextPage"><a class="page-link" href="#"> <?php echo e(trans('pagination.next')); ?> </a></li>
+                                </ul>
+                            </nav>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table id="bookTable" class="table table-striped">
+                                            <colgroup>
+                                                <col style="width: 25%;">
+                                                <col style="width: 25%;">
+                                                <col style="width: 25%;">
+                                                <col style="width: 25%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th><?php echo e(trans('messages.arrivo')); ?></th>
+                                                    <th><?php echo e(trans('messages.partenza')); ?></th>
+                                                    <th><?php echo e(trans('messages.prezzo')); ?></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $__currentLoopData = $prenotazioni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prenotazione): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td><?php echo e(\Carbon\Carbon::parse($prenotazione->arrivo)->format('d/m/Y')); ?></td>
+                                                        <td><?php echo e(\Carbon\Carbon::parse($prenotazione->partenza)->format('d/m/Y')); ?></td>
+                                                        <td>€<?php echo e($prenotazione->prezzoTotale); ?></td>
+                                                        <td>
+                                                            <div class="btn-group-vertical" role="group">
+                                                                <a class="btn btn-secondary mb-1" href="<?php echo e(route('prenotazioniUtente.show', ['prenotazioniUtente' => $prenotazione->id])); ?>"><?php echo e(trans('button.dettagli')); ?></a>
+                                                                <?php if(Carbon\Carbon::parse($prenotazione->arrivo)->isFuture() || Carbon\Carbon::parse($prenotazione->arrivo)->isToday()): ?>
+                                                                    <a class="btn btn-danger" href="<?php echo e(route('prenotazioniUtente.destroy.confirm', ['id' => $prenotazione->id])); ?>"><i class="bi bi-trash"></i> <?php echo e(trans('button.elimina')); ?></a>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>

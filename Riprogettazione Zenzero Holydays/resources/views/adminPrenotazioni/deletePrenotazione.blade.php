@@ -1,4 +1,4 @@
-@extends('layouts.delete') 
+@extends('layouts.master') 
 
 @section('titolo')
     Elimina prenotazione
@@ -29,9 +29,6 @@
                                 <h2>
                                     Stai per cancellare la prenotazione di "{{ $prenotazione->nome }} {{ $prenotazione->cognome }}"
                                 </h2>
-                                <p class="confirm">
-                                    Sei sicuro di voler proseguire? Questa azione è irreversibile.
-                                </p>
                             </div>
                         </div>
 
@@ -77,16 +74,16 @@
 
                             <!-- Card di conferma cancellazione -->
                             <div class="row justify-content-center mt-4">
-                                <div class="col-md-4 mt-4 mt-md-0">
+                                <div class="col-md-4 mt-md-0 card-conferma-eliminazione">
                                     <div class="card border-secondary card-custom-width">
                                         <div class="card-header text-center ">
                                             Conferma
                                         </div>
                                         <div class="card-body text-center">
                                             <p>
-                                                La prenotazione <strong>sarà cancellata</strong>
+                                                {{ trans('messages.prenotazione') }} <strong>{{ trans('messages.cancellata') }}</strong>
                                             </p>
-                                            <form name="prenotazione" method="post" action="{{ route('prenotazioniAdmin.destroy', ['prenotazioniAdmin' => $prenotazione->id]) }}" style="padding: unset;">
+                                            <form name="prenotazione" method="post" action="{{ route('prenotazioniAdmin.destroy', ['prenotazioniAdmin' => $prenotazione->id]) }}" style="padding: 0.80em;">
                                                 @method('DELETE')
                                                 @csrf
                                                 <label for="mySubmit" class="btn btn-danger w-100"><i class="bi bi-trash"></i> {{ trans('button.elimina') }}</label>
@@ -97,14 +94,14 @@
                                 </div>
 
                                 <!-- Card per annullare la cancellazione -->
-                                <div class="col-md-4 mt-4 mt-md-0">
+                                <div class="col-md-4 mt-md-0 card-conferma-eliminazione">
                                     <div class="card border-secondary card-custom-width">
                                         <div class="card-header text-center">
                                             Annulla
                                         </div>
                                         <div class="card-body text-center">
                                             <p>
-                                                La prenotazione <strong>non sarà cancellata</strong>
+                                                {{ trans('messages.prenotazione') }} <strong>{{ trans('messages.nonCancellata') }}</strong>
                                             </p>
                                             <a class="btn btn-secondary w-100" href="{{ route('prenotazioniAdmin.index') }}"><i class="bi bi-box-arrow-left"></i> {{ trans('button.annulla') }}</a>
                                         </div>

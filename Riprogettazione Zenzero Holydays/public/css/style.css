@@ -961,13 +961,7 @@ input.search-box {
 .select-box ol li .country-name {
     margin-left: .4rem;
 }
-#navTariffe {
-    margin-left: 33em;
-}
 
-#visualizzaTariffe {
-    margin-right: 1.5em;
-}
 
 .form-price {
     background-color: var(--main-color);
