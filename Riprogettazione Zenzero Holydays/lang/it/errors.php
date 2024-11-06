@@ -30,6 +30,18 @@ return [
     'prezzoErr' => "Il prezzo non può essere negativo.",
 
 
+    'password' => 'La password è obbligatoria.',
+    'passwordSbagliata' => 'Password sbagliata: prova a inserirla di nuovo.',
+    'emailInesistente' => 'Email inesistente: prova a inserirla di nuovo.',
+    'formatoEmail' => "Il formato dell'email è sbagliato.",
+    'formatoPassword' => "Il formato della password è sbagliato.",
+    'confermaPassword' => 'La conferma della password è obbligatoria.',
+    'stessaPassword' => "Le due password devono combaciare.",
+    'emailEsistente' => "Questa email è già in uso. Scegline un'altra.",
 
+    'accesso_errato' => 'Accesso alla pagina non consentito o pagina inesistente!',
+    'prenotazione_inesistente' => 'La prenotazione non esiste.',
+    'tariffa_inesistente' => 'La tariffa non esiste.',
+    'torna_home' => 'Torna alla Home',
 
 ];

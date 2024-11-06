@@ -17,8 +17,9 @@ return [
     'next' => 'Next',
     'cercaData' => 'Search by date (dd/mm/yyyy)...',
     'booking' => 'bookings per page',
-    'cercaPrezzo' => 'Search by price...',
+    'price' => 'Search by price...',
     'cercaOspite' => 'Search by guest...',
+    'rate' => 'rates per page',
 
 
 ];

@@ -68,6 +68,8 @@ class AdminBookingController extends Controller
 
         if ($prenotazione !== null) {
             return view('adminPrenotazioni.detailsPrenotazione')->with('prenotazione',$prenotazione);
+        } else {
+            return view('errors.404')->with('message', __('errors.prenotazione_inesistente'));
         }
     }
 
@@ -78,7 +80,7 @@ class AdminBookingController extends Controller
     {
         $dl = new DataLayer();
         $prenotazione = $dl->findPrenotazioneById($id);
-        
+
         if ($prenotazione !== null) {
             return view('adminPrenotazioni.editPrenotazione')->with('prenotazione', $prenotazione);
         }
@@ -86,7 +88,7 @@ class AdminBookingController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *//* 
+     *//*
     public function update(Request $request, string $id)
     {
         //Recupero dati inseriti nei campi della form per aggiunta nuovo libro
@@ -116,7 +118,7 @@ class AdminBookingController extends Controller
         $dl = new DataLayer();
         $prenotazione = $dl->findPrenotazioneById($id);
         $emailCliente = $prenotazione->email;
-        
+
         $dl->deletePrenotazione($id);
 
         $arrivoMail= Carbon::parse($prenotazione->arrivo)->format('d/m/Y');
@@ -155,46 +157,45 @@ class AdminBookingController extends Controller
         return view('adminPrenotazioni.deletePrenotazione')->with('prenotazione', $prenotazione);
     }
 
-    
+
     public function ajaxCheckPrenotazione(Request $request)
     {
         $arrivo = Carbon::parse($request->input('arrivo'));
         $partenza = Carbon::parse($request->input('partenza'));
-    
+
         // Controllo che le date di arrivo e partenza non coincidano
         if ($arrivo->eq($partenza)) {
             return response()->json(['found' => true, 'occupiedDates' => [['arrivo' => $arrivo->toDateString(), 'partenza' => $partenza->toDateString()]], 'error' => 'La data di arrivo e partenza non possono coincidere.']);
         }
-    
+
         $dl = new DataLayer();
         $occupiedDates = $dl->checkPrenotazioniSovrapposte($arrivo, $partenza, $request->input('prenotazioneId'));
-    
+
         if (!empty($occupiedDates)) {
             return response()->json(['found' => true, 'occupiedDates' => $occupiedDates]);
         } else {
             return response()->json(['found' => false]);
         }
     }
-    
+
     public function ajaxCheckTariffePrenotazione(Request $request)
     {
         $giorno = Carbon::parse($request->input('giorno'));
         $giornoFino = Carbon::parse($request->input('giorno_fino'));
         $context = $request->input('context'); // Ottieni il parametro context
 
-    
+
         $dl = new DataLayer();
         $result = $dl->checkTariffeDisponibili($giorno, $giornoFino);
-
 
         if (!$result['allTariffeExist']) {
             return response()->json([
                 'available' => false,
                 'message' => 'Tariffe mancanti per i seguenti giorni: ' . implode(', ', $result['missingDates']),
-                'context' => $context                
+                'context' => $context
             ]);
         }
-    
+
         return response()->json(['available' => true]);
     }
 
@@ -211,9 +212,9 @@ class AdminBookingController extends Controller
         return response()->json(['prezzoTotale' => $prezzoTotale]);
     }
 
-    
 
-    
+
+
 
 
 }

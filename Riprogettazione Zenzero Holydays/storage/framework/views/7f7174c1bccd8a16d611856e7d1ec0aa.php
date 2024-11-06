@@ -15,15 +15,16 @@
         <div class="col-md-12">
             <div class="card border-danger">
                 <div class='card-header'>
-                    <b>Accesso alla pagina non consentito:</b> qualcosa di errato è accaduto durante l'accesso a questa pagina!
+                    <b><?php echo e(trans('errors.accesso_errato')); ?></b>
                 </div>
                 <div class='card-body'>
                     <p><?php echo $message; ?></p>
-                    <p><a class="btn btn-danger" href="<?php echo e(route('home')); ?>"><i class="bi bi-box-arrow-left"></i>Torna alla home!</a></p>
+                    <p><a class="btn btn-danger" href="<?php echo e(route('home')); ?>"><i class="bi bi-box-arrow-left"></i> <?php echo e(trans('errors.torna_home')); ?></a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/errors/404.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Human-Macchine-Interaction\Riprogettazione Zenzero Holydays\resources\views/errors/404.blade.php ENDPATH**/ ?>

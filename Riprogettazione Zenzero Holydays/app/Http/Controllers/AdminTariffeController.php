@@ -32,13 +32,13 @@ class AdminTariffeController extends Controller
      */
     public function store(Request $request)
     {
-        // Recupero dati inseriti nei campi della form per aggiunta nuova tariffa 
+        // Recupero dati inseriti nei campi della form per aggiunta nuova tariffa
         $giorno = $request->input('giorno');
         $giornoFino = $request->input('giornoFino'); // Data finale dell'intervallo
         $prezzo = $request->input('prezzo');
-        
+
         $dl = new DataLayer();
-                
+
         // Converto le date in oggetti Carbon per facilitare l'iterazione
         $startDate = Carbon::parse($giorno);
         $endDate = Carbon::parse($giornoFino);
@@ -62,6 +62,8 @@ class AdminTariffeController extends Controller
 
         if ($tariffa !== null) {
             return view('adminTariffe.detailsTariffa')->with('tariffa',$tariffa);
+        } else {
+            return view('errors.404')->with('message', __('errors.tariffa_inesistente'));
         }
     }
 
@@ -72,7 +74,7 @@ class AdminTariffeController extends Controller
     {
         $dl = new DataLayer();
         $tariffa = $dl->findTariffaById($id);
-        
+
         if ($tariffa !== null) {
             return view('adminTariffe.editTariffa')->with('tariffa', $tariffa);
         }
@@ -89,7 +91,7 @@ class AdminTariffeController extends Controller
 
         $dl = new DataLayer();
         $dl->editTariffa($id, $giorno, $prezzo);
-        return Redirect::to(route('tariffeAdmin.index'))->with('success', 'Tariffe modificate con successo.');
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', 'Tariffa modificata con successo.');
     }
 
     /**
@@ -110,7 +112,7 @@ class AdminTariffeController extends Controller
     }
 
     public function ajaxCheckTariffa(Request $request) {
-        
+
         $dl = new DataLayer();
 
         $giorno = $request->input('giorno');
@@ -118,9 +120,9 @@ class AdminTariffeController extends Controller
 
         $tariffeTrovate=[];
 
-        
+
         $tariffeTrovate= $dl->findTariffaByGiorno($giorno, $giornoFino);
-          
+
         if ($tariffeTrovate->isNotEmpty()) {
             return response()->json(['found' => true, 'tariffe' => $tariffeTrovate]);
         }
@@ -134,12 +136,12 @@ class AdminTariffeController extends Controller
         $dateRange = $dl->getDateRangeForTariffe(); // Supponendo un repository o data layer
 
         return view('adminTariffe.editTariffa')->with(['minDate' => $dateRange['minDate'],'maxDate' => $dateRange['maxDate']]);
-    
+
     }
 
     public function updateGruppo(Request $request)
     {
-    
+
        // Ottieni i dati dalla richiesta
         $giorno = $request->input('giorno');
         $giornoFino = $request->input('giornoFino');
@@ -147,7 +149,7 @@ class AdminTariffeController extends Controller
 
         $dl = new DataLayer();
         $dl->editGruppoTariffe($giorno, $giornoFino, $prezzo);
-        return Redirect::to(route('tariffeAdmin.index'));    
+        return Redirect::to(route('tariffeAdmin.index'))->with('success', 'Tariffe modificate con successo.');
     }
 
     public function ajaxCheckTariffePrenotazioni(Request $request)
@@ -157,7 +159,7 @@ class AdminTariffeController extends Controller
 
         $dl = new DataLayer();
         $tariffePrenotate= $dl->checkTariffePrenotate($giorno, $giornoFino);
-        
+
 
         return response()->json([
             'hasBookings' => $tariffePrenotate->isNotEmpty(),

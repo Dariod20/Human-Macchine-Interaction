@@ -62,7 +62,7 @@
                     // Verifica se il campo "password" è vuoto
                     if (password.trim() === "") {
                         error = true;
-                        $("#invalid-password").text("La password è obbligatoria.");
+                        $("#invalid-password").text("{{ trans('errors.password') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='password']").focus();
                     } else {
@@ -72,11 +72,37 @@
                     // Verifica se il campo "email" è vuoto
                     if (email.trim() === "") {
                         error = true;
-                        $("#invalid-email").text("L'indirizzo email è obbligatorio.");
+                        $("#invalid-email").text("{{ trans('errors.email') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='email']").focus();
                     } else {
                         $("#invalid-email").text("");
+                    }
+
+                    if(!error) {
+                        event.preventDefault();
+                        $.ajax('/loginEmailCheck', {
+                            method: 'GET',
+                            data: {email: email.trim()},
+                            success: function (result) {
+                                if (result.found) {
+                                    $.ajax('/loginPasswordCheck', {
+                                        method: 'GET',
+                                        data: {email: email.trim(),
+                                                password: password.trim()},
+                                        success: function (result) {
+                                            if (result.found) {
+                                                $("form")[0].submit();
+                                            } else {
+                                                $("#invalid-password").text("{{ trans('errors.passwordSbagliata') }}");;
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $("#invalid-email").text("{{ trans('errors.emailInesistente') }}");
+                                }
+                            }
+                        });
                     }
                 });
 
@@ -97,7 +123,7 @@
                     // Verifica se il campo "name" è vuoto
                     if (name.trim() === "") {
                         error = true;
-                        $("#invalid-name").text("Il nome è obbligatorio.");
+                        $("#invalid-name").text("{{ trans('errors.nome') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='name']").focus();
                     } else {
@@ -107,11 +133,11 @@
                     // Verifica se il campo "email" è vuoto
                     if (email.trim() === "") {
                         error = true;
-                        $("#invalid-registrationEmail").text("L'indirizzo email è obbligatorio.");
+                        $("#invalid-registrationEmail").text("{!! trans('errors.email') !!}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='registration-email']").focus();
                     } else if(!emailRegex.test(email)) {
-                        $("#invalid-registrationEmail").text("Il formato dell'email è sbagliato.");
+                        $("#invalid-registrationEmail").text("{!! trans('errors.formatoEmail') !!}");
                         error = true;
                         event.preventDefault(); // Impedisce l'invio del modulo
                     } else{
@@ -121,12 +147,12 @@
                     // Verifica se il campo "password" è vuoto
                     if (password.trim() === "") {
                         error = true;
-                        $("#invalid-registrationPassword").text("La password è obbligatoria.");
+                        $("#invalid-registrationPassword").text("{{ trans('errors.password') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='registration-password']").focus();
                     } else if(!passwordRegex.test(password)) {
                         error = true;
-                        $("#invalid-registrationPassword").text("Il formato della password è sbagliato.");
+                        $("#invalid-registrationPassword").text("{{ trans('errors.formatoPassword') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='registration-password']").focus();
                     } else {
@@ -136,12 +162,13 @@
                     // Verifica se il campo "confirm-password" è vuoto
                     if (confirmPassword.trim() === "") {
                         error = true;
-                        $("#invalid-confirmPassword").text("La conferma della password è obbligatoria.");
+                        $("#invalid-confirmPassword").text("{{ trans('errors.confermaPassword') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='confirm-password']").focus();
                     // Verifica che la password sia state editata due volte correttamente
                     } else if(confirmPassword.trim() !== password.trim()) {
-                        $("#invalid-confirmPassword").text("Immettere la stessa password due volte.");
+                        error = true;
+                        $("#invalid-confirmPassword").text("{{ trans('errors.stessaPassword') }}");
                         event.preventDefault(); // Impedisce l'invio del modulo
                         $("input[name='confirm-password']").focus();
                     } else {
@@ -163,8 +190,8 @@
 
                                 if (data.found)
                                 {
-                                    error = true;
-                                    $("#invalid-registrationEmail").text("L'email esiste già nel database.");
+                                    //error = true;
+                                    $("#invalid-registrationEmail").text("{!! trans('errors.emailEsistente') !!}");
                                 } else {
                                     $("form")[1].submit();
                                 }
@@ -175,21 +202,34 @@
             });
         </script>
 
-        <div class="container col-lg-4" id="login-container">
-            @if (session('login_feedback'))
-                <div class="alert alert-info mt-4" role="alert">
-                    <i class="fas fa-info-circle"></i> 
-                    {{ session('login_feedback') }}
+        @if (session('registration_success'))
+            <div class="d-flex justify-content-center"> <!-- Contenitore per centrare -->
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="registration_success">
+                    {{ session('registration_success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif
+            </div>
+        @endif
+
+        @if (session('login_feedback'))
+            <div class="d-flex justify-content-center"> <!-- Contenitore per centrare -->
+                <div class="alert alert-info mt-4" role="alert">
+                    <i class="fas fa-info-circle"></i>
+                    {{ session('login_feedback') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
+
+        <div class="container col-lg-4" id="login-container">
             <div class="row">
                 <h1 id="zenzero-login"> Zenzero Holidays <i class="bi bi-house-door-fill"></i> </h1>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
+                        <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true"> {{ trans('button.login') }} </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Register</button>
+                        <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false"> {{ trans('button.registrati') }} </button>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -198,19 +238,19 @@
                             @csrf
                             <div class="form-group">
                                 <label for="email" class="login-label">Email</label>
-                                <input type="text" name="email" class="form-control"/>
+                                <input type="text" name="email" placeholder="{{ trans('messages.placeholder_email') }}" class="form-control"/>
                                 <span class="invalid-input" id="invalid-email"></span>
                             </div>
                             <div class="form-group">
                             <label for="password" class="login-label">Password</label>
-                                <input type="password" name="password" class="form-control pwd"/>
+                                <input type="password" name="password" placeholder="{{ trans('messages.placeholder_password') }}" class="form-control  pwd"/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
                                 <span class="invalid-input" id="invalid-password"></span>
                             </div>
 
                             <div>
-                                <a href="{{ route('home') }}" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Login" class="btn btn-primary btn-login"><i class="bi bi-door-open"></i> Login</label>
+                                <a href="{{ route('home') }}" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> {{ trans('button.annulla') }} </a>
+                                <label for="Login" class="btn btn-primary btn-login"><i class="bi bi-door-open"></i> {{ trans('button.login') }} </label>
                                 <input id="Login" type="submit" value="Login" class="d-none"/>
                             </div>
                         </form>
@@ -219,35 +259,34 @@
                         <form id="register-form" action="{{ route('user.register') }}" method="post" style="margin-top: 0.3em">
                             @csrf
                             <div class="form-group">
-                            <label for="email" class="login-label">Name</label>
-                                <input type="text" name="name" class="form-control" value=""/>
+                            <label for="email" class="login-label">{{ trans('button.nome') }}</label>
+                                <input type="text" name="name" placeholder="{{ trans('messages.placeholder_nome') }}" class="form-control" value=""/>
                                 <span class="invalid-input" id="invalid-name"></span>
                             </div>
 
                             <div class="form-group">
                             <label for="email" class="login-label">Email</label>
-                                <input type="text" name="registration-email" class="form-control" value=""/>
+                                <input type="text" name="registration-email" placeholder="{{ trans('messages.placeholder_email') }}" class="form-control" value=""/>
                                 <span class="invalid-input" id="invalid-registrationEmail"></span>
                             </div>
 
                             <div class="form-group" id="password-space">
                             <label for="password" class="login-label">Password</label>
-                                <input type="password" name="registration-password" class="form-control pwd" value=""/>
+                                <input type="password" name="registration-password" placeholder="{{ trans('messages.placeholder_password') }}" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
-                                <p id="info-pwd"><i class="bi-info-circle-fill"></i> La password deve essere lunga minimo 8 caratteri
-                                    e contenere almeno una maiuscola, una cifra e un carattere tra ! - * [ ] $ & / </p>
+                                <p id="info-pwd"><i class="bi-info-circle-fill"></i> {{ trans('messages.infoPassword') }} </p>
                                 <p class="invalid-input" id="invalid-registrationPassword"></p>
                             </div>
 
                             <div class="form-group">
-                            <label for="conform-password" class="login-label">Confirm Password</label>
-                                <input type="password" name="confirm-password" class="form-control pwd" value=""/>
+                            <label for="conform-password" class="login-label">{{ trans('button.conferma') }}</label>
+                                <input type="password" name="confirm-password" placeholder="{{ trans('messages.placeholder_passwordConf') }}" class="form-control pwd" value=""/>
                                 <i class="bi bi-eye-slash toggle-pwd"></i>
                                 <span class="invalid-input" id="invalid-confirmPassword"></span>
                             </div>
                             <div>
-                                <a href="{{ route('home') }}" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Register" class="btn btn-primary btn-login"><i class="bi bi-person-plus"></i> Register</label>
+                                <a href="{{ route('home') }}" class="btn btn-secondary btn-login"><i class="bi-box-arrow-left"></i> {{ trans('button.annulla') }} </a>
+                                <label for="Register" class="btn btn-primary btn-login"><i class="bi bi-person-plus"></i> {{ trans('button.registrati') }} </label>
                                 <input id="Register" type="submit" value="Register" class="d-none"/>
                             </div>
                         </form>

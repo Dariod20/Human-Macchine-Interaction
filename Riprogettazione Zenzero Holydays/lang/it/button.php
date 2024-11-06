@@ -13,6 +13,7 @@ return [
     'annulla' => 'Annulla',
     'login' => 'Accedi',
     'logout' => 'Esci',
+    'registrati' => 'Registrati',
     'indietro' => 'Indietro',
     'avanti' => 'Avanti',
     'confermaPren' => 'Conferma Prenotazione ',
@@ -22,8 +23,17 @@ return [
     'meseSucc' => 'Mese Successivo',
     'calendarioHome' => 'Calendario',
 
+    'nome' => 'Nome',
+    'conferma' => 'Conferma Password',
+    'visualizzazione' => 'Cambia visualizzazione',
 
-
+    'edit_rate_group' => 'Modifica gruppo di tariffe',
+    'add_rate_group' => 'Aggiungi gruppo di tariffe',
+    'cerca_per' => "Cerca per",
+    'giorno' => 'Giorno',
+    'prezzo' => 'Prezzo',
+    'ospite' => 'Ospite',
+    'data' => 'Data',
 
 
 ];

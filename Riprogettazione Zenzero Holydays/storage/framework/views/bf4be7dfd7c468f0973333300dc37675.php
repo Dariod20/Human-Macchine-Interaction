@@ -1,149 +1,188 @@
 
 
 <?php $__env->startSection('titolo'); ?>
-<?php echo e(trans('button.book')); ?>
+<?php if(session('logged') && session('role') == 'admin'): ?>
+    <?php echo e(trans('button.calendarioHome')); ?>
 
+<?php else: ?>
+    <?php echo e(trans('button.book')); ?>
+
+<?php endif; ?>
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('active_prenota','active'); ?>
+<?php $__env->startSection('active_prenota', 'active'); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('home')); ?>">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page"><?php echo e(trans('button.book')); ?></li>
+<li class="breadcrumb-item active" aria-current="page">
+    <?php if(session('logged') && session('role') == 'admin'): ?>
+        <?php echo e(trans('button.calendarioHome')); ?>
+
+    <?php else: ?>
+        <?php echo e(trans('button.book')); ?>
+
+    <?php endif; ?>
+</li>
 <?php $__env->stopSection(); ?>
  
 <?php
-if (!function_exists('build_calendar')){ 
-    function build_calendar($month, $year, $tariffe) {
-       
-    
-     // Create array containing abbreviations of days of week.
-     $daysOfWeek = array('Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato');
+if (!function_exists('build_calendar')) {
+    function build_calendar($month, $year, $tariffe)
+    {
 
-     // What is the first day of the month in question?
-     $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
 
-     // How many days does this month contain?
-     $numberDays = date('t',$firstDayOfMonth);
+        // Create array containing abbreviations of days of week.
+        $daysOfWeek = trans('messages.days');
+        $startDay = 1;
 
-     // Retrieve some information about the first day of the
-     // month in question.
-     $dateComponents = getdate($firstDayOfMonth);
 
-     // What is the name of the month in question?
-     $monthName = $dateComponents['month'];
+        // What is the first day of the month in question?
+        $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
 
-     // What is the index value (0-6) of the first day of the
-     // month in question.
-     $dayOfWeek = $dateComponents['wday'];
+        // How many days does this month contain?
+        $numberDays = date('t', $firstDayOfMonth);
 
-     // Create the table tag opener and day headers
-     
-    $datetoday = date('Y-m-d');
-    
-    
-    
-    $calendar = "<table class='table table-bordered'>";
-    $calendar .= "<center><h2>$monthName $year</h2>";
-    $calendar.= "<a class='btn btn-xs btn-custom' href='?month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."'>Mese Precedente</a> ";
-    
-    $calendar.= " <a class='btn btn-xs btn-custom' href='?month=".date('m')."&year=".date('Y')."'>Mese Corrente</a> ";
-    
-    $calendar.= "<a class='btn btn-xs btn-custom' href='?month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."'>Mese Successivo</a></center><br>";
-    
-    
-        
-      $calendar .= "<tr>";
+        // Retrieve some information about the first day of the
+        // month in question.
+        $dateComponents = getdate($firstDayOfMonth);
 
-     // Create the calendar headers
+        // What is the name of the month in question?
+        $monthName = trans('messages.months')[$month - 1];
 
-     foreach($daysOfWeek as $day) {
-          $calendar .= "<th  class='header'>$day</th>";
-     } 
+        // What is the index value (0-6) of the first day of the
+        // month in question.
+        $dayOfWeek = $dateComponents['wday'];
 
-     // Create the rest of the calendar
+        // Create the table tag opener and day headers
 
-     // Initiate the day counter, starting with the 1st.
+        $datetoday = date('Y-m-d');
 
-     $currentDay = 1;
+        if ($startDay === 1 && $dayOfWeek === 0) {
+            $dayOfWeek = 6;  // Imposta la domenica come ultimo giorno
+        } elseif ($startDay === 1) {
+            $dayOfWeek--; // Riduci di uno per iniziare da lunedì
+        }
 
-     $calendar .= "</tr><tr>";
 
-     // The variable $dayOfWeek is used to
-     // ensure that the calendar
-     // display consists of exactly 7 columns.
+        $calendar = "<table class='table table-bordered'>";
+        $prevMonth = date('m', mktime(0, 0, 0, $month - 1, 1, $year));
+        $prevYear = date('Y', mktime(0, 0, 0, $month - 1, 1, $year));
 
-     if ($dayOfWeek > 0) { 
-         for($k=0;$k<$dayOfWeek;$k++){
-                $calendar .= "<td  class='empty'></td>"; 
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-         }
-     }
-    
-     
-     $month = str_pad($month, 2, "0", STR_PAD_LEFT);
-  
-     while ($currentDay <= $numberDays) {
+        $nextMonth = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
+        $nextYear = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
-          // Seventh column (Saturday) reached. Start a new row.
 
-          if ($dayOfWeek == 7) {
+        $calendar .= "<center style=\"background-color: white;\"><h2>$monthName $year</h2>";
+        $calendar .= "<div class='btn-group'>";
+        // Controlla se il mese corrente è uguale al mese passato
+        if ($month == $currentMonth && $year == $currentYear) {
+            // Se siamo nel mese corrente, disabilita il tasto mese precedente
+            $calendar .= "<button class='btn btn-xs btn-prev' disabled>" . trans('button.mesePrec') . "</button> ";
+            $calendar .= "<button class='btn btn-xs' disabled>" . trans('button.meseCorr') . "</button> ";
+        } else {
+            $calendar .= "<a class='btn btn-xs btn-prev' href='?month=$prevMonth&year=$prevYear'>" . trans('button.mesePrec') . "</a> ";
+            $calendar .= "<a class='btn btn-xs' href='?month=$currentMonth&year=$currentYear'>" . trans('button.meseCorr') . "</a> ";
+        }
+        $calendar .= "<a class='btn btn-xs btn-next' href='?month=$nextMonth&year=$nextYear'>" . trans('button.meseSucc') . "</a> ";
+        $calendar .= "</div></center>";
 
-               $dayOfWeek = 0;
-               $calendar .= "</tr><tr>";
 
-          }
-          
-          $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
-          $date = "$year-$month-$currentDayRel";
-          
+        $calendar .= "<tr>";
+
+        // Create the calendar headers
+
+        foreach ($daysOfWeek as $day) {
+            $calendar .= "<th class='header'>$day</th>";
+        }
+
+        // Create the rest of the calendar
+
+        // Initiate the day counter, starting with the 1st.
+
+        $currentDay = 1;
+
+        $calendar .= "</tr><tr>";
+
+        // The variable $dayOfWeek is used to
+        // ensure that the calendar
+        // display consists of exactly 7 columns.
+
+        if ($dayOfWeek > 0) {
+            for ($k = 0; $k < $dayOfWeek; $k++) {
+                $calendar .= "<td  class='empty'></td>";
+
+            }
+        }
+
+
+        $month = str_pad($month, 2, "0", STR_PAD_LEFT);
+
+        while ($currentDay <= $numberDays) {
+
+            // Seventh column (Saturday) reached. Start a new row.
+
+            if ($dayOfWeek == 7) {
+
+                $dayOfWeek = 0;
+                $calendar .= "</tr><tr>";
+
+            }
+
+            $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
+            $date = "$year-$month-$currentDayRel";
+
             $dayname = strtolower(date('l', strtotime($date)));
             $eventNum = 0;
-            $today = $date==date('Y-m-d')? "today" : "";
+            $today = $date == date('Y-m-d') ? "today" : "";
             $tariffa = $tariffe->firstWhere('giorno', $date);
 
             if ($date < date('Y-m-d')) {
-                $calendar .= "<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>/</button></td>";
+                $calendar .= "<td class='$today'><h4>$currentDay</h4> <span class='btn btn-danger btn-xs disabled-button'>/</span></td>";
             } elseif ($tariffa) {
                 if ($tariffa->prenotazione_id) {
-                    $calendar .= "<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>/</button></td>";
+                    $calendar .= "<td class='$today'><h4>$currentDay</h4> <span class='btn btn-danger btn-xs disabled-button'>/</span></td>";
                 } else {
                     $calendar .= "<td class='$today selectable'><h4>$currentDay</h4> <a href='" . route('prenotazione.conferma', ['arrivo' => $date]) . "' class='btn btn-success btn-xs'>€ $tariffa->prezzo </a></td>";
                 }
             } else {
-                $calendar .= "<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>/</button></td>";
+                $calendar .= "<td class='$today'><h4>$currentDay</h4> <span class='btn btn-danger btn-xs disabled-button'>/</span></td>";
             }
-            
-            
-           
-            
-          $calendar .="</td>";
-          // Increment counters
- 
-          $currentDay++;
-          $dayOfWeek++;
 
-     }
-     
-    
 
-     // Complete the row of the last week in month, if necessary
 
-     if ($dayOfWeek != 7) { 
-     
-          $remainingDays = 7 - $dayOfWeek;
-            for($l=0;$l<$remainingDays;$l++){
-                $calendar .= "<td class='empty'></td>"; 
 
-         }
+            $calendar .= "</td>";
+            // Increment counters
 
-     }
-     
-     $calendar .= "</tr>";
+            $currentDay++;
+            $dayOfWeek++;
 
-     $calendar .= "</table>";
+        }
 
-     echo $calendar;
+
+
+        // Complete the row of the last week in month, if necessary
+
+        if ($dayOfWeek != 7) {
+
+            $remainingDays = 7 - $dayOfWeek;
+            for ($l = 0; $l < $remainingDays; $l++) {
+                $calendar .= "<td class='empty'></td>";
+
+            }
+
+        }
+
+        $calendar .= "</tr>";
+
+        $calendar .= "</table>";
+
+        $calendar .= "<br>";
+
+        echo $calendar;
 
     }
 }
@@ -152,8 +191,7 @@ if (!function_exists('build_calendar')){
 
 <?php $__env->startSection('corpo'); ?>
         <style>
-        @media only screen and (max-width: 760px),
-            (min-device-width: 802px) and (max-device-width: 1020px) {
+        @media only screen and (max-device-width: 802px){
 
                 /* Force table to not be like tables anymore */
                 table, thead, tbody, th, td, tr {
@@ -260,17 +298,22 @@ if (!function_exists('build_calendar')){
                 
                 
                         <h1>
+                        <?php if(session('logged') && session('role') == 'admin'): ?>
+                            <?php echo e(trans('button.calendarioHome')); ?>
+
+                        <?php else: ?>
                             <?php echo e(trans('button.book')); ?>
 
+                        <?php endif; ?>
                         </h1>
                    
                         <?php
                             $dateComponents = getdate();
-                            if(isset($_GET['month']) && isset($_GET['year'])){
-                                $month = $_GET['month']; 			     
+                            if (isset($_GET['month']) && isset($_GET['year'])) {
+                                $month = $_GET['month'];
                                 $year = $_GET['year'];
-                            }else{
-                                $month = $dateComponents['mon']; 			     
+                            } else {
+                                $month = $dateComponents['mon'];
                                 $year = $dateComponents['year'];
                             }
                             echo build_calendar($month, $year, $tariffe);

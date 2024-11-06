@@ -5,7 +5,7 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('active_casa','active'); ?>
+<?php $__env->startSection('active_casa', 'active'); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('home')); ?>">Home</a></li>
@@ -27,7 +27,7 @@
         <!-- Descrizione -->
         <section id="descrizione" class="px-lg-4">
             <div class="container">
-                <h2 class="text-center mb-4" id="titolo"><?php echo e(trans('messages.titoloCasa')); ?></h2>
+                <h2 class="text-center mb-4" ><?php echo e(trans('messages.titoloCasa')); ?></h2>
                 <p class="lead">
                 <?php echo e(trans('messages.testoCasa')); ?>
 
@@ -36,12 +36,40 @@
         </section>
 
         <section id="descrizione2" class="px-lg-4">
-            <div class="container">
-                <h2 class="text-center mb-4" id="titolo"><?php echo e(trans('messages.titolo2Casa')); ?></h2>
+            <div class="container" >
+                <h2 class="text-center mb-4" ><?php echo e(trans('messages.titolo2Casa')); ?></h2>
                 <p class="lead">
-                    <?php echo e(trans('messages.descrizioneCasa')); ?>
+                    <?php echo trans('messages.descrizioneCasa'); ?>
 
                 </p>
+            </div>
+        </section>
+
+        <section id="regole" class="px-lg-4">
+            <div class="container text-center">
+                <div class="row mb-4">
+                    <!-- Sezione Regolamento -->
+                    <div class="col-md-6 mx-auto">
+                        <h2><?php echo e(trans('messages.regole')); ?></h2>
+                        <ul class="list-group regole">
+                            <li class="list-group-item regole"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola1')); ?>
+
+                            </li>
+                            <li class="list-group-item regole"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola2')); ?>
+
+                            </li>
+                            <li class="list-group-item regole"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola3')); ?>
+
+                            </li>
+                            <li class="list-group-item regole"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola4')); ?>
+
+                            </li>
+                            <li class="list-group-item regole"><i class="bi bi-check-circle-fill"></i> <?php echo e(trans('messages.regola5')); ?>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 

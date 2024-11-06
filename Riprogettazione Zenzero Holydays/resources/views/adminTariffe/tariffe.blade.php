@@ -68,7 +68,6 @@
                 return;
             }
 
-            // Get selected column for filtering
             var column = $("#searchInput").attr("data-column");
             var anyVisible = false; // Variabile per tracciare se ci sono risultati
 
@@ -110,7 +109,7 @@
 
 <section id="form-admin">
     <div class="container-fluid px-lg-4">
-        
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="form-admin">
@@ -118,7 +117,7 @@
 
                     <div class="container-fluid mb-3 pt-3 text-center">
                         <h1>
-                            Lista tariffe
+                            {{ trans('messages.lista_tariffe') }}
                         </h1>
                     </div>
 
@@ -130,23 +129,23 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-8 d-flex justify-content-center align-items-center">
                                     <a class="btn btn-primary me-2" href="{{ route('tariffeAdmin.editGruppo') }}" style="font-size: large;">
-                                        <i class="bi bi-pencil-square"></i> Modifica gruppo di tariffe
+                                        <i class="bi bi-pencil-square"></i> {{ trans('button.edit_rate_group') }}
                                     </a>
                                     <a class="btn btn-success" href="{{ route('tariffeAdmin.create') }}" style="font-size: large;">
-                                        <i class="bi bi-database-add"></i> Aggiungi gruppo di tariffe
+                                        <i class="bi bi-database-add"></i> {{ trans('button.add_rate_group') }}
                                     </a>
                                 </div>
                             </div>
 
 
                             <div class="row pt-3 mb-3 justify-content-center">
-                                <div class="col-md-8 d-flex align-items-center">
+                                <div class="col-md-8 d-flex align-items-start">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cerca per</button>
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ trans('button.cerca_per') }} &nbsp;</button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item searchOptions" href="#" data-column="0">Giorno</a></li>
-                                                <li><a class="dropdown-item searchOptions" href="#" data-column="1">Prezzo</a></li>
+                                                <li><a class="dropdown-item searchOptions" href="#" data-column="0">{{ trans('button.giorno') }}</a></li>
+                                                <li><a class="dropdown-item searchOptions" href="#" data-column="1">{{ trans('button.prezzo') }}</a></li>
                                             </ul>
                                         </div>
                                         <input type="text" id="searchInput" class="form-control" aria-label="Text input with dropdown button" >
@@ -155,23 +154,21 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="col-md-4 d-flex justify-content-end align-items-center" id="visualizzaTariffe">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRowsPerPage"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ trans('button.visualizzazione') }} &nbsp;&nbsp;
+                                        </button>
+                                        <div class="dropdown-menu" id="menuPaginazioneTariffe" aria-labelledby="dropdownRowsPerPage">
+                                            <a class="dropdown-item" href="#" data-value="5">5 {{ trans('pagination.rate') }}</a>
+                                            <a class="dropdown-item" href="#" data-value="10">10 {{ trans('pagination.rate') }}</a>
+                                            <a class="dropdown-item" href="#" data-value="15">15 {{ trans('pagination.rate') }}</a>
+                                            <a class="dropdown-item" href="#" data-value="20">20 {{ trans('pagination.rate') }}</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <nav aria-label="Page navigation example" id="paginationNav">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" id="previousPage"><a class="page-link" href="#">Precedente</a></li>
-                                    <!-- Numeri di pagina -->
-                                    <li class="page-item" id="nextPage"><a class="page-link" href="#">Next</a></li>
-                                    <li>
-                                        <select id="rowsPerPage" class="form-control justify-content-end">
-                                            <option value="5">5 tariffe per pagina</option>
-                                            <option value="10">10 tariffe per pagina</option>
-                                            <option value="15">15 tariffe per pagina</option>
-                                            <option value="20">20 tariffe per pagina</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                            </nav>
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -184,8 +181,8 @@
                                             </colgroup>
                                             <thead>
                                                 <tr>
-                                                    <th>Giorno</th>
-                                                    <th>Prezzo</th>
+                                                    <th>{{ trans('button.giorno') }}</th>
+                                                    <th>{{ trans('button.prezzo') }}</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -196,10 +193,10 @@
                                                         <td>€{{ $tariffa->prezzo }}</td>
                                                         <td>
                                                             <div class="btn-group-vertical" role="group">
-                                                                <a class="btn btn-secondary mb-1" href="{{ route('tariffeAdmin.show', ['tariffeAdmin' => $tariffa->id]) }}">Dettagli</a>
+                                                                <a class="btn btn-secondary mb-1" href="{{ route('tariffeAdmin.show', ['tariffeAdmin' => $tariffa->id]) }}">{{ trans('button.dettagli') }}</a>
                                                                 @if($tariffa->prenotazione_id == null)
-                                                                    <a class="btn btn-primary mb-1" href="{{ route('tariffeAdmin.edit', ['tariffeAdmin' => $tariffa->id]) }}"><i class="bi bi-pencil-square"></i> Modifica</a>
-                                                                    <a class="btn btn-danger" href="{{ route('tariffeAdmin.destroy.confirm', ['id' => $tariffa->id]) }}"><i class="bi bi-trash"></i> Elimina</a>
+                                                                    <a class="btn btn-primary mb-1" href="{{ route('tariffeAdmin.edit', ['tariffeAdmin' => $tariffa->id]) }}"><i class="bi bi-pencil-square"></i> {{ trans('button.modifica') }} </a>
+                                                                    <a class="btn btn-danger" href="{{ route('tariffeAdmin.destroy.confirm', ['id' => $tariffa->id]) }}"><i class="bi bi-trash"></i>{{ trans('button.elimina') }}</a>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -211,6 +208,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <nav aria-label="page navigation example" id="paginationNav">
+                                <div class="justify-content-center d-flex flex-grow-1">
+                                    <ul class="pagination">
+                                        <li class="page-item" id="previousPage">
+                                            <a class="page-link" href="#">{{ trans('pagination.previous') }}</a>
+                                        </li>
+                                        <li class="page-item" id="nextPage">
+                                            <a class="page-link" href="#">{{ trans('pagination.next') }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+
                         </div>
                     </div>
 
